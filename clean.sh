@@ -1,3 +1,3 @@
 #!/bin/sh
-rm util/*.gcn
-rm util/*.gct
+rm *.gcn
+rm *.gct
