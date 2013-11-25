@@ -1,4 +1,10 @@
 //METHODS
+//returns the square root of the given value
+method sqrt(value : Number) {
+
+    return value ^ 0.5
+}
+
 //returns the minimum value of the two given values
 method min(value : Number, value' : Number) -> Number {
 
