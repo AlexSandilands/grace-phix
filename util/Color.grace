@@ -95,57 +95,75 @@ class Color.new(r' : Number, g' : Number, b' : Number, a' : Number) {
     var a : Number is public := math.clamp(a') between(0, 1)
 
 
-    // Makes this color object slightly brighter, by a factor of 0.7
-    method brighter -> Done is public {
+    // Returns a slightly brighter copy of this color, by a factor of 0.7
+    method brighter -> Color is public {
 
-        if(r == 0 && g == 0 && b == 0) then {
+        if((r == 0) && (g == 0) && (b == 0)) then {
 
-            r := 0.5
-            g := 0.5
-            b := 0.5
+            var newR := 0.5
+            var newG := 0.5
+            var newB := 0.5
+
+            return Color.new(newR, newG, newB, a)
         }
 
         // Deal with Red component
-        r := math.clamp(r / 0.7) below(1)
+        var newR := math.clamp(r / 0.7) below(1)
 
         // Deal with Green component
-        g := math.clamp(g / 0.7) below(1)
+        var newG := math.clamp(g / 0.7) below(1)
 
         // Deal with Blue component
-        b := math.clamp(b / 0.7) below(1)
+        var newB := math.clamp(b / 0.7) below(1)
+
+
+        return Color.new(newR, newG, newB, a)
     }
 
-    // Makes this color object slightly darker, by a factor of 0.7
-    method darker -> Done is public {
+    // Returns a slightly darker copy of this color, by a factor of 0.7
+    method darker -> Color is public {
 
         // Deal with Red component
-        r := math.clamp(r * 0.7) above(0)
+        var newR := math.clamp(r * 0.7) above(0)
 
         // Deal with Green component
-        g := math.clamp(g * 0.7) above(0)
+        var newG := math.clamp(g * 0.7) above(0)
 
         // Deal with Blue component
-        b := math.clamp(b * 0.7) above(0)
+        var newB := math.clamp(b * 0.7) above(0)
+
+
+        return Color.new(newR, newG, newB, a)
     }
 
-    // Inverts each component of this color
-    method invert -> Done is public {
 
-        r := 1 - r
-        g := 1 - g
-        b := 1 - b
+
+    // Returns an inverted copy of this color
+    method invert -> Color is public {
+
+        var newR := 1 - r
+        var newG := 1 - g
+        var newB := 1 - b
+
+
+        return Color.new(newR, newG, newB, a)
     }
+
 
 
     // Grayscales this color
-    method grayscale -> Done is public {
+    method grayscale -> Color is public {
 
         var avg := (r + g + b)/3
 
-        r := avg
-        g := avg
-        b := avg
+        var newR := avg
+        var newG := avg
+        var newB := avg
+
+
+        return Color.new(newR, newG, newB, a)
     }
+
 
 
     // Additive binary operator for colors. Works like adding lights
@@ -156,7 +174,7 @@ class Color.new(r' : Number, g' : Number, b' : Number, a' : Number) {
         var newB := math.clamp(self.b + other.b) below(1)
         var newA := math.clamp(self.a + other.a) below(1)
 
-        Color.new(newR, newG, newB, newA)
+        return Color.new(newR, newG, newB, newA)
     }
 
 
