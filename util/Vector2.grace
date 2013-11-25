@@ -129,10 +129,25 @@ class Vector2.new(x' : Number, y' : Number) {
         return Vector2.new(x / mag, y / mag)
     }
 
-    //clamps all the components of this vector between the two given vectors
-    method clamp(lower : Number, upper : Number) {
+    //returns a new vector that is this vector clamped between the two values
+    method clampBetween(lower : Number, upper : Number) -> Vector2 {
 
+        return Vector2.new(pmath.clamp(x) between(lower, upper),
+            pmath.clamp(y) between(lower, upper))
+    }
 
+    //returns a new vector that is this vector clamped above the given value
+    method clampAbove(threshold : Number) -> Vector2 {
+
+        return Vector2.new(pmath.clamp(x) above(threshold),
+            pmath.clamp(y) above(threshold))
+    }
+
+    //returns a new vector that is this vector clamped below the given value
+    method clampBelow(threshold : Number) -> Vector2 {
+
+        return Vector2.new(pmath.clamp(x) below(threshold),
+            pmath.clamp(y) below(threshold))
     }
 
     //creates a new 2d vector as the result of adding the given scalar

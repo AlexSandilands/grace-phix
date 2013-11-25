@@ -56,12 +56,15 @@ method clamp(value : Number) below(threshold : Number) -> Number {
 //clamps the given value so that it is not less than the given threshold
 method clamp(value : Number) above(threshold : Number) -> Number {
 
+    print(value)
+    print(threshold)
+
     if (value < threshold) then {
 
         return threshold
     }
 
-    value
+    return value
 }
 
 // Calculates the factorial of the given input

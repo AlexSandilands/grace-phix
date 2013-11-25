@@ -36,14 +36,14 @@ method setVector4(v : Vector4) -> Vector3 {
 
 //creates a new 3d vector and initialises the x and y values with the given
 //2d vector's x and y values, and initialises the z value with the given z value
-method setVector2(v : Vector2) Coord(z : Number) -> Vector3 {
+method setVector2(v : Vector2) coord(z : Number) -> Vector3 {
 
     return Vector3.new(v.x, v.y, z)
 }
 
 //creates a new 3d vector and initialises the x value with the given x value
 //and initialises the y and z values with the given 2d vectors x and y values
-method setCoord(x : Number) Vector2(v : Vector2) -> Vector3 {
+method setCoord(x : Number) vector2(v : Vector2) -> Vector3 {
 
     return Vector3.new(x, v.x, v.y)
 }
@@ -154,6 +154,30 @@ class Vector3.new(x' : Number, y' : Number, z' : Number) {
         def mag = self.magnitude
 
         return Vector3.new(x / mag, y / mag, z / mag)
+    }
+
+    //returns a new vector that is this vector clamped between the two values
+    method clampBetween(lower : Number, upper : Number) -> Vector3 {
+
+        return Vector3.new(pmath.clamp(x) between(lower, upper),
+            pmath.clamp(y) between(lower, upper),
+            pmath.clamp(z) between(lower, upper))
+    }
+
+    //returns a new vector that is this vector clamped above the given value
+    method clampAbove(threshold : Number) -> Vector3 {
+
+        return Vector3.new(pmath.clamp(x) above(threshold),
+            pmath.clamp(y) above(threshold),
+            pmath.clamp(z) above(threshold))
+    }
+
+    //returns a new vector that is this vector clamped below the given value
+    method clampBelow(threshold : Number) -> Vector3 {
+
+        return Vector3.new(pmath.clamp(x) below(threshold),
+            pmath.clamp(y) below(threshold),
+            pmath.clamp(z) below(threshold))
     }
 
     //creates a new 3d vector as the result of adding the given scalar

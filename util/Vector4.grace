@@ -37,7 +37,7 @@ method setVector4(v : Vector4) -> Vector4 {
 //creates a new 4d vector and initialises the x and y values to the given
 //2d vector's x and y values and initialises the z and w values to the given
 //z and w values
-method setVector2(v: Vector2) Coord(z : Number, w : Number) -> Vector4 {
+method setVector2(v: Vector2) coord(z : Number, w : Number) -> Vector4 {
 
     return Vector4.new(v.x, v.y, z, w)
 }
@@ -45,7 +45,7 @@ method setVector2(v: Vector2) Coord(z : Number, w : Number) -> Vector4 {
 //creates a new 4d vector and initialises the x and w values with the given
 //x and w values and initialises the y and z values with the given 2d
 //vector's x and y values
-method setCoord(x : Number) Vector2(v : Vector2) Coord(w : Number) -> Vector4 {
+method setCoord(x : Number) vector2(v : Vector2) Coord(w : Number) -> Vector4 {
 
     return Vector4.new(x, v.x, v.y, w)
 }
@@ -53,7 +53,7 @@ method setCoord(x : Number) Vector2(v : Vector2) Coord(w : Number) -> Vector4 {
 //creates a new 4d vector and initialises the x and y values with the given
 //x and y values and initialises the z and w values with the given 2d
 //vector's x and y values
-method setCoord(x : Number, y : Number) Vector2(v : Vector2) -> Vector4 {
+method setCoord(x : Number, y : Number) vector2(v : Vector2) -> Vector4 {
 
     return Vector4.new(x, y, v.x, v.y)
 }
@@ -61,7 +61,7 @@ method setCoord(x : Number, y : Number) Vector2(v : Vector2) -> Vector4 {
 //creates a new 4d vector and initialises the x and y values using the given
 //2d vector v x and y values and initialises the z and w values using the
 //given 2d vector v' x and y values
-method setVector2(v : Vector2) Vector2(v' : Vector2) -> Vector4 {
+method setVector2(v : Vector2) vector2(v' : Vector2) -> Vector4 {
 
     return Vector4.new(v.x, v.y, v'.x, v'.y)
 }
@@ -69,7 +69,7 @@ method setVector2(v : Vector2) Vector2(v' : Vector2) -> Vector4 {
 //creates a new 4d vector and initialises the x, y, and z values using the
 //given 3d vector's x, y, and z values and initialises the w value with the
 //given w value
-method setVector3(v : Vector3) Coord(w : Number) -> Vector4 {
+method setVector3(v : Vector3) coord(w : Number) -> Vector4 {
 
     return Vector4.new(v.x, v.y, v.z, w)
 }
@@ -77,7 +77,7 @@ method setVector3(v : Vector3) Coord(w : Number) -> Vector4 {
 //creates a new 4d vector and initialises the x value with the given x value
 //and initialises the y, z, and w values with the given 3d vector's x, y, and z
 //values
-method setCoord(x : Number) Vector3(v : Vector3) -> Vector4 {
+method setCoord(x : Number) vector3(v : Vector3) -> Vector4 {
 
     return Vector4.new(x, v.x, v.y, v.z)
 }
@@ -189,6 +189,33 @@ class Vector4.new(x' : Number, y' : Number, z' : Number, w' : Number) {
         def mag = self.magnitude
 
         return Vector4.new(x / mag, y / mag, z / mag, w / mag)
+    }
+
+    //returns a new vector that is this vector clamped between the two values
+    method clampBetween(lower : Number, upper : Number) -> Vector4 {
+
+        return Vector4.new(pmath.clamp(x) between(lower, upper),
+            pmath.clamp(y) between(lower, upper),
+            pmath.clamp(z) between(lower, upper),
+            pmath.clamp(w) between(lower, upper))
+    }
+
+    //returns a new vector that is this vector clamped above the given value
+    method clampAbove(threshold : Number) -> Vector4 {
+
+        return Vector4.new(pmath.clamp(x) above(threshold),
+            pmath.clamp(y) above(threshold),
+            pmath.clamp(z) above(threshold),
+            pmath.clamp(w) above(threshold))
+    }
+
+    //returns a new vector that is this vector clamped below the given value
+    method clampBelow(threshold : Number) -> Vector4 {
+
+        return Vector4.new(pmath.clamp(x) below(threshold),
+            pmath.clamp(y) below(threshold),
+            pmath.clamp(z) below(threshold),
+            pmath.clamp(w) below(threshold))
     }
 
     //creates a new 4d vector as the result of adding the given scalar
