@@ -70,7 +70,7 @@ method clamp(value : Number) above(threshold : Number) -> Number {
 // Calculates the factorial of the given input
 method fact(value : Number) -> Number {
 
-    if(value == 1) then {
+    if (value == 1) then {
 
         return 1
     }
@@ -83,8 +83,9 @@ method sin(value : Number) -> Number {
 
     var ret := 0
 
-    for(1 .. 50) do { n ->
+    for (1 .. 50) do { n ->
 
+        // Arrg don't look at this yet
         ret := ret + (((-1)^n)*(value^(2*n + 1)))/fact(2*n + 1)
     }
 
