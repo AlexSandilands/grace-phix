@@ -129,6 +129,12 @@ class Vector2.new(x' : Number, y' : Number) {
         return Vector2.new(x / mag, y / mag)
     }
 
+    //clamps all the components of this vector between the two given vectors
+    method clamp(lower : Number, upper : Number) {
+
+
+    }
+
     //creates a new 2d vector as the result of adding the given scalar
     //to this vector
     method addScalar(s : Number) -> Vector2 is public {
