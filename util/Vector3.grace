@@ -79,6 +79,7 @@ class Vector3.new(x' : Number, y' : Number, z' : Number) {
     var z : Number is public := z'
 
     //PUBLIC METHODS
+    //returns the vector as a string
     method asString -> String is public {
 
         "[" ++ x ++ ", " ++ y ++ ", " ++ z ++ "]"

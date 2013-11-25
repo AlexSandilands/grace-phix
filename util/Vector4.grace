@@ -114,6 +114,7 @@ class Vector4.new(x' : Number, y' : Number, z' : Number, w' : Number) {
     var w : Number is public := w'
 
     //PUBLIC METHODS
+    //returns the vector as a string
     method asString -> String is public {
 
         "[" ++ x ++ ", " ++ y ++ ", " ++ z ++ ", " ++ w ++ "]"

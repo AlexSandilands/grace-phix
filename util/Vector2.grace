@@ -52,8 +52,20 @@ class Vector2.new(x' : Number, y' : Number) {
     var y : Number is public := y'
 
     //PUBLIC METHODS
+    //returns the vector as a string
     method asString -> String is public {
 
         "[" ++ x ++ ", " ++ y ++ "]"
+    }
+
+    //OPERATORS
+    //returns the inversion of this vector
+    //method prefix
+
+    //creates a new 2d vector as the result of adding this vector with
+    //the given vector
+    method +(v : Vector2) -> Vector2 is public {
+
+        Vector2.new(x + v.x, y + v.y)
     }
 }
