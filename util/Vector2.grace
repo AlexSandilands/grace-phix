@@ -25,6 +25,13 @@ method setVector3(v : Vector3) -> Vector2 {
     Vector2.new(v.x, v.y)
 }
 
+//creates a new 2d vector and initialises it with the x and y values of the
+//given 4d vector and truncates the z and w values
+method setVector4(v : Vector4) -> Vector2 {
+
+    Vector2.new(v.x, v.y)
+}
+
 //creates a new 2d vector initialised with x: 1, y: 0
 method xAxis -> Vector2 {
 

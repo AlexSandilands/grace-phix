@@ -1,8 +1,5 @@
 # Ignore everything
-*
+util/*
 
 # Apart from Grace files
-!*.grace
-
-# and this
-!.gitignore
+!util/*.grace
