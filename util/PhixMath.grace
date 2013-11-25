@@ -22,23 +22,22 @@ method max(value : Number, value' : Number) -> Number {
 }
 
 //clamps the given value between the upper and lower thresholds
-method clamp(value : Number)
-    between(lowerThreshold : Number, upperThreshold : Number) -> Number {
+method clamp(value : Number) between(lower : Number, upper : Number) -> Number {
 
-    if (value < lowerThreshold) then {
+    if (value < lower) then {
 
-        return lowerThreshold
+        return lower
     }
-    if (value > upperThreshold) then {
+    if (value > upper) then {
 
-        return upperThreshold
+        return upper
     }
 
     value
 }
 
 //clamps the given value so that it is not greater then the given threshold
-method clamp(value : Number)below(threshold : Number) -> Number {
+method clamp(value : Number) below(threshold : Number) -> Number {
 
     if (value > threshold) then {
 
@@ -49,7 +48,7 @@ method clamp(value : Number)below(threshold : Number) -> Number {
 }
 
 //clamps the given value so that it is not less than the given threshold
-method clamp(value : Number)above(threshold : Number) -> Number {
+method clamp(value : Number) above(threshold : Number) -> Number {
 
     if (value < threshold) then {
 
