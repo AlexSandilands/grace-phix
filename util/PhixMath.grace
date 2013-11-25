@@ -57,3 +57,28 @@ method clamp(value : Number) above(threshold : Number) -> Number {
 
     value
 }
+
+// Calculates the factorial of the given input
+method fact(value : Number) -> Number {
+
+    if(value == 1) then {
+
+        return 1
+    }
+
+    value * fact(value - 1)
+}
+
+// Uses Taylors series expansion to get an estimate of sine
+method sin(value : Number) -> Number {
+
+    var ret := 0
+
+    for(1 .. 50) do { n ->
+
+        ret := ret + (((-1)^n)*(value^(2*n + 1)))/fact(2*n + 1)
+    }
+
+
+    return ret
+}
