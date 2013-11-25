@@ -30,26 +30,53 @@ static Object inheritingObject = NULL;
 static const char modulename[] = "Vector2";
 Object module_StandardPrelude_init();
 static char *originalSourceLines[] = {
+  "//CONSTRUCTOR METHODS",
+  "//creates a new zero 2d vector",
   "method zero -> Vector2 {",
   "",
   "    Vector2.new(0, 0)",
   "}",
   "",
+  "//creates a new 2d vector and initialises it with the given x and y values",
   "method setCoords(x : Number, y : Number) -> Vector2 {",
   "",
   "    Vector2.new(x, y)",
   "}",
   "",
-  "method setVector(v : Vector2) -> Vector2 {",
+  "//creates a new 2d vector and initialises it with the values of the given",
+  "//2d vector",
+  "method setVector2(v : Vector2) -> Vector2 {",
   "",
   "    Vector2.new(v.x, v.y)",
   "}",
   "",
+  "//creates a new 2d vector and initialises it with the x and y values of the",
+  "//given 3d vector and truncates the z value",
+  "method setVector3(v : Vector3) -> Vector2 {",
+  "",
+  "    Vector2.new(v.x, v.y)",
+  "}",
+  "",
+  "//creates a new 2d vector initialised with x: 1, y: 0",
+  "method xAxis -> Vector2 {",
+  "",
+  "    Vector2.new(1, 0);",
+  "}",
+  "",
+  "//creates a new 2d vector initialised with x: 0, y: 1",
+  "method yAxis -> Vector2 {",
+  "",
+  "    Vector2.new(0, 1);",
+  "}",
+  "",
+  "//VECTOR2 CLASS",
+  "//constructs a new 2d vector with the given x' and y' values",
   "class Vector2.new(x' : Number, y' : Number) {",
   "",
   "    var x : Number is public := x'",
   "    var y : Number is public := y'",
   "",
+  "    //PUBLIC METHODS",
   "    method asString -> String is public {",
   "",
   "        \"[\" ++ x ++ \", \" ++ y ++ \"]\"",
@@ -57,37 +84,37 @@ static char *originalSourceLines[] = {
   "}",
   NULL
 };
-Object reader_Vector2_outer_17(Object self, int nparams, int *argcv, Object* args, int flags) {
+Object reader_Vector2_outer_34(Object self, int nparams, int *argcv, Object* args, int flags) {
   struct UserObject *uo = (struct UserObject*)self;
   return uo->data[0];
 }
-Object reader_Vector2_outer_20(Object self, int nparams, int *argcv, Object* args, int flags) {
+Object reader_Vector2_outer_37(Object self, int nparams, int *argcv, Object* args, int flags) {
   struct UserObject *uo = (struct UserObject*)self;
   return uo->data[0];
 }
-Object reader_Vector2_x_21(Object self, int nparams, int *argcv, Object* args, int flags) {
+Object reader_Vector2_x_38(Object self, int nparams, int *argcv, Object* args, int flags) {
   struct UserObject *uo = (struct UserObject *)self;
   return uo->data[1];
 }
-Object writer_Vector2_x_21(Object self, int nparams, int *argcv, Object* args, int flags) {
+Object writer_Vector2_x_38(Object self, int nparams, int *argcv, Object* args, int flags) {
   struct UserObject *uo = (struct UserObject *)self;
   uo->data[1] = args[0];
   return done;
 }
-Object reader_Vector2_y_22(Object self, int nparams, int *argcv, Object* args, int flags) {
+Object reader_Vector2_y_39(Object self, int nparams, int *argcv, Object* args, int flags) {
   struct UserObject *uo = (struct UserObject *)self;
   return uo->data[2];
 }
-Object writer_Vector2_y_22(Object self, int nparams, int *argcv, Object* args, int flags) {
+Object writer_Vector2_y_39(Object self, int nparams, int *argcv, Object* args, int flags) {
   struct UserObject *uo = (struct UserObject *)self;
   uo->data[2] = args[0];
   return done;
 }
-static ClassData objclass16;
-static ClassData objclass19;
-static Object strlit28;
-static Object strlit33;
-static Object strlit40;
+static ClassData objclass33;
+static ClassData objclass36;
+static Object strlit45;
+static Object strlit50;
+static Object strlit57;
 Object meth_Vector2_zero0(Object self, int nparts, int *argcv, Object *args, int32_t flags) {
   struct UserObject *uo = (struct UserObject*)self;
   Object closure = getdatum((Object)uo, 1, (flags>>24)&0xff);
@@ -111,13 +138,13 @@ if (argcv && argcv[0] > 0)
   *selfslot = self;
   setframeelementname(stackframe, 0, "self");
   if (methodInheritingObject) curarg++;
-// Begin line 4
-  setline(4);
+// Begin line 6
+  setline(6);
   setmodule(modulename);
   setsource(originalSourceLines);
   int callframe1 = gc_frame_new();
-// Begin line 3
-  setline(3);
+// Begin line 5
+  setline(5);
   setmodule(modulename);
   setsource(originalSourceLines);
   Object num2 = alloc_Float64(0);
@@ -168,13 +195,13 @@ if (argcv && argcv[0] > 2)
   *selfslot = self;
   setframeelementname(stackframe, 0, "self");
   if (methodInheritingObject) curarg++;
-// Begin line 9
-  setline(9);
+// Begin line 12
+  setline(12);
   setmodule(modulename);
   setsource(originalSourceLines);
   int callframe6 = gc_frame_new();
-// Begin line 8
-  setline(8);
+// Begin line 11
+  setline(11);
   setmodule(modulename);
   setsource(originalSourceLines);
 // compilenode returning *var_x
@@ -192,12 +219,12 @@ if (argcv && argcv[0] > 2)
   gc_frame_end(frame);
   return call7;
 }
-Object meth_Vector2_setVector8(Object self, int nparts, int *argcv, Object *args, int32_t flags) {
+Object meth_Vector2_setVector28(Object self, int nparts, int *argcv, Object *args, int32_t flags) {
   struct UserObject *uo = (struct UserObject*)self;
   Object closure = getdatum((Object)uo, 3, (flags>>24)&0xff);
   struct StackFrameObject *stackframe = alloc_StackFrame(2, getclosureframe(closure));
   pushclosure(closure);
-  pushstackframe(stackframe, "setVector");
+  pushstackframe(stackframe, "setVector2");
   int frame = gc_frame_new();
   gc_frame_newslot((Object)stackframe);
   Object methodInheritingObject = NULL;
@@ -210,23 +237,23 @@ Object meth_Vector2_setVector8(Object self, int nparts, int *argcv, Object *args
   int curarg = 0;
   int pushcv[] = {1};
   if (nparts < 1 && args)
-    gracedie("missing argument list for setVector (probably reflection error): got %i lists, expected 1.", nparts);
+    gracedie("missing argument list for setVector2 (probably reflection error): got %i lists, expected 1.", nparts);
   Object *var_v = &(stackframe->slots[0]);
   *var_v = args[curarg];
   curarg++;
 if (argcv && argcv[0] > 1)
-  gracedie("too many arguments for setVector");
+  gracedie("too many arguments for setVector2");
   Object *selfslot = &(stackframe->slots[1]);
   *selfslot = self;
   setframeelementname(stackframe, 0, "self");
   if (methodInheritingObject) curarg++;
-// Begin line 14
-  setline(14);
+// Begin line 19
+  setline(19);
   setmodule(modulename);
   setsource(originalSourceLines);
   int callframe9 = gc_frame_new();
-// Begin line 13
-  setline(13);
+// Begin line 18
+  setline(18);
   setmodule(modulename);
   setsource(originalSourceLines);
   int callframe10 = gc_frame_new();
@@ -258,9 +285,165 @@ if (argcv && argcv[0] > 1)
   gc_frame_end(frame);
   return call14;
 }
-Object meth_Vector2_Vector215(Object self, int nparts, int *argcv, Object *args, int32_t flags) {
+Object meth_Vector2_setVector315(Object self, int nparts, int *argcv, Object *args, int32_t flags) {
   struct UserObject *uo = (struct UserObject*)self;
   Object closure = getdatum((Object)uo, 4, (flags>>24)&0xff);
+  struct StackFrameObject *stackframe = alloc_StackFrame(2, getclosureframe(closure));
+  pushclosure(closure);
+  pushstackframe(stackframe, "setVector3");
+  int frame = gc_frame_new();
+  gc_frame_newslot((Object)stackframe);
+  Object methodInheritingObject = NULL;
+  if (nparts > 0 && argcv[0] < 1)
+    gracedie("insufficient arguments to method");
+  Object params[2];
+  int partcv[1];
+  Object *var_Vector2 = getfromclosure(closure, 0);
+  int i;
+  int curarg = 0;
+  int pushcv[] = {1};
+  if (nparts < 1 && args)
+    gracedie("missing argument list for setVector3 (probably reflection error): got %i lists, expected 1.", nparts);
+  Object *var_v = &(stackframe->slots[0]);
+  *var_v = args[curarg];
+  curarg++;
+if (argcv && argcv[0] > 1)
+  gracedie("too many arguments for setVector3");
+  Object *selfslot = &(stackframe->slots[1]);
+  *selfslot = self;
+  setframeelementname(stackframe, 0, "self");
+  if (methodInheritingObject) curarg++;
+// Begin line 26
+  setline(26);
+  setmodule(modulename);
+  setsource(originalSourceLines);
+  int callframe16 = gc_frame_new();
+// Begin line 25
+  setline(25);
+  setmodule(modulename);
+  setsource(originalSourceLines);
+  int callframe17 = gc_frame_new();
+// compilenode returning *var_v
+  partcv[0] = 0;
+  Object call18 = callmethod(*var_v, "x",
+    1, partcv, params);
+  gc_frame_end(callframe17);
+// compilenode returning call18
+// compilenode returning call18
+  gc_frame_newslot(call18);
+  int callframe19 = gc_frame_new();
+// compilenode returning *var_v
+  partcv[0] = 0;
+  Object call20 = callmethod(*var_v, "y",
+    1, partcv, params);
+  gc_frame_end(callframe19);
+// compilenode returning call20
+// compilenode returning call20
+  gc_frame_newslot(call20);
+// compilenode returning *var_Vector2
+  params[0] = call18;
+  params[1] = call20;
+  partcv[0] = 2;
+  Object call21 = callmethod(*var_Vector2, "new",
+    1, partcv, params);
+  gc_frame_end(callframe16);
+// compilenode returning call21
+  gc_frame_end(frame);
+  return call21;
+}
+Object meth_Vector2_xAxis22(Object self, int nparts, int *argcv, Object *args, int32_t flags) {
+  struct UserObject *uo = (struct UserObject*)self;
+  Object closure = getdatum((Object)uo, 5, (flags>>24)&0xff);
+  struct StackFrameObject *stackframe = alloc_StackFrame(1, getclosureframe(closure));
+  pushclosure(closure);
+  pushstackframe(stackframe, "xAxis");
+  int frame = gc_frame_new();
+  gc_frame_newslot((Object)stackframe);
+  Object methodInheritingObject = NULL;
+  Object params[2];
+  int partcv[1];
+  Object *var_Vector2 = getfromclosure(closure, 0);
+  int i;
+  int curarg = 0;
+  int pushcv[] = {1};
+  if (nparts < 1 && args)
+    gracedie("missing argument list for xAxis (probably reflection error): got %i lists, expected 1.", nparts);
+if (argcv && argcv[0] > 0)
+  gracedie("too many arguments for xAxis");
+  Object *selfslot = &(stackframe->slots[0]);
+  *selfslot = self;
+  setframeelementname(stackframe, 0, "self");
+  if (methodInheritingObject) curarg++;
+// Begin line 31
+  setline(31);
+  setmodule(modulename);
+  setsource(originalSourceLines);
+  int callframe23 = gc_frame_new();
+  Object num24 = alloc_Float64(1);
+// compilenode returning num24
+  gc_frame_newslot(num24);
+  Object num25 = alloc_Float64(0);
+// compilenode returning num25
+  gc_frame_newslot(num25);
+// compilenode returning *var_Vector2
+  params[0] = num24;
+  params[1] = num25;
+  partcv[0] = 2;
+  Object call26 = callmethod(*var_Vector2, "new",
+    1, partcv, params);
+  gc_frame_end(callframe23);
+// compilenode returning call26
+  gc_frame_end(frame);
+  return call26;
+}
+Object meth_Vector2_yAxis27(Object self, int nparts, int *argcv, Object *args, int32_t flags) {
+  struct UserObject *uo = (struct UserObject*)self;
+  Object closure = getdatum((Object)uo, 6, (flags>>24)&0xff);
+  struct StackFrameObject *stackframe = alloc_StackFrame(1, getclosureframe(closure));
+  pushclosure(closure);
+  pushstackframe(stackframe, "yAxis");
+  int frame = gc_frame_new();
+  gc_frame_newslot((Object)stackframe);
+  Object methodInheritingObject = NULL;
+  Object params[2];
+  int partcv[1];
+  Object *var_Vector2 = getfromclosure(closure, 0);
+  int i;
+  int curarg = 0;
+  int pushcv[] = {1};
+  if (nparts < 1 && args)
+    gracedie("missing argument list for yAxis (probably reflection error): got %i lists, expected 1.", nparts);
+if (argcv && argcv[0] > 0)
+  gracedie("too many arguments for yAxis");
+  Object *selfslot = &(stackframe->slots[0]);
+  *selfslot = self;
+  setframeelementname(stackframe, 0, "self");
+  if (methodInheritingObject) curarg++;
+// Begin line 37
+  setline(37);
+  setmodule(modulename);
+  setsource(originalSourceLines);
+  int callframe28 = gc_frame_new();
+  Object num29 = alloc_Float64(0);
+// compilenode returning num29
+  gc_frame_newslot(num29);
+  Object num30 = alloc_Float64(1);
+// compilenode returning num30
+  gc_frame_newslot(num30);
+// compilenode returning *var_Vector2
+  params[0] = num29;
+  params[1] = num30;
+  partcv[0] = 2;
+  Object call31 = callmethod(*var_Vector2, "new",
+    1, partcv, params);
+  gc_frame_end(callframe28);
+// compilenode returning call31
+  gc_frame_end(frame);
+  return call31;
+}
+Object meth_Vector2_Vector232(Object self, int nparts, int *argcv, Object *args, int32_t flags) {
+  struct UserObject *uo = (struct UserObject*)self;
+  Object closure = getdatum((Object)uo, 7, (flags>>24)&0xff);
   struct StackFrameObject *stackframe = alloc_StackFrame(1, getclosureframe(closure));
   pushclosure(closure);
   pushstackframe(stackframe, "Vector2");
@@ -281,15 +464,15 @@ if (argcv && argcv[0] > 0)
   *selfslot = self;
   setframeelementname(stackframe, 0, "self");
   if (methodInheritingObject) curarg++;
-// Begin line 16
-  setline(16);
+// Begin line 42
+  setline(42);
   setmodule(modulename);
   setsource(originalSourceLines);
 // compilenode returning *var_Vector2
   gc_frame_end(frame);
   return *var_Vector2;
 }
-Object meth_Vector2_asString23(Object self, int nparts, int *argcv, Object *args, int32_t flags) {
+Object meth_Vector2_asString40(Object self, int nparts, int *argcv, Object *args, int32_t flags) {
   struct StackFrameObject *stackframe = alloc_StackFrame(1, NULL);
   pushclosure(NULL);
   pushstackframe(stackframe, "asString");
@@ -309,67 +492,67 @@ if (argcv && argcv[0] > 0)
   *selfslot = self;
   setframeelementname(stackframe, 0, "self");
   if (methodInheritingObject) curarg++;
-// Begin line 24
-  setline(24);
+// Begin line 51
+  setline(51);
   setmodule(modulename);
   setsource(originalSourceLines);
-// Begin line 23
-  setline(23);
+// Begin line 50
+  setline(50);
   setmodule(modulename);
   setsource(originalSourceLines);
-  if (strlit28 == NULL) {
-    strlit28 = alloc_String("[");
-    gc_root(strlit28);
+  if (strlit45 == NULL) {
+    strlit45 = alloc_String("[");
+    gc_root(strlit45);
   }
-// compilenode returning strlit28
-  int op_slot_left_27 = gc_frame_newslot(strlit28);
-  int callframe29 = gc_frame_new();
+// compilenode returning strlit45
+  int op_slot_left_44 = gc_frame_newslot(strlit45);
+  int callframe46 = gc_frame_new();
   partcv[0] = 0;
-  Object call30 = callmethodflags(self, "x", 1, partcv, params, CFLAG_SELF);
-  gc_frame_end(callframe29);
-// compilenode returning call30
-  int op_slot_right_27 = gc_frame_newslot(call30);
-  params[0] = call30;
+  Object call47 = callmethodflags(self, "x", 1, partcv, params, CFLAG_SELF);
+  gc_frame_end(callframe46);
+// compilenode returning call47
+  int op_slot_right_44 = gc_frame_newslot(call47);
+  params[0] = call47;
   partcv[0] = 1;
-  Object opresult32 = callmethod(strlit28, "++", 1, partcv, params);
-// compilenode returning opresult32
-  int op_slot_left_26 = gc_frame_newslot(opresult32);
-  if (strlit33 == NULL) {
-    strlit33 = alloc_String(", ");
-    gc_root(strlit33);
+  Object opresult49 = callmethod(strlit45, "++", 1, partcv, params);
+// compilenode returning opresult49
+  int op_slot_left_43 = gc_frame_newslot(opresult49);
+  if (strlit50 == NULL) {
+    strlit50 = alloc_String(", ");
+    gc_root(strlit50);
   }
-// compilenode returning strlit33
-  int op_slot_right_26 = gc_frame_newslot(strlit33);
-  params[0] = strlit33;
+// compilenode returning strlit50
+  int op_slot_right_43 = gc_frame_newslot(strlit50);
+  params[0] = strlit50;
   partcv[0] = 1;
-  Object opresult35 = callmethod(opresult32, "++", 1, partcv, params);
-// compilenode returning opresult35
-  int op_slot_left_25 = gc_frame_newslot(opresult35);
-  int callframe36 = gc_frame_new();
+  Object opresult52 = callmethod(opresult49, "++", 1, partcv, params);
+// compilenode returning opresult52
+  int op_slot_left_42 = gc_frame_newslot(opresult52);
+  int callframe53 = gc_frame_new();
   partcv[0] = 0;
-  Object call37 = callmethodflags(self, "y", 1, partcv, params, CFLAG_SELF);
-  gc_frame_end(callframe36);
-// compilenode returning call37
-  int op_slot_right_25 = gc_frame_newslot(call37);
-  params[0] = call37;
+  Object call54 = callmethodflags(self, "y", 1, partcv, params, CFLAG_SELF);
+  gc_frame_end(callframe53);
+// compilenode returning call54
+  int op_slot_right_42 = gc_frame_newslot(call54);
+  params[0] = call54;
   partcv[0] = 1;
-  Object opresult39 = callmethod(opresult35, "++", 1, partcv, params);
-// compilenode returning opresult39
-  int op_slot_left_24 = gc_frame_newslot(opresult39);
-  if (strlit40 == NULL) {
-    strlit40 = alloc_String("]");
-    gc_root(strlit40);
+  Object opresult56 = callmethod(opresult52, "++", 1, partcv, params);
+// compilenode returning opresult56
+  int op_slot_left_41 = gc_frame_newslot(opresult56);
+  if (strlit57 == NULL) {
+    strlit57 = alloc_String("]");
+    gc_root(strlit57);
   }
-// compilenode returning strlit40
-  int op_slot_right_24 = gc_frame_newslot(strlit40);
-  params[0] = strlit40;
+// compilenode returning strlit57
+  int op_slot_right_41 = gc_frame_newslot(strlit57);
+  params[0] = strlit57;
   partcv[0] = 1;
-  Object opresult42 = callmethod(opresult39, "++", 1, partcv, params);
-// compilenode returning opresult42
+  Object opresult59 = callmethod(opresult56, "++", 1, partcv, params);
+// compilenode returning opresult59
   gc_frame_end(frame);
-  return opresult42;
+  return opresult59;
 }
-Object meth_Vector2_new18(Object self, int nparts, int *argcv, Object *args, int32_t flags) {
+Object meth_Vector2_new35(Object self, int nparts, int *argcv, Object *args, int32_t flags) {
   struct StackFrameObject *stackframe = alloc_StackFrame(3, NULL);
   pushclosure(NULL);
   pushstackframe(stackframe, "new");
@@ -399,88 +582,88 @@ if (argcv && argcv[0] > 2)
   if (methodInheritingObject) curarg++;
   isTailObject = 1;
   inheritingObject = methodInheritingObject;
-  Object inheritingObject19 = inheritingObject;
+  Object inheritingObject36 = inheritingObject;
   if (isTailObject) {
     isTailObject = 0;
     inheritingObject = NULL;
   }
-  Object obj19 = alloc_userobj2(5,4, objclass19);
-  gc_frame_newslot(obj19);
-if (objclass19 == NULL) {
-  glfree(obj19->class->name);
-  obj19->class->name = "Vector2";
+  Object obj36 = alloc_userobj2(5,4, objclass36);
+  gc_frame_newslot(obj36);
+if (objclass36 == NULL) {
+  glfree(obj36->class->name);
+  obj36->class->name = "Vector2";
 }
 // OBJECT OUTER DEC outer
-  adddatum2(obj19, self, 0);
-  addmethodreal(obj19,"outer", &reader_Vector2_outer_20);
-  Object oldself19 = self;
-  struct StackFrameObject *oldstackframe19 = stackframe;
-  stackframe = alloc_StackFrame(1, oldstackframe19);
+  adddatum2(obj36, self, 0);
+  addmethodreal(obj36,"outer", &reader_Vector2_outer_37);
+  Object oldself36 = self;
+  struct StackFrameObject *oldstackframe36 = stackframe;
+  stackframe = alloc_StackFrame(1, oldstackframe36);
   gc_frame_newslot((Object)stackframe);
-  self = obj19;
-  Object *oldselfslot19 = selfslot;
+  self = obj36;
+  Object *oldselfslot36 = selfslot;
   selfslot = &stackframe->slots[0];
   *selfslot = self;
   setframeelementname(stackframe, 0, "self");
-  if (inheritingObject19) {
-    struct UserObject *inho19 = (struct UserObject *)inheritingObject19;
-    while (inho19->super != GraceDefaultObject) inho19 = (struct UserObject *)inho19->super;
-    inho19->super = obj19;
-    self = inheritingObject19;
+  if (inheritingObject36) {
+    struct UserObject *inho36 = (struct UserObject *)inheritingObject36;
+    while (inho36->super != GraceDefaultObject) inho36 = (struct UserObject *)inho36->super;
+    inho36->super = obj36;
+    self = inheritingObject36;
     *selfslot = self;
   }
-if (objclass19 == NULL) {
-  Method *reader21 = addmethodrealflags(obj19, "x",&reader_Vector2_x_21, 0);
-  Method *writer21 = addmethodrealflags(obj19, "x:=",&writer_Vector2_x_21, 0);
-  reader21->definitionModule = modulename;
-  writer21->definitionModule = modulename;
-  reader21->definitionLine = 19;
-  writer21->definitionLine = 19;
+if (objclass36 == NULL) {
+  Method *reader38 = addmethodrealflags(obj36, "x",&reader_Vector2_x_38, 0);
+  Method *writer38 = addmethodrealflags(obj36, "x:=",&writer_Vector2_x_38, 0);
+  reader38->definitionModule = modulename;
+  writer38->definitionModule = modulename;
+  reader38->definitionLine = 45;
+  writer38->definitionLine = 45;
 }
-obj19->flags |= OFLAG_MUTABLE;
-adddatum2(obj19, alloc_Undefined(), 1);
-if (objclass19 == NULL) {
-  Method *reader22 = addmethodrealflags(obj19, "y",&reader_Vector2_y_22, 0);
-  Method *writer22 = addmethodrealflags(obj19, "y:=",&writer_Vector2_y_22, 0);
-  reader22->definitionModule = modulename;
-  writer22->definitionModule = modulename;
-  reader22->definitionLine = 21;
-  writer22->definitionLine = 21;
+obj36->flags |= OFLAG_MUTABLE;
+adddatum2(obj36, alloc_Undefined(), 1);
+if (objclass36 == NULL) {
+  Method *reader39 = addmethodrealflags(obj36, "y",&reader_Vector2_y_39, 0);
+  Method *writer39 = addmethodrealflags(obj36, "y:=",&writer_Vector2_y_39, 0);
+  reader39->definitionModule = modulename;
+  writer39->definitionModule = modulename;
+  reader39->definitionLine = 48;
+  writer39->definitionLine = 48;
 }
-obj19->flags |= OFLAG_MUTABLE;
-adddatum2(obj19, alloc_Undefined(), 2);
-  struct UserObject *uo23 = (struct UserObject*)obj19;
-  uo23->data[3] = emptyclosure;
-  Method *meth_meth_Vector2_asString23 = addmethod2pos(obj19, "asString", &meth_Vector2_asString23, 3);
-int argcv_meth_Vector2_asString23[] = {0};
-meth_meth_Vector2_asString23->type = alloc_MethodType(1, argcv_meth_Vector2_asString23);
-  meth_meth_Vector2_asString23->definitionModule = modulename;
-  meth_meth_Vector2_asString23->definitionLine = 21;
-  sourceObject = obj19;
-// Begin line 18
-  setline(18);
+obj36->flags |= OFLAG_MUTABLE;
+adddatum2(obj36, alloc_Undefined(), 2);
+  struct UserObject *uo40 = (struct UserObject*)obj36;
+  uo40->data[3] = emptyclosure;
+  Method *meth_meth_Vector2_asString40 = addmethod2pos(obj36, "asString", &meth_Vector2_asString40, 3);
+int argcv_meth_Vector2_asString40[] = {0};
+meth_meth_Vector2_asString40->type = alloc_MethodType(1, argcv_meth_Vector2_asString40);
+  meth_meth_Vector2_asString40->definitionModule = modulename;
+  meth_meth_Vector2_asString40->definitionLine = 48;
+  sourceObject = obj36;
+// Begin line 44
+  setline(44);
   setmodule(modulename);
   setsource(originalSourceLines);
 // compilenode returning *var_x_39_
-  adddatum2(obj19, *var_x_39_, 1);
-  sourceObject = obj19;
-// Begin line 19
-  setline(19);
+  adddatum2(obj36, *var_x_39_, 1);
+  sourceObject = obj36;
+// Begin line 45
+  setline(45);
   setmodule(modulename);
   setsource(originalSourceLines);
 // compilenode returning *var_y_39_
-  adddatum2(obj19, *var_y_39_, 2);
-  sourceObject = obj19;
-objclass19 = obj19->class;
-  objclass19->definitionModule = modulename;
-  objclass19->definitionLine = 13;
-  self = oldself19;
-  selfslot = oldselfslot19;
-  stackframe = oldstackframe19;
+  adddatum2(obj36, *var_y_39_, 2);
+  sourceObject = obj36;
+objclass36 = obj36->class;
+  objclass36->definitionModule = modulename;
+  objclass36->definitionLine = 25;
+  self = oldself36;
+  selfslot = oldselfslot36;
+  stackframe = oldstackframe36;
   gc_frame_end(frame);
-  return obj19;
+  return obj36;
 }
-Object meth_Vector2_new18_object(Object self, int nparts, int *argcv, Object *args, int32_t flags) {
+Object meth_Vector2_new35_object(Object self, int nparts, int *argcv, Object *args, int32_t flags) {
   struct StackFrameObject *stackframe = alloc_StackFrame(3, NULL);
   pushclosure(NULL);
   pushstackframe(stackframe, "new()object");
@@ -510,91 +693,91 @@ if (argcv && argcv[0] > 2)
   if (methodInheritingObject) curarg++;
   isTailObject = 1;
   inheritingObject = methodInheritingObject;
-  Object inheritingObject19 = inheritingObject;
+  Object inheritingObject36 = inheritingObject;
   if (isTailObject) {
     isTailObject = 0;
     inheritingObject = NULL;
   }
-  Object obj19 = alloc_userobj2(5,4, objclass19);
-  gc_frame_newslot(obj19);
-if (objclass19 == NULL) {
-  glfree(obj19->class->name);
-  obj19->class->name = "Vector2";
+  Object obj36 = alloc_userobj2(5,4, objclass36);
+  gc_frame_newslot(obj36);
+if (objclass36 == NULL) {
+  glfree(obj36->class->name);
+  obj36->class->name = "Vector2";
 }
 // OBJECT OUTER DEC outer
-  adddatum2(obj19, self, 0);
-  addmethodreal(obj19,"outer", &reader_Vector2_outer_20);
-  Object oldself19 = self;
-  struct StackFrameObject *oldstackframe19 = stackframe;
-  stackframe = alloc_StackFrame(1, oldstackframe19);
+  adddatum2(obj36, self, 0);
+  addmethodreal(obj36,"outer", &reader_Vector2_outer_37);
+  Object oldself36 = self;
+  struct StackFrameObject *oldstackframe36 = stackframe;
+  stackframe = alloc_StackFrame(1, oldstackframe36);
   gc_frame_newslot((Object)stackframe);
-  self = obj19;
-  Object *oldselfslot19 = selfslot;
+  self = obj36;
+  Object *oldselfslot36 = selfslot;
   selfslot = &stackframe->slots[0];
   *selfslot = self;
   setframeelementname(stackframe, 0, "self");
-  if (inheritingObject19) {
-    struct UserObject *inho19 = (struct UserObject *)inheritingObject19;
-    while (inho19->super != GraceDefaultObject) inho19 = (struct UserObject *)inho19->super;
-    inho19->super = obj19;
-    self = inheritingObject19;
+  if (inheritingObject36) {
+    struct UserObject *inho36 = (struct UserObject *)inheritingObject36;
+    while (inho36->super != GraceDefaultObject) inho36 = (struct UserObject *)inho36->super;
+    inho36->super = obj36;
+    self = inheritingObject36;
     *selfslot = self;
   }
-if (objclass19 == NULL) {
-  Method *reader21 = addmethodrealflags(obj19, "x",&reader_Vector2_x_21, 0);
-  Method *writer21 = addmethodrealflags(obj19, "x:=",&writer_Vector2_x_21, 0);
-  reader21->definitionModule = modulename;
-  writer21->definitionModule = modulename;
-  reader21->definitionLine = 19;
-  writer21->definitionLine = 19;
+if (objclass36 == NULL) {
+  Method *reader38 = addmethodrealflags(obj36, "x",&reader_Vector2_x_38, 0);
+  Method *writer38 = addmethodrealflags(obj36, "x:=",&writer_Vector2_x_38, 0);
+  reader38->definitionModule = modulename;
+  writer38->definitionModule = modulename;
+  reader38->definitionLine = 45;
+  writer38->definitionLine = 45;
 }
-obj19->flags |= OFLAG_MUTABLE;
-adddatum2(obj19, alloc_Undefined(), 1);
-if (objclass19 == NULL) {
-  Method *reader22 = addmethodrealflags(obj19, "y",&reader_Vector2_y_22, 0);
-  Method *writer22 = addmethodrealflags(obj19, "y:=",&writer_Vector2_y_22, 0);
-  reader22->definitionModule = modulename;
-  writer22->definitionModule = modulename;
-  reader22->definitionLine = 21;
-  writer22->definitionLine = 21;
+obj36->flags |= OFLAG_MUTABLE;
+adddatum2(obj36, alloc_Undefined(), 1);
+if (objclass36 == NULL) {
+  Method *reader39 = addmethodrealflags(obj36, "y",&reader_Vector2_y_39, 0);
+  Method *writer39 = addmethodrealflags(obj36, "y:=",&writer_Vector2_y_39, 0);
+  reader39->definitionModule = modulename;
+  writer39->definitionModule = modulename;
+  reader39->definitionLine = 48;
+  writer39->definitionLine = 48;
 }
-obj19->flags |= OFLAG_MUTABLE;
-adddatum2(obj19, alloc_Undefined(), 2);
-  struct UserObject *uo23 = (struct UserObject*)obj19;
-  uo23->data[3] = emptyclosure;
-  Method *meth_meth_Vector2_asString23 = addmethod2pos(obj19, "asString", &meth_Vector2_asString23, 3);
-int argcv_meth_Vector2_asString23[] = {0};
-meth_meth_Vector2_asString23->type = alloc_MethodType(1, argcv_meth_Vector2_asString23);
-  meth_meth_Vector2_asString23->definitionModule = modulename;
-  meth_meth_Vector2_asString23->definitionLine = 21;
-  sourceObject = obj19;
-// Begin line 18
-  setline(18);
+obj36->flags |= OFLAG_MUTABLE;
+adddatum2(obj36, alloc_Undefined(), 2);
+  struct UserObject *uo40 = (struct UserObject*)obj36;
+  uo40->data[3] = emptyclosure;
+  Method *meth_meth_Vector2_asString40 = addmethod2pos(obj36, "asString", &meth_Vector2_asString40, 3);
+int argcv_meth_Vector2_asString40[] = {0};
+meth_meth_Vector2_asString40->type = alloc_MethodType(1, argcv_meth_Vector2_asString40);
+  meth_meth_Vector2_asString40->definitionModule = modulename;
+  meth_meth_Vector2_asString40->definitionLine = 48;
+  sourceObject = obj36;
+// Begin line 44
+  setline(44);
   setmodule(modulename);
   setsource(originalSourceLines);
 // compilenode returning *var_x_39_
-  adddatum2(obj19, *var_x_39_, 1);
-  sourceObject = obj19;
-// Begin line 19
-  setline(19);
+  adddatum2(obj36, *var_x_39_, 1);
+  sourceObject = obj36;
+// Begin line 45
+  setline(45);
   setmodule(modulename);
   setsource(originalSourceLines);
 // compilenode returning *var_y_39_
-  adddatum2(obj19, *var_y_39_, 2);
-  sourceObject = obj19;
-objclass19 = obj19->class;
-  objclass19->definitionModule = modulename;
-  objclass19->definitionLine = 13;
-  self = oldself19;
-  selfslot = oldselfslot19;
-  stackframe = oldstackframe19;
+  adddatum2(obj36, *var_y_39_, 2);
+  sourceObject = obj36;
+objclass36 = obj36->class;
+  objclass36->definitionModule = modulename;
+  objclass36->definitionLine = 25;
+  self = oldself36;
+  selfslot = oldselfslot36;
+  stackframe = oldstackframe36;
   gc_frame_end(frame);
-  return obj19;
+  return obj36;
 }
 Object module_Vector2_init() {
   int flags = 0;
   int frame = gc_frame_new();
-  Object self = alloc_obj2(6, 6);
+  Object self = alloc_obj2(9, 9);
   gc_root(self);
   prelude = module_StandardPrelude_init();
   adddatum2(self, prelude, 0);
@@ -635,7 +818,7 @@ Object module_Vector2_init() {
   gc_root(*var_MatchFailed);
   emptyclosure = createclosure(0, "empty");
   gc_root(emptyclosure);
-  struct StackFrameObject *stackframe = alloc_StackFrame(6, NULL);
+  struct StackFrameObject *stackframe = alloc_StackFrame(9, NULL);
   gc_root((Object)stackframe);
   pushstackframe(stackframe, "module scope");
   Object *selfslot = &(stackframe->slots[0]);
@@ -645,6 +828,10 @@ Object module_Vector2_init() {
   int partcv[1];
   Object *var_Vector2 = &(stackframe->slots[1]);
   setframeelementname(stackframe, 1, "Vector2");
+// Begin line 3
+  setline(3);
+  setmodule(modulename);
+  setsource(originalSourceLines);
   block_savedest(self);
   Object closure0 = createclosure(1, "zero");
 setclosureframe(closure0, stackframe);
@@ -655,10 +842,10 @@ setclosureframe(closure0, stackframe);
 int argcv_meth_Vector2_zero0[] = {0};
 meth_meth_Vector2_zero0->type = alloc_MethodType(1, argcv_meth_Vector2_zero0);
   meth_meth_Vector2_zero0->definitionModule = modulename;
-  meth_meth_Vector2_zero0->definitionLine = 1;
+  meth_meth_Vector2_zero0->definitionLine = 3;
 // compilenode returning 
-// Begin line 6
-  setline(6);
+// Begin line 9
+  setline(9);
   setmodule(modulename);
   setsource(originalSourceLines);
   block_savedest(self);
@@ -675,36 +862,79 @@ meth_meth_Vector2_setCoords5->type->names[0] = "x";
 meth_meth_Vector2_setCoords5->type->types[1] = type_Number;
 meth_meth_Vector2_setCoords5->type->names[1] = "y";
   meth_meth_Vector2_setCoords5->definitionModule = modulename;
-  meth_meth_Vector2_setCoords5->definitionLine = 6;
+  meth_meth_Vector2_setCoords5->definitionLine = 9;
 // compilenode returning 
-// Begin line 11
-  setline(11);
+// Begin line 16
+  setline(16);
   setmodule(modulename);
   setsource(originalSourceLines);
   block_savedest(self);
-  Object closure8 = createclosure(1, "setVector");
+  Object closure8 = createclosure(1, "setVector2");
 setclosureframe(closure8, stackframe);
   addtoclosure(closure8, var_Vector2);
   struct UserObject *uo8 = (struct UserObject*)self;
   uo8->data[3] = (Object)closure8;
-  Method *meth_meth_Vector2_setVector8 = addmethod2pos(self, "setVector", &meth_Vector2_setVector8, 3);
-int argcv_meth_Vector2_setVector8[] = {1};
-meth_meth_Vector2_setVector8->type = alloc_MethodType(1, argcv_meth_Vector2_setVector8);
-  meth_meth_Vector2_setVector8->definitionModule = modulename;
-  meth_meth_Vector2_setVector8->definitionLine = 11;
+  Method *meth_meth_Vector2_setVector28 = addmethod2pos(self, "setVector2", &meth_Vector2_setVector28, 3);
+int argcv_meth_Vector2_setVector28[] = {1};
+meth_meth_Vector2_setVector28->type = alloc_MethodType(1, argcv_meth_Vector2_setVector28);
+  meth_meth_Vector2_setVector28->definitionModule = modulename;
+  meth_meth_Vector2_setVector28->definitionLine = 16;
 // compilenode returning 
-// Begin line 1
-  setline(1);
+// Begin line 23
+  setline(23);
+  setmodule(modulename);
+  setsource(originalSourceLines);
+  block_savedest(self);
+  Object closure15 = createclosure(1, "setVector3");
+setclosureframe(closure15, stackframe);
+  addtoclosure(closure15, var_Vector2);
+  struct UserObject *uo15 = (struct UserObject*)self;
+  uo15->data[4] = (Object)closure15;
+  Method *meth_meth_Vector2_setVector315 = addmethod2pos(self, "setVector3", &meth_Vector2_setVector315, 4);
+int argcv_meth_Vector2_setVector315[] = {1};
+meth_meth_Vector2_setVector315->type = alloc_MethodType(1, argcv_meth_Vector2_setVector315);
+  meth_meth_Vector2_setVector315->definitionModule = modulename;
+  meth_meth_Vector2_setVector315->definitionLine = 23;
+// compilenode returning 
+// Begin line 29
+  setline(29);
+  setmodule(modulename);
+  setsource(originalSourceLines);
+  block_savedest(self);
+  Object closure22 = createclosure(1, "xAxis");
+setclosureframe(closure22, stackframe);
+  addtoclosure(closure22, var_Vector2);
+  struct UserObject *uo22 = (struct UserObject*)self;
+  uo22->data[5] = (Object)closure22;
+  Method *meth_meth_Vector2_xAxis22 = addmethod2pos(self, "xAxis", &meth_Vector2_xAxis22, 5);
+int argcv_meth_Vector2_xAxis22[] = {0};
+meth_meth_Vector2_xAxis22->type = alloc_MethodType(1, argcv_meth_Vector2_xAxis22);
+  meth_meth_Vector2_xAxis22->definitionModule = modulename;
+  meth_meth_Vector2_xAxis22->definitionLine = 29;
+// compilenode returning 
+// Begin line 35
+  setline(35);
+  setmodule(modulename);
+  setsource(originalSourceLines);
+  block_savedest(self);
+  Object closure27 = createclosure(1, "yAxis");
+setclosureframe(closure27, stackframe);
+  addtoclosure(closure27, var_Vector2);
+  struct UserObject *uo27 = (struct UserObject*)self;
+  uo27->data[6] = (Object)closure27;
+  Method *meth_meth_Vector2_yAxis27 = addmethod2pos(self, "yAxis", &meth_Vector2_yAxis27, 6);
+int argcv_meth_Vector2_yAxis27[] = {0};
+meth_meth_Vector2_yAxis27->type = alloc_MethodType(1, argcv_meth_Vector2_yAxis27);
+  meth_meth_Vector2_yAxis27->definitionModule = modulename;
+  meth_meth_Vector2_yAxis27->definitionLine = 35;
+// compilenode returning 
+// Begin line 3
+  setline(3);
   setmodule(modulename);
   setsource(originalSourceLines);
 // compilenode returning 
-// Begin line 6
-  setline(6);
-  setmodule(modulename);
-  setsource(originalSourceLines);
-// compilenode returning 
-// Begin line 11
-  setline(11);
+// Begin line 9
+  setline(9);
   setmodule(modulename);
   setsource(originalSourceLines);
 // compilenode returning 
@@ -712,82 +942,102 @@ meth_meth_Vector2_setVector8->type = alloc_MethodType(1, argcv_meth_Vector2_setV
   setline(16);
   setmodule(modulename);
   setsource(originalSourceLines);
-// Begin line 13
-  setline(13);
+// compilenode returning 
+// Begin line 23
+  setline(23);
+  setmodule(modulename);
+  setsource(originalSourceLines);
+// compilenode returning 
+// Begin line 29
+  setline(29);
+  setmodule(modulename);
+  setsource(originalSourceLines);
+// compilenode returning 
+// Begin line 35
+  setline(35);
+  setmodule(modulename);
+  setsource(originalSourceLines);
+// compilenode returning 
+// Begin line 42
+  setline(42);
+  setmodule(modulename);
+  setsource(originalSourceLines);
+// Begin line 25
+  setline(25);
   setmodule(modulename);
   setsource(originalSourceLines);
   block_savedest(self);
-  Object closure15 = createclosure(1, "Vector2");
-setclosureframe(closure15, stackframe);
-  addtoclosure(closure15, var_Vector2);
-  struct UserObject *uo15 = (struct UserObject*)self;
-  uo15->data[4] = (Object)closure15;
-  Method *meth_meth_Vector2_Vector215 = addmethod2pos(self, "Vector2", &meth_Vector2_Vector215, 4);
-int argcv_meth_Vector2_Vector215[] = {0};
-meth_meth_Vector2_Vector215->type = alloc_MethodType(1, argcv_meth_Vector2_Vector215);
-  meth_meth_Vector2_Vector215->definitionModule = modulename;
-  meth_meth_Vector2_Vector215->definitionLine = 13;
+  Object closure32 = createclosure(1, "Vector2");
+setclosureframe(closure32, stackframe);
+  addtoclosure(closure32, var_Vector2);
+  struct UserObject *uo32 = (struct UserObject*)self;
+  uo32->data[7] = (Object)closure32;
+  Method *meth_meth_Vector2_Vector232 = addmethod2pos(self, "Vector2", &meth_Vector2_Vector232, 7);
+int argcv_meth_Vector2_Vector232[] = {0};
+meth_meth_Vector2_Vector232->type = alloc_MethodType(1, argcv_meth_Vector2_Vector232);
+  meth_meth_Vector2_Vector232->definitionModule = modulename;
+  meth_meth_Vector2_Vector232->definitionLine = 25;
 // compilenode returning 
-// Begin line 13
-  setline(13);
+// Begin line 25
+  setline(25);
   setmodule(modulename);
   setsource(originalSourceLines);
-  Object inheritingObject16 = inheritingObject;
+  Object inheritingObject33 = inheritingObject;
   if (isTailObject) {
     isTailObject = 0;
     inheritingObject = NULL;
   }
-  Object obj16 = alloc_userobj2(2,4, objclass16);
-  gc_frame_newslot(obj16);
+  Object obj33 = alloc_userobj2(2,4, objclass33);
+  gc_frame_newslot(obj33);
 // OBJECT OUTER DEC outer
-  adddatum2(obj16, self, 0);
-  addmethodreal(obj16,"outer", &reader_Vector2_outer_17);
-  Object oldself16 = self;
-  struct StackFrameObject *oldstackframe16 = stackframe;
-  stackframe = alloc_StackFrame(1, oldstackframe16);
+  adddatum2(obj33, self, 0);
+  addmethodreal(obj33,"outer", &reader_Vector2_outer_34);
+  Object oldself33 = self;
+  struct StackFrameObject *oldstackframe33 = stackframe;
+  stackframe = alloc_StackFrame(1, oldstackframe33);
   gc_frame_newslot((Object)stackframe);
-  self = obj16;
-  Object *oldselfslot16 = selfslot;
+  self = obj33;
+  Object *oldselfslot33 = selfslot;
   selfslot = &stackframe->slots[0];
   *selfslot = self;
   setframeelementname(stackframe, 0, "self");
-  if (inheritingObject16) {
-    struct UserObject *inho16 = (struct UserObject *)inheritingObject16;
-    while (inho16->super != GraceDefaultObject) inho16 = (struct UserObject *)inho16->super;
-    inho16->super = obj16;
-    self = inheritingObject16;
+  if (inheritingObject33) {
+    struct UserObject *inho33 = (struct UserObject *)inheritingObject33;
+    while (inho33->super != GraceDefaultObject) inho33 = (struct UserObject *)inho33->super;
+    inho33->super = obj33;
+    self = inheritingObject33;
     *selfslot = self;
   }
-  struct UserObject *uo18 = (struct UserObject*)obj16;
-  uo18->data[1] = emptyclosure;
-  Method *meth_meth_Vector2_new18 = addmethod2pos(obj16, "new", &meth_Vector2_new18, 1);
-int argcv_meth_Vector2_new18[] = {2};
-meth_meth_Vector2_new18->type = alloc_MethodType(1, argcv_meth_Vector2_new18);
-meth_meth_Vector2_new18->type->types[0] = type_Number;
-meth_meth_Vector2_new18->type->names[0] = "x'";
-meth_meth_Vector2_new18->type->types[1] = type_Number;
-meth_meth_Vector2_new18->type->names[1] = "y'";
-  meth_meth_Vector2_new18->definitionModule = modulename;
-  meth_meth_Vector2_new18->definitionLine = 13;
-  Method *meth_meth_Vector2_new18_object = addmethod2pos(obj16, "new()object", &meth_Vector2_new18_object, 1);
-int argcv_meth_Vector2_new18_object[] = {2};
-meth_meth_Vector2_new18_object->type = alloc_MethodType(1, argcv_meth_Vector2_new18_object);
-meth_meth_Vector2_new18_object->type->types[0] = type_Number;
-meth_meth_Vector2_new18_object->type->names[0] = "x'";
-meth_meth_Vector2_new18_object->type->types[1] = type_Number;
-meth_meth_Vector2_new18_object->type->names[1] = "y'";
-  meth_meth_Vector2_new18_object->definitionModule = modulename;
-  meth_meth_Vector2_new18_object->definitionLine = 13;
-  sourceObject = obj16;
-objclass16 = obj16->class;
-  objclass16->definitionModule = modulename;
-  objclass16->definitionLine = 13;
-  self = oldself16;
-  selfslot = oldselfslot16;
-  stackframe = oldstackframe16;
-// compilenode returning obj16
-  *var_Vector2 = obj16;
-  if (obj16 == undefined)
+  struct UserObject *uo35 = (struct UserObject*)obj33;
+  uo35->data[1] = emptyclosure;
+  Method *meth_meth_Vector2_new35 = addmethod2pos(obj33, "new", &meth_Vector2_new35, 1);
+int argcv_meth_Vector2_new35[] = {2};
+meth_meth_Vector2_new35->type = alloc_MethodType(1, argcv_meth_Vector2_new35);
+meth_meth_Vector2_new35->type->types[0] = type_Number;
+meth_meth_Vector2_new35->type->names[0] = "x'";
+meth_meth_Vector2_new35->type->types[1] = type_Number;
+meth_meth_Vector2_new35->type->names[1] = "y'";
+  meth_meth_Vector2_new35->definitionModule = modulename;
+  meth_meth_Vector2_new35->definitionLine = 25;
+  Method *meth_meth_Vector2_new35_object = addmethod2pos(obj33, "new()object", &meth_Vector2_new35_object, 1);
+int argcv_meth_Vector2_new35_object[] = {2};
+meth_meth_Vector2_new35_object->type = alloc_MethodType(1, argcv_meth_Vector2_new35_object);
+meth_meth_Vector2_new35_object->type->types[0] = type_Number;
+meth_meth_Vector2_new35_object->type->names[0] = "x'";
+meth_meth_Vector2_new35_object->type->types[1] = type_Number;
+meth_meth_Vector2_new35_object->type->names[1] = "y'";
+  meth_meth_Vector2_new35_object->definitionModule = modulename;
+  meth_meth_Vector2_new35_object->definitionLine = 25;
+  sourceObject = obj33;
+objclass33 = obj33->class;
+  objclass33->definitionModule = modulename;
+  objclass33->definitionLine = 25;
+  self = oldself33;
+  selfslot = oldselfslot33;
+  stackframe = oldstackframe33;
+// compilenode returning obj33
+  *var_Vector2 = obj33;
+  if (obj33 == undefined)
     callmethod(done, "assignment", 0, NULL, NULL);
 // compilenode returning done
 // compilenode returning done
