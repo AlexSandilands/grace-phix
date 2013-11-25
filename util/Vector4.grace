@@ -2,21 +2,21 @@
 //creates a new zero 3d vector
 method zero -> Vector4 {
 
-    Vector4.new(0, 0, 0, 0)
+    return Vector4.new(0, 0, 0, 0)
 }
 
 //creates a new 3d vector and initialises it with the given
 //x, y, z, and w values
 method setCoords(x : Number, y : Number, z : Number, w : Number) ->Vector4 {
 
-    Vector4.new(x, y, z, w)
+    return Vector4.new(x, y, z, w)
 }
 
 //creates a new 4d vector and initialises it the x and y values of the given
 //2d vector's x and y values and sets the z and w values to zero
 method setVector2(v : Vector2) -> Vector4 {
 
-    Vector4.new(v.x, v.y, 0, 0)
+    return Vector4.new(v.x, v.y, 0, 0)
 }
 
 //creates a new 4d vector and initialises it the x, y, and z values of the given
@@ -29,7 +29,7 @@ method setVector3(v : Vector3) -> Vector4 {
 //creates a new 4d vector and initialises it with the given 4d vector's values
 method setVector4(v : Vector4) -> Vector4 {
 
-    Vector4.new(v.x, v.y, v.z, v.w)
+    return Vector4.new(v.x, v.y, v.z, v.w)
 }
 
 //creates a new 4d vector and initialises the x and y values to the given
@@ -37,7 +37,7 @@ method setVector4(v : Vector4) -> Vector4 {
 //z and w values
 method setVector2(v: Vector2) Coords(z : Number, w : Number) -> Vector4 {
 
-    Vector4.new(v.x, v.y, z, w)
+    return Vector4.new(v.x, v.y, z, w)
 }
 
 //creates a new 4d vector and initialises the x and w values with the given
@@ -45,7 +45,7 @@ method setVector2(v: Vector2) Coords(z : Number, w : Number) -> Vector4 {
 //vector's x and y values
 method setCoord(x : Number) Vector2(v : Vector2) Coord(w : Number) -> Vector4 {
 
-    Vector4.new(x, v.x, v.y, w)
+    return Vector4.new(x, v.x, v.y, w)
 }
 
 //creates a new 4d vector and initialises the x and y values with the given
@@ -53,7 +53,7 @@ method setCoord(x : Number) Vector2(v : Vector2) Coord(w : Number) -> Vector4 {
 //vector's x and y values
 method setCoords(x : Number, y : Number) Vector2(v : Vector2) -> Vector4 {
 
-    Vector4.new(x, y, v.x, v.y)
+    return Vector4.new(x, y, v.x, v.y)
 }
 
 //creates a new 4d vector and initialises the x and y values using the given
@@ -61,7 +61,7 @@ method setCoords(x : Number, y : Number) Vector2(v : Vector2) -> Vector4 {
 //given 2d vector v' x and y values
 method setVector2(v : Vector2) Vector2(v' : Vector2) -> Vector4 {
 
-    Vector4.new(v.x, v.y, v'.x, v'.y)
+    return Vector4.new(v.x, v.y, v'.x, v'.y)
 }
 
 //creates a new 4d vector and initialises the x, y, and z values using the
@@ -69,7 +69,7 @@ method setVector2(v : Vector2) Vector2(v' : Vector2) -> Vector4 {
 //given w value
 method setVector3(v : Vector3) Coord(w : Number) -> Vector4 {
 
-    Vector4.new(v.x, v.y, v.z, w)
+    return Vector4.new(v.x, v.y, v.z, w)
 }
 
 //creates a new 4d vector and initialises the x value with the given x value
@@ -77,31 +77,31 @@ method setVector3(v : Vector3) Coord(w : Number) -> Vector4 {
 //values
 method setCoord(x : Number) Vector3(v : Vector3) -> Vector4 {
 
-    Vector4.new(x, v.x, v.y, v.z)
+    return Vector4.new(x, v.x, v.y, v.z)
 }
 
 //creates a new 4d vector initialised with x: 1, y: 0, z: 0 w: 0
 method xAxis -> Vector4 {
 
-    Vector4.new(1, 0, 0, 0)
+    return Vector4.new(1, 0, 0, 0)
 }
 
 //creates a new 4d vector initialised with x: 0, y: 1, z: 0 w: 0
 method yAxis -> Vector4 {
 
-    Vector4.new(0, 1, 0, 0)
+    return Vector4.new(0, 1, 0, 0)
 }
 
 //creates a new 4d vector initialised with x: 0, y: 0, z: 1 w: 0
 method zAxis -> Vector4 {
 
-    Vector4.new(0, 0, 1, 0)
+    return Vector4.new(0, 0, 1, 0)
 }
 
 //creates a new 4d vector initialised with x: 0, y: 0, z: 0 w: 1
 method wAxis -> Vector4 {
 
-    Vector4.new(0, 0, 0, 1)
+    return Vector4.new(0, 0, 0, 1)
 }
 
 //VECTOR4 CLASS
@@ -113,10 +113,85 @@ class Vector4.new(x' : Number, y' : Number, z' : Number, w' : Number) {
     var z : Number is public := z'
     var w : Number is public := w'
 
+    //OPERATORS
+    //returns true if this vector has the same values as the given vector
+    method ==(v : Vector4) -> Vector4 is public {
+
+        return (x == v.x) && ((y == v.y) && ((z == v.z) && (w == v.w)))
+    }
+
+    //returns true if this vector has different values from the given vector
+    method !=(v : Vector4) -> Vector4 is public {
+
+        return !((x == v.x) && ((y == v.y) && ((z == v.z) && (w == v.w))))
+    }
+
+    //returns if the magnitude of this vector is less than the
+    //magnitude of the given vector
+    method <(v : Vector4) -> Vector4 is public {
+
+        //TODO:
+    }
+
+    //returns if the magnitude of this vector is greater than the
+    //magnitude of the given vector
+    method >(v : Vector4) -> Vector4 is public {
+
+        //TODO:
+    }
+
+    //returns the inversion of this vector
+    method prefix- -> Vector4 is public {
+
+        return Vector4.new(-x, -y, -z, -w)
+    }
+
+    //creates a new 4d vector as the result of adding this vector with
+    //the given vector
+    method +(v : Vector4) -> Vector4 is public {
+
+        return Vector4.new(x + v.x, y + v.y, z + v.z, w + v.w)
+    }
+
+    //creates a new 4d vector as the result of subtracting this vector
+    //from the the given vector
+    method -(v : Vector4) -> Vector4 is public {
+
+        return Vector4.new(x - v.x, y - v.y, z - v.z, w - v.w)
+    }
+
+    //creates a new 4d vector as the result of multiplying the components
+    //of this vector by the given scalar
+    method *(s : Number) -> Vector4 is public {
+
+        return Vector4.new(x * s, y * s, z * s, w * s)
+    }
+
+    //creates a new 4d vector as the result of dividing the components
+    //of this vector by the given scalar
+    method /(s : Number) -> Vector4 is public {
+
+        return Vector4.new(x / s, y / s, z / s, w / s)
+    }
+
     //PUBLIC METHODS
+    //creates a new 4d vector as the result of adding the given scalar
+    //to this vector
+    method addScalar(s : Number) -> Vector4 is public {
+
+        return Vector4.new(x + s, y + s, z + s, w + s)
+    }
+
+    //creates a new 4d vector as the result of subtracting the given scalar
+    //from this vector
+    method subScalar(s : Number) -> Vector4 is public {
+
+        return Vector4.new(x - s, y - s, z - s, w - s)
+    }
+
     //returns the vector as a string
     method asString -> String is public {
 
-        "[" ++ x ++ ", " ++ y ++ ", " ++ z ++ ", " ++ w ++ "]"
+        return "[" ++ x ++ ", " ++ y ++ ", " ++ z ++ ", " ++ w ++ "]"
     }
 }
