@@ -1,3 +1,5 @@
+import "PhixMath" as pmath
+
 //CONSTRUCTOR METHODS
 //creates a new zero 3d vector
 method zero -> Vector4 {
@@ -7,7 +9,7 @@ method zero -> Vector4 {
 
 //creates a new 3d vector and initialises it with the given
 //x, y, z, and w values
-method setCoords(x : Number, y : Number, z : Number, w : Number) ->Vector4 {
+method setCoord(x : Number, y : Number, z : Number, w : Number) ->Vector4 {
 
     return Vector4.new(x, y, z, w)
 }
@@ -35,7 +37,7 @@ method setVector4(v : Vector4) -> Vector4 {
 //creates a new 4d vector and initialises the x and y values to the given
 //2d vector's x and y values and initialises the z and w values to the given
 //z and w values
-method setVector2(v: Vector2) Coords(z : Number, w : Number) -> Vector4 {
+method setVector2(v: Vector2) Coord(z : Number, w : Number) -> Vector4 {
 
     return Vector4.new(v.x, v.y, z, w)
 }
@@ -51,7 +53,7 @@ method setCoord(x : Number) Vector2(v : Vector2) Coord(w : Number) -> Vector4 {
 //creates a new 4d vector and initialises the x and y values with the given
 //x and y values and initialises the z and w values with the given 2d
 //vector's x and y values
-method setCoords(x : Number, y : Number) Vector2(v : Vector2) -> Vector4 {
+method setCoord(x : Number, y : Number) Vector2(v : Vector2) -> Vector4 {
 
     return Vector4.new(x, y, v.x, v.y)
 }
@@ -115,29 +117,29 @@ class Vector4.new(x' : Number, y' : Number, z' : Number, w' : Number) {
 
     //OPERATORS
     //returns true if this vector has the same values as the given vector
-    method ==(v : Vector4) -> Vector4 is public {
+    method ==(v : Vector4) -> Boolean is public {
 
         return (x == v.x) && ((y == v.y) && ((z == v.z) && (w == v.w)))
     }
 
     //returns true if this vector has different values from the given vector
-    method !=(v : Vector4) -> Vector4 is public {
+    method !=(v : Vector4) -> Boolean is public {
 
         return !((x == v.x) && ((y == v.y) && ((z == v.z) && (w == v.w))))
     }
 
     //returns if the magnitude of this vector is less than the
     //magnitude of the given vector
-    method <(v : Vector4) -> Vector4 is public {
+    method <(v : Vector4) -> Boolean is public {
 
-        //TODO:
+        return self.magnitude < v.magnitude
     }
 
     //returns if the magnitude of this vector is greater than the
     //magnitude of the given vector
-    method >(v : Vector4) -> Vector4 is public {
+    method >(v : Vector4) -> Boolean is public {
 
-        //TODO:
+        return self.magnitude < v.magnitude
     }
 
     //returns the inversion of this vector
@@ -175,6 +177,20 @@ class Vector4.new(x' : Number, y' : Number, z' : Number, w' : Number) {
     }
 
     //PUBLIC METHODS
+    //returns the magnitude of this vector
+    method magnitude -> Number is public {
+
+        return pmath.sqrt((x * x) + (y * y) + (z * z) + (w * w))
+    }
+
+    //returns a normalised version of this vector
+    method normalize -> Vector4 is public {
+
+        def mag = self.magnitude
+
+        return Vector4.new(x / mag, y / mag, z / mag, w / mag)
+    }
+
     //creates a new 4d vector as the result of adding the given scalar
     //to this vector
     method addScalar(s : Number) -> Vector4 is public {
@@ -187,6 +203,33 @@ class Vector4.new(x' : Number, y' : Number, z' : Number, w' : Number) {
     method subScalar(s : Number) -> Vector4 is public {
 
         return Vector4.new(x - s, y - s, z - s, w - s)
+    }
+
+    //returns the dot product of this vector with the other given vector
+    method dot(v : Vector4) -> Number is public {
+
+        return (x * v.x) + (y * v.y) + (z * v.z) + (w * v.w)
+    }
+
+    //returns the distance from this vector to the other vector
+    method distanceTo(v : Vector4) -> Number is public {
+
+        return pmath.sqrt(((x - v.x) ^ 2) + ((y - v.y) ^ 2) +
+            ((z - v.z) ^ 2) + ((w - v.w) ^ 2))
+    }
+
+    //returns the angle between this vector and the other vector
+    method angleBetween(v : Vector4) -> Number is public {
+
+        //TODO
+    }
+
+    //Check out glm vector functions
+
+    //returns the vector as a list
+    method toList -> List is public {
+
+        return [x, y, z, w]
     }
 
     //returns the vector as a string
