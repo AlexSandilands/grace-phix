@@ -59,13 +59,78 @@ class Vector2.new(x' : Number, y' : Number) {
     }
 
     //OPERATORS
+    //returns true if this vector has the same values as the given vector
+    method ==(v : Vector2) -> Vector2 is public {
+
+        return (x == v.x) && (y == v.y)
+    }
+
+    //returns true if this vector has different values from the given vector
+    method !=(v : Vector2) -> Vector2 is public {
+
+        return !((x == v.x) && (y == v.y))
+    }
+
+    //returns if the magnitude of this vector is less than the
+    //magnitude of the given vector
+    method <(v : Vector2) -> Vector2 is public {
+
+        //TODO:
+    }
+
+    //returns if the magnitude of this vector is greater than the
+    //magnitude of the given vector
+    method >(v : Vector2) -> Vector2 is public {
+
+        //TODO:
+    }
+
     //returns the inversion of this vector
-    //method prefix
+    method prefix- -> Vector2 is public {
+
+        Vector2.new(-x, -y)
+    }
 
     //creates a new 2d vector as the result of adding this vector with
     //the given vector
     method +(v : Vector2) -> Vector2 is public {
 
         Vector2.new(x + v.x, y + v.y)
+    }
+
+    //creates a new 2d vector as the result of subtracting this vector
+    //from the the given vector
+    method -(v : Vector2) -> Vector2 is public {
+
+        Vector2.new(x - v.x, y - v.y)
+    }
+
+    //creates a new 2d vector as the result of multiplying the components
+    //of this vector by the given scalar
+    method *(s : Number) -> Vector2 is public {
+
+        Vector2.new(x * s, y * s)
+    }
+
+    //creates a new 2d vector as the result of dividing the components
+    //of this vector by the given scalar
+    method /(s : Number) -> Vector2 is public {
+
+        Vector2.new(x / s, y / s)
+    }
+
+    //PUBLIC METHODS
+    //creates a new 2d vector as the result of adding the given scalar
+    //to this vector
+    method addScalar(s : Number) -> Vector2 is public {
+
+        Vector2.new(x + s, y + s)
+    }
+
+    //creates a new 2d vector as the result of subtracting the given scalar
+    //from this vector
+    method subScalar(s : Number) -> Vector2 is public {
+
+        Vector2.new(x - s, y - s)
     }
 }

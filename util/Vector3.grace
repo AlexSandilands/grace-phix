@@ -34,14 +34,14 @@ method setVector4(v : Vector4) -> Vector3 {
 
 //creates a new 3d vector and initialises the x and y values with the given
 //2d vector's x and y values, and initialises the z value with the given z value
-method setVector2(v : Vector2)Coord(z : Number) -> Vector3 {
+method setVector2(v : Vector2) Coord(z : Number) -> Vector3 {
 
     Vector3.new(v.x, v.y, z)
 }
 
 //creates a new 3d vector and initialises the x value with the given x value
 //and initialises the y and z values with the given 2d vectors x and y values
-method setCoord(x : Number)Vector2(v : Vector2) -> Vector3 {
+method setCoord(x : Number) Vector2(v : Vector2) -> Vector3 {
 
     Vector3.new(x, v.x, v.y)
 }

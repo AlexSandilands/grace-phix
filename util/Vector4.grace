@@ -35,7 +35,7 @@ method setVector4(v : Vector4) -> Vector4 {
 //creates a new 4d vector and initialises the x and y values to the given
 //2d vector's x and y values and initialises the z and w values to the given
 //z and w values
-method setVector2(v: Vector2)Coords(z : Number, w : Number) -> Vector4 {
+method setVector2(v: Vector2) Coords(z : Number, w : Number) -> Vector4 {
 
     Vector4.new(v.x, v.y, z, w)
 }
@@ -43,7 +43,7 @@ method setVector2(v: Vector2)Coords(z : Number, w : Number) -> Vector4 {
 //creates a new 4d vector and initialises the x and w values with the given
 //x and w values and initialises the y and z values with the given 2d
 //vector's x and y values
-method setCoord(x : Number)Vector2(v : Vector2)Coord(w : Number) -> Vector4 {
+method setCoord(x : Number) Vector2(v : Vector2) Coord(w : Number) -> Vector4 {
 
     Vector4.new(x, v.x, v.y, w)
 }
@@ -51,7 +51,7 @@ method setCoord(x : Number)Vector2(v : Vector2)Coord(w : Number) -> Vector4 {
 //creates a new 4d vector and initialises the x and y values with the given
 //x and y values and initialises the z and w values with the given 2d
 //vector's x and y values
-method setCoords(x : Number, y : Number)Vector2(v : Vector2) -> Vector4 {
+method setCoords(x : Number, y : Number) Vector2(v : Vector2) -> Vector4 {
 
     Vector4.new(x, y, v.x, v.y)
 }
@@ -59,7 +59,7 @@ method setCoords(x : Number, y : Number)Vector2(v : Vector2) -> Vector4 {
 //creates a new 4d vector and initialises the x and y values using the given
 //2d vector v x and y values and initialises the z and w values using the
 //given 2d vector v' x and y values
-method setVector2(v : Vector2)Vector2(v' : Vector2) -> Vector4 {
+method setVector2(v : Vector2) Vector2(v' : Vector2) -> Vector4 {
 
     Vector4.new(v.x, v.y, v'.x, v'.y)
 }
@@ -67,7 +67,7 @@ method setVector2(v : Vector2)Vector2(v' : Vector2) -> Vector4 {
 //creates a new 4d vector and initialises the x, y, and z values using the
 //given 3d vector's x, y, and z values and initialises the w value with the
 //given w value
-method setVector3(v : Vector3)Coord(w : Number) -> Vector4 {
+method setVector3(v : Vector3) Coord(w : Number) -> Vector4 {
 
     Vector4.new(v.x, v.y, v.z, w)
 }
@@ -75,7 +75,7 @@ method setVector3(v : Vector3)Coord(w : Number) -> Vector4 {
 //creates a new 4d vector and initialises the x value with the given x value
 //and initialises the y, z, and w values with the given 3d vector's x, y, and z
 //values
-method setCoord(x : Number)Vector3(v : Vector3) -> Vector4 {
+method setCoord(x : Number) Vector3(v : Vector3) -> Vector4 {
 
     Vector4.new(x, v.x, v.y, v.z)
 }
