@@ -1,3 +1,5 @@
+import "PhixMath" as math
+
 //CONSTRUCTOR METHODS
 //creates a new zero 2d vector
 method zero -> Vector2 {
@@ -68,14 +70,14 @@ class Vector2.new(x' : Number, y' : Number) {
     //magnitude of the given vector
     method <(v : Vector2) -> Vector2 is public {
 
-        //TODO:
+        return self.magnitude < v.magnitude
     }
 
     //returns if the magnitude of this vector is greater than the
     //magnitude of the given vector
     method >(v : Vector2) -> Vector2 is public {
 
-        //TODO:
+        return self.magnitude > v.magnitude
     }
 
     //returns the inversion of this vector
@@ -113,6 +115,20 @@ class Vector2.new(x' : Number, y' : Number) {
     }
 
     //PUBLIC METHODS
+    //returns the magnitude of this vector
+    method magnitude -> Number is public {
+
+        return math.sqrt((x * x) + (y * y))
+    }
+
+    //returns a normalised version of this vector
+    method normalize -> Vector2 is public {
+
+        def mag = self.magnitude
+
+        return Vector2.new(x / mag, y / mag)
+    }
+
     //creates a new 2d vector as the result of adding the given scalar
     //to this vector
     method addScalar(s : Number) -> Vector2 is public {
@@ -125,6 +141,32 @@ class Vector2.new(x' : Number, y' : Number) {
     method subScalar(s : Number) -> Vector2 is public {
 
         return Vector2.new(x - s, y - s)
+    }
+
+    //returns the dot product of this vector with the other given vector
+    method dot(v : Vector2) -> Number is public {
+
+        return (x * v.x) + (y * v.y)
+    }
+
+    //returns the distance from this vector to the other vector
+    method distanceTo(v : Vector2) -> Number is public {
+
+        return math.sqrt(((x - v.x) ^ 2) + ((y - v.y) ^ 2))
+    }
+
+    //returns the angle between this vector and the other vector
+    method angleBetween(v : Vector2) -> Number is public {
+
+        //TODO
+    }
+
+    //Check out glm vector functions
+
+    //returns the vector as a list
+    method toList -> List is public {
+
+        return [x, y]
     }
 
     //returns the vector as a string
