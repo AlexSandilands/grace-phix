@@ -1,4 +1,4 @@
-import "PhixMath" as math
+import "PhixMath" as pmath
 
 //CONSTRUCTOR METHODS
 //creates a new zero 2d vector
@@ -8,7 +8,7 @@ method zero -> Vector2 {
 }
 
 //creates a new 2d vector and initialises it with the given x and y values
-method setCoords(x : Number, y : Number) -> Vector2 {
+method setCoord(x : Number, y : Number) -> Vector2 {
 
     return Vector2.new(x, y)
 }
@@ -55,27 +55,27 @@ class Vector2.new(x' : Number, y' : Number) {
 
     //OPERATORS
     //returns true if this vector has the same values as the given vector
-    method ==(v : Vector2) -> Vector2 is public {
+    method ==(v : Vector2) -> Boolean is public {
 
         return (x == v.x) && (y == v.y)
     }
 
     //returns true if this vector has different values from the given vector
-    method !=(v : Vector2) -> Vector2 is public {
+    method !=(v : Vector2) -> Boolean is public {
 
         return !((x == v.x) && (y == v.y))
     }
 
     //returns if the magnitude of this vector is less than the
     //magnitude of the given vector
-    method <(v : Vector2) -> Vector2 is public {
+    method <(v : Vector2) -> Boolean is public {
 
         return self.magnitude < v.magnitude
     }
 
     //returns if the magnitude of this vector is greater than the
     //magnitude of the given vector
-    method >(v : Vector2) -> Vector2 is public {
+    method >(v : Vector2) -> Boolean is public {
 
         return self.magnitude > v.magnitude
     }
@@ -118,7 +118,7 @@ class Vector2.new(x' : Number, y' : Number) {
     //returns the magnitude of this vector
     method magnitude -> Number is public {
 
-        return math.sqrt((x * x) + (y * y))
+        return pmath.sqrt((x * x) + (y * y))
     }
 
     //returns a normalised version of this vector
@@ -127,6 +127,27 @@ class Vector2.new(x' : Number, y' : Number) {
         def mag = self.magnitude
 
         return Vector2.new(x / mag, y / mag)
+    }
+
+    //returns a new vector that is this vector clamped between the two values
+    method clampBetween(lower : Number, upper : Number) -> Vector2 {
+
+        return Vector2.new(pmath.clamp(x) between(lower, upper),
+            pmath.clamp(y) between(lower, upper))
+    }
+
+    //returns a new vector that is this vector clamped above the given value
+    method clampAbove(threshold : Number) -> Vector2 {
+
+        return Vector2.new(pmath.clamp(x) above(threshold),
+            pmath.clamp(y) above(threshold))
+    }
+
+    //returns a new vector that is this vector clamped below the given value
+    method clampBelow(threshold : Number) -> Vector2 {
+
+        return Vector2.new(pmath.clamp(x) below(threshold),
+            pmath.clamp(y) below(threshold))
     }
 
     //creates a new 2d vector as the result of adding the given scalar
@@ -152,7 +173,7 @@ class Vector2.new(x' : Number, y' : Number) {
     //returns the distance from this vector to the other vector
     method distanceTo(v : Vector2) -> Number is public {
 
-        return math.sqrt(((x - v.x) ^ 2) + ((y - v.y) ^ 2))
+        return pmath.sqrt(((x - v.x) ^ 2) + ((y - v.y) ^ 2))
     }
 
     //returns the angle between this vector and the other vector
