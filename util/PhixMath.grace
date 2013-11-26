@@ -1,3 +1,10 @@
+// Constants
+def pi : Number is readable      = 3.14159265358979
+def half_pi : Number is readable = 1.57079632679
+def two_pi : Number is readable  = 6.28318530718
+
+def UnsafeOperation = Error.refine "UnsafeOperation"
+
 //METHODS
 //returns the square root of the given value
 method sqrt(value : Number) {
@@ -67,7 +74,7 @@ method clamp(value : Number) above(threshold : Number) -> Number {
 // Calculates the factorial of the given input
 method fact(value : Number) -> Number {
 
-    if (value == 1) then {
+    if (value == 0) then {
 
         return 1
     }
@@ -75,17 +82,138 @@ method fact(value : Number) -> Number {
     value * fact(value - 1)
 }
 
+// Converts degrees to radians
+method toRadians(value : Number) -> Number {
+
+    return value * 0.0174532925
+}
+
+// Converts radians to degrees
+method toDegrees(value : Number) -> Number {
+
+    return value * 57.2957795
+}
+
+// Normalizes radians to be between 0 and 2pi
+method normalizeRadians(value : Number) -> Number {
+
+    var ret := value
+
+    if (ret < 0) then {
+
+        while {ret < 0} do {
+
+            ret := ret + pi
+        }
+
+        return ret
+
+    } elseif (ret > pi) then {
+
+        while {ret > pi} do {
+
+            ret := ret - pi
+        }
+
+        return ret
+    }
+
+    return ret
+}
+
+// Binomial Coefficient
+method n(n : Number) choose(k : Number) -> Number {
+
+    if((k < 0) || (k > n)) then {
+
+        UnsafeOperation.raise "Must choose a value between 0 and n"
+    }
+
+    return fact(n)/(fact(k)*fact(n-k))
+}
+
 // Uses Taylors series expansion to get an estimate of sine
+// This method assumes that the value passed in is already in radians.
+// and converts it to a value between 0 and 2pi
 method sin(value : Number) -> Number {
+
+    var x := normalizeRadians(value)
 
     var ret := 0
 
-    for (1 .. 50) do { n ->
+    for (0 .. 10) do { n ->
 
-        // Arrg don't look at this yet
-        ret := ret + (((-1)^n)*(value^(2*n + 1)))/fact(2*n + 1)
+        ret := ret + (((-1)^n)*(x^(2*n + 1)))/fact(2*n + 1)
     }
 
+
+    return ret
+}
+
+// Uses Taylors series expansion to get an estimate of cosine
+// This method assumes that the value passed in is already in radians.
+// and converts it to a value between 0 and 2pi
+method cos(value : Number) -> Number {
+
+    var x := normalizeRadians(value)
+
+    var ret := 0
+
+    for (0 .. 10) do { n ->
+
+        ret := ret + (((-1)^n)*(x^(2*n)))/fact(2*n)
+    }
+
+
+    return ret
+}
+
+// Uses sin and cos functions to approximate values on tan
+// Undefined on pi/2 and 3pi/2 so will throw an error on these values
+method tan(value : Number) -> Number {
+
+    if ((value == half_pi) || (value == (pi/2))) then {
+
+        UnsafeOperation.raise "Tan(pi/2) is undefined"
+
+    } elseif((value == (3*half_pi)) || (value == (3*(pi/2)))) then {
+
+        UnsafeOperation.raise "Tan(3pi/2) is undefined"
+    }
+
+
+    return sin(value)/cos(value)
+}
+
+// Uses power series expansion to approximate inverse sine values
+method aSin(value : Number) -> Number {
+
+    var ret := 0
+
+    for(0 .. 10) do { n ->
+
+        ret := ret + ((n(2*n) choose(n))*(value^(2*n + 1)))/((4^n)*(2*n + 1))
+    }
+
+
+    return ret
+}
+
+// Uses arcSine to calculate arcCosine
+method aCos(value : Number) -> Number {
+
+    return half_pi - aSin(value)
+}
+
+// Uses power series expansion to approximate arcTan
+method aTan(value : Number) -> Number {
+
+    var ret := 0
+
+    for(0 .. 10) do { n ->
+
+        ret := ret + (((-1)^n)*(value^(2*n + 1)))/(2*n + 1)
+    }
 
     return ret
 }
