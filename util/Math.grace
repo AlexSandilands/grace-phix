@@ -1,7 +1,7 @@
 // Constants
-def pi : Number is readable      = 3.14159265358979
-def half_pi : Number is readable = 1.57079632679
-def two_pi : Number is readable  = 6.28318530718
+def pi : Number is readable      = 3.14159265358979323846
+def half_pi : Number is readable = 1.57079632679489661923
+def two_pi : Number is readable  = 6.28318530717958647692
 
 def UnsafeOperation = Error.refine "UnsafeOperation"
 
@@ -20,7 +20,7 @@ method min(value : Number, value' : Number) -> Number {
         return value
     }
 
-    value'
+    return value'
 }
 
 //returns the maximum value of the two given values
@@ -31,7 +31,7 @@ method max(value : Number, value' : Number) -> Number {
         return value
     }
 
-    value'
+    return value'
 }
 
 //clamps the given value between the upper and lower thresholds
@@ -46,7 +46,7 @@ method clamp(value : Number) between(lower : Number, upper : Number) -> Number {
         return upper
     }
 
-    value
+    return value
 }
 
 //clamps the given value so that it is not greater then the given threshold
@@ -57,14 +57,11 @@ method clamp(value : Number) below(threshold : Number) -> Number {
         return threshold
     }
 
-    value
+    return value
 }
 
 //clamps the given value so that it is not less than the given threshold
 method clamp(value : Number) above(threshold : Number) -> Number {
-
-    print(value)
-    print(threshold)
 
     if (value < threshold) then {
 
@@ -82,19 +79,19 @@ method fact(value : Number) -> Number {
         return 1
     }
 
-    value * fact(value - 1)
+    return value * fact(value - 1)
 }
 
 // Converts degrees to radians
 method toRadians(value : Number) -> Number {
 
-    return value * 0.0174532925
+    value * 0.0174532925
 }
 
 // Converts radians to degrees
 method toDegrees(value : Number) -> Number {
 
-    return value * 57.2957795
+    value * 57.2957795
 }
 
 // Normalizes radians to be between 0 and 2pi

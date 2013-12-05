@@ -1,0 +1,14 @@
+// How to use:
+
+    window.get_size
+    window.get_position
+
+// How to fix:
+
+    window.set_position
+
+// Other Problems
+
+	Types!
+	Clicking, and other mouse events
+	Time
