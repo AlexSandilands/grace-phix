@@ -1,4 +1,20 @@
-import "PhixMath" as pmath
+import "Math" as math
+
+//TYPE
+type Vector4 = {
+
+    x -> Number
+    y -> Number
+    z -> Number
+    w -> Number
+
+    == -> Boolean
+    != -> Boolean
+    +  -> Vector4
+    -  -> Vector4
+    *  -> Vector4
+    /  -> Vector4
+}
 
 //CONSTRUCTOR METHODS
 //creates a new zero 3d vector
@@ -108,7 +124,8 @@ method wAxis -> Vector4 {
 
 //VECTOR4 CLASS
 //constructs a new 4d vector with the given x', y', z', and w' values
-class Vector4.new(x' : Number, y' : Number, z' : Number, w' : Number) {
+class Vector4.new(x' : Number, y' : Number, z' : Number, w' : Number)
+    -> Vector4 {
 
     var x : Number is public := x'
     var y : Number is public := y'
@@ -180,7 +197,7 @@ class Vector4.new(x' : Number, y' : Number, z' : Number, w' : Number) {
     //returns the magnitude of this vector
     method magnitude -> Number is public {
 
-        return pmath.sqrt((x * x) + (y * y) + (z * z) + (w * w))
+        return math.sqrt((x * x) + (y * y) + (z * z) + (w * w))
     }
 
     //returns a normalised version of this vector
@@ -194,28 +211,28 @@ class Vector4.new(x' : Number, y' : Number, z' : Number, w' : Number) {
     //returns a new vector that is this vector clamped between the two values
     method clampBetween(lower : Number, upper : Number) -> Vector4 {
 
-        return Vector4.new(pmath.clamp(x) between(lower, upper),
-            pmath.clamp(y) between(lower, upper),
-            pmath.clamp(z) between(lower, upper),
-            pmath.clamp(w) between(lower, upper))
+        return Vector4.new(math.clamp(x) between(lower, upper),
+            math.clamp(y) between(lower, upper),
+            math.clamp(z) between(lower, upper),
+            math.clamp(w) between(lower, upper))
     }
 
     //returns a new vector that is this vector clamped above the given value
     method clampAbove(threshold : Number) -> Vector4 {
 
-        return Vector4.new(pmath.clamp(x) above(threshold),
-            pmath.clamp(y) above(threshold),
-            pmath.clamp(z) above(threshold),
-            pmath.clamp(w) above(threshold))
+        return Vector4.new(math.clamp(x) above(threshold),
+            math.clamp(y) above(threshold),
+            math.clamp(z) above(threshold),
+            math.clamp(w) above(threshold))
     }
 
     //returns a new vector that is this vector clamped below the given value
     method clampBelow(threshold : Number) -> Vector4 {
 
-        return Vector4.new(pmath.clamp(x) below(threshold),
-            pmath.clamp(y) below(threshold),
-            pmath.clamp(z) below(threshold),
-            pmath.clamp(w) below(threshold))
+        return Vector4.new(math.clamp(x) below(threshold),
+            math.clamp(y) below(threshold),
+            math.clamp(z) below(threshold),
+            math.clamp(w) below(threshold))
     }
 
     //creates a new 4d vector as the result of adding the given scalar
@@ -241,7 +258,7 @@ class Vector4.new(x' : Number, y' : Number, z' : Number, w' : Number) {
     //returns the distance from this vector to the other vector
     method distanceTo(v : Vector4) -> Number is public {
 
-        return pmath.sqrt(((x - v.x) ^ 2) + ((y - v.y) ^ 2) +
+        return math.sqrt(((x - v.x) ^ 2) + ((y - v.y) ^ 2) +
             ((z - v.z) ^ 2) + ((w - v.w) ^ 2))
     }
 
