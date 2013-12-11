@@ -1,10 +1,15 @@
 import "gtk" as gtk
 import "gdk" as gdk
 import "Vector2" as vec2
+import "canvas" as can
+import "components" as comps
 
-type Window = {
+
+type Window = comps.Container & {
 
     display -> Done
+
+    addCanvas(c : can.Canvas) -> Done
 
     title -> String
     title:= (t : String) -> Done
@@ -14,15 +19,16 @@ type Window = {
 
     position -> vec2.Vector2
     position:= (p : vec2.Vector2) -> Done
-
-
 }
 
 
 // Wrapper class for a gtk window. Has more readable syntax
 class aWindow.new() -> Window {
 
-    def w is public = gtk.window(gtk.GTK_WINDOW_TOPLEVEL)
+    // GTK components and values
+
+    // The gtk window object
+    def w  = gtk.window(gtk.GTK_WINDOW_TOPLEVEL)
 
     w.title := "Default Window"
     w.set_default_size(640, 480)
@@ -30,11 +36,65 @@ class aWindow.new() -> Window {
 
     w.on "destroy" do { gtk.main_quit }
 
+    // The default box for components to be added to.
+    def box : comps.Container = comps.aVerticalBox.new
+
+    w.add(box.getComponent)
+    box.parent := self
+
+
     def accelgroup = gtk.accel_group
     accelgroup.accel_connect(gdk.GDK_KEY_Escape, { gtk.main_quit })
 
     w.add_accel_group(accelgroup)
 
+
+    // COMPONENT METHODS
+
+    def ComponentError = Error.refine "Component Error"
+
+    // Window throws an error when trying to get it's parent
+    method parent -> comps.Component is override {
+
+        ComponentError.raise "Windows do not have a parent component"
+    }
+
+    // Window throws an error when trying to set it's parent
+    method parent := (c : comps.Component) -> Done is override {
+
+        ComponentError.raise "Windows do not have a parent component"
+    }
+
+    method getComponent {
+
+        w
+    }
+
+
+    // CONTAINER METHODS
+
+    method add(c : comps.Component) -> Done {
+
+        box.add(c.getComponent)
+    }
+
+    method remove(c : comps.Component) -> Boolean {
+
+
+    }
+
+    method getChildren -> List<comps.Component> {
+
+        [box]
+    }
+
+
+
+
+    // WINDOW METHODS
+
+    // Size of this window
+    var s : vec2.Vector2 is confidential := vec2.setCoord(640, 480)
 
     // Displays the window and all components in the window
     // then starts up the gtk main loop.
@@ -44,8 +104,6 @@ class aWindow.new() -> Window {
         w.show_all
         gtk.main
     }
-
-
 
     // Return the title of this window
     method title -> String {
@@ -59,19 +117,18 @@ class aWindow.new() -> Window {
         w.title := t
     }
 
-
-    // Return the size of this window
+    // Get the size of this window
     method size -> vec2.Vector2 {
 
-        // TODO
+        s
     }
 
-    // Sets the size of this window
-    method size:= (s : vec2.Vector2) -> Done {
+    // Set the size of this window
+    method size := (s' : vec2.Vector2) -> Done {
 
-        w.set_default_size(s.x, s.y)
+        s := s'
+        w.set_size_request(s.x, s.y)
     }
-
 
     // Return the position of this window
     method position -> vec2.Vector2 {
@@ -83,6 +140,7 @@ class aWindow.new() -> Window {
 
         // TODO
     }
+
 
 
 

@@ -407,6 +407,7 @@ class aText.write(t : String) at(l : vec2.Vector2) colored(c : col.Color) -> Tex
     var color : col.Color is public := c
 
 
+    // Paint this object to the canvas
     method draw(gfx) -> Done is override {
 
         gfx.font_size := size
