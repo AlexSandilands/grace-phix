@@ -254,11 +254,11 @@ method createSectorAround(x : Number, y : Number)
 // ARCS
 
 
-// Arc. Has default values: Black, around (50, 50), radius 25, width 10 from 0 to pi
+// Arc. Has default values: Black, around (50, 50), radius 25, width 10 from 0 to 2pi
 method createArc -> draw.Arc {
 
     return draw.aArc.around (vec2.setCoord(50, 50))
-                       from (0) to (math.pi)
+                       from (0) to (math.two_pi)
                      radius (25)
                       width (10)
                     colored (col.black)
@@ -279,7 +279,7 @@ method createArcAround(x : Number, y : Number)
 // LINE
 
 // Line. Has default values: Black, from (25, 25) to (75, 75)
-method createText -> draw.Line {
+method createLine -> draw.Line {
 
     return draw.aLine.from (vec2.setCoord(25, 25))
                         to (vec2.setCoord(75, 75))

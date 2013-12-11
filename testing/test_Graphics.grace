@@ -1,5 +1,6 @@
 import "graphics" as g
 import "Color" as col
+import "Math" as math
 
 def window = g.createWindow
 
@@ -21,8 +22,23 @@ canvas.add(rect)
 canvas.add(circ)
 canvas.add(text)
 
+canvas.fill := false
+canvas.color := col.pink
+canvas.drawRectangleAt(200, 200) sized(25, 25)
+canvas.color := col.red
+canvas.drawCircleAround(20, 20) radius(20)
+canvas.color := col.doge
+canvas.drawSectorAround(300, 50) from(0) to(math.pi) radius(40)
+canvas.color := col.blue
+canvas.drawArcAround(100, 100) from(0) to(math.two_pi) radius(30) width(10)
+canvas.fill := true
+canvas.drawLineFrom(20, 250) to(400, 260)
+canvas.color := col.green
+canvas.drawTextSaying("Hello World") at(100, 200)
+
+
 def button = g.createButton
-button.label := "Hello Word"
+button.label := "Hello World"
 
 button.clicked := {
 

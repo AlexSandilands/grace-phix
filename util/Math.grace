@@ -1,7 +1,7 @@
 // Constants
-def pi : Number is readable      = 3.14159265358979
-def half_pi : Number is readable = 1.57079632679
-def two_pi : Number is readable  = 6.28318530718
+def pi : Number is readable      = 3.14159265358979323846
+def half_pi : Number is readable = 1.57079632679489661923
+def two_pi : Number is readable  = 6.28318530717958647692
 
 def UnsafeOperation = Error.refine "UnsafeOperation"
 

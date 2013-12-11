@@ -330,8 +330,8 @@ class aArc.around(l : vec2.Vector2) from(f : Number) to(t : Number)
     var fill   : Boolean   is public := true
     var lineWidth : Number is public := 2
 
-    var from : Number is public
-    var to   : Number is public
+    var from : Number is public := f
+    var to   : Number is public := t
 
 
     method draw(gfx) -> Done is override {
