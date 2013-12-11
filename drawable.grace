@@ -178,15 +178,15 @@ class aRectangle.at(l : vec2.Vector2) sized(s : vec2.Vector2) colored(c : col.Co
 
 
     // Easier getters for the dimension components
-    method w -> Number { size.x }
-    method h -> Number { size.y }
+    method width -> Number { size.x }
+    method height -> Number { size.y }
 
     // Easier setters for the dimension components
-    method w := (w' : Number) -> Done {
+    method width := (w' : Number) -> Done {
         size.x := w'
     }
 
-    method h := (h' : Number) -> Done {
+    method height := (h' : Number) -> Done {
         size.y := h'
     }
 
