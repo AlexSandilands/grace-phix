@@ -198,7 +198,7 @@ class aRectangle.at(l : vec2.Vector2) sized(s : vec2.Vector2) colored(c : col.Co
         gfx.set_source_rgb(color.r, color.g, color.b)
 
         // Draw the rectangle using stored values
-        gfx.rectangle(x, y, w, h)
+        gfx.rectangle(x, y, width, height)
 
         if (fill) then {
 
