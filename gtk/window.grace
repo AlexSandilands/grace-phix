@@ -19,6 +19,9 @@ type Window = comps.Container & {
 
     position -> vec2.Vector2
     position:= (p : vec2.Vector2) -> Done
+
+    mouseClicked:= (b : Block) -> Done
+    mouseDragged:= (b : Block) -> Done
 }
 
 
@@ -48,6 +51,9 @@ class aWindow.new() -> Window {
 
     w.add_accel_group(accelgroup)
 
+    w.add_events(gdk.GDK_BUTTON_PRESS_MASK)
+    w.add_events(gdk.GDK_BUTTON1_MOTION_MASK)
+
 
     // COMPONENT METHODS
 
@@ -75,12 +81,12 @@ class aWindow.new() -> Window {
 
     method add(c : comps.Component) -> Done {
 
-        box.add(c.getComponent)
+        box.add(c)
     }
 
     method remove(c : comps.Component) -> Boolean {
 
-
+        box.remove(c)
     }
 
     method getChildren -> List<comps.Component> {
@@ -141,6 +147,33 @@ class aWindow.new() -> Window {
         // TODO
     }
 
+
+    // MOUSE EVENTS
+
+    var clickedBlock : Block := {}
+    var draggedBlock : Block := {}
+
+    w.on "button-press-event" do { e ->
+
+        clickedBlock.apply(e)
+    }
+
+    w.on "motion-notify-event" do { e ->
+
+        draggedBlock.apply(e)
+    }
+
+    // Set the clicked block
+    method mouseClicked := (b : Block) -> Done {
+
+        clickedBlock := b
+    }
+
+    // Set the dragged block
+    method mouseDragged := (b : Block) -> Done {
+
+        draggedBlock := b
+    }
 
 
 

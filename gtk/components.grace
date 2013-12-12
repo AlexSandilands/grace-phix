@@ -37,6 +37,12 @@ type Button = Component & {
     label -> String
     label:= (s : String) -> Done
 
+    width -> Number
+    height -> Number
+
+    width:= -> Done
+    height:= -> Done
+
     clicked(b : Block)  -> Done
     pressed(b : Block)  -> Done
     released(b : Block) -> Done
@@ -73,13 +79,18 @@ class aVerticalBox.new -> Container {
 
     // CONTAINER METHODS
 
-    method add(c : Component) -> Done {
+    method add(c : Component) -> Boolean {
 
         // Check to see if the component is already in the container
         if (!l.contains(c)) then {
 
             l.push(c)
-            vbox.add(c)
+            vbox.add(c.getComponent)
+            return true
+
+        } else {
+
+            return false
         }
 
     }
@@ -87,10 +98,12 @@ class aVerticalBox.new -> Container {
     // Removes the component c from this container
     // This sometimes results in the component being destroyed,
     // so make a referece to it before removing if you want to keep it
-    method remove(c : Component) {
+    method remove(c : Component) -> Boolean {
 
         var new : List<Component> := []
 
+        // Add every component in the box to a new list,
+        // apart from the on being removed
         for (l) do { other ->
 
             if (c != other) then {
@@ -99,9 +112,20 @@ class aVerticalBox.new -> Container {
             }
         }
 
-        l := new
+        // Check if the component was in this box
+        if (l.size == new.size) then {
 
-        vbox.remove(c.getComponent)
+            // If not, do nothing and return false
+            return false
+
+        } else {
+
+            // Otherwise remove the component and return true
+            l := new
+            vbox.remove(c.getComponent)
+
+            return true
+        }
     }
 
     method getChildren -> List<Component> {
@@ -117,6 +141,9 @@ class aHorizontalBox.new -> Container {
 
     var l : List<Component> := []
 
+    var w : Number
+    var h : Number
+
 
     // COMPONENT METHODS
 
@@ -131,13 +158,18 @@ class aHorizontalBox.new -> Container {
 
     // CONTAINER METHODS
 
-    method add(c : Component) -> Done {
+    method add(c : Component) -> Boolean {
 
         // Check to see if the component is already in the container
         if (!l.contains(c)) then {
 
             l.push(c)
-            hbox.add(c)
+            hbox.add(c.getComponent)
+            return true
+
+        } else {
+
+            return false
         }
 
     }
@@ -145,10 +177,12 @@ class aHorizontalBox.new -> Container {
     // Removes the component c from this container
     // This sometimes results in the component being destroyed,
     // so make a referece to it before removing if you want to keep it
-    method remove(c : Component) {
+    method remove(c : Component) -> Boolean {
 
         var new : List<Component> := []
 
+        // Add every component in the box to a new list,
+        // apart from the on being removed
         for (l) do { other ->
 
             if (c != other) then {
@@ -157,9 +191,21 @@ class aHorizontalBox.new -> Container {
             }
         }
 
-        l := new
+        // Check if the component was in this box
+        if (l.size == new.size) then {
 
-        hbox.remove(c.getComponent)
+            // If not, do nothing and return false
+            return false
+
+        } else {
+
+            // Otherwise remove the component and return true
+            l := new
+            hbox.remove(c.getComponent)
+
+            return true
+        }
+
     }
 
     method getChildren -> List<Component> {
@@ -187,7 +233,10 @@ class aButton.new -> Button {
 
     // BUTTON METHODS
 
+    method setSize(w : Number, h : Number) -> Done {
 
+        b.set_size_request(w, h)
+    }
 
     // Return the label on this button
     method label -> String {

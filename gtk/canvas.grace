@@ -28,6 +28,8 @@ class aCanvas.new -> Canvas {
     def c = gtk.drawing_area
     c.set_size_request(640, 480)
     c.app_paintable := true
+    c.add_events(gdk.GDK_BUTTON_PRESS_MASK)
+    c.add_events(gdk.GDK_BUTTON1_MOTION_MASK)
 
 
     def drawables : List<draw.Drawable> is confidential = []
@@ -107,6 +109,35 @@ class aCanvas.new -> Canvas {
 
     // Defines whether or not the shapes drawn by the canvas will be filled
     var fill : Boolean is public := true
+
+
+    // MOUSE EVENTS
+
+    var clickedBlock : Block := {}
+    var draggedBlock : Block := {}
+
+    c.on "button-press-event" do { e ->
+
+        clickedBlock.apply(e)
+    }
+
+    c.on "motion-notify-event" do { e ->
+
+        draggedBlock.apply(e)
+    }
+
+    // Set the clicked block
+    method mouseClicked := (b : Block) -> Done {
+
+        clickedBlock := b
+    }
+
+    // Set the dragged block
+    method mouseDragged := (b : Block) -> Done {
+
+        draggedBlock := b
+    }
+
 
 
     // RECTANGLES
