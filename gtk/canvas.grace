@@ -250,4 +250,18 @@ class aCanvas.new -> Canvas {
         )
     }
 
+
+    // IMAGE
+
+    // Image at (x, y) sized wxh from file: path
+    method drawImageAt(x : Number, y : Number)
+                 sized(w : Number, h : Number)
+                  from(path : String) -> Done {
+
+        drawables.push(
+
+            draw.aImage.at(vec2.setCoord(x, y)) sized(vec2.setCoord(w, h)) from(path)
+        )
+    }
+
 }

@@ -335,3 +335,14 @@ method createTextSaying(t : String)
 
     draw.aText.write(t) at(vec2.setCoord(x, y)) colored(c)
 }
+
+
+// IMAGE
+
+// Image at (x, y) sized wxh from file: path
+method createImageAt(x : Number, y : Number)
+               sized(w : Number, h : Number)
+                from(path : String) -> draw.Image {
+
+    draw.aImage.at(vec2.setCoord(x, y)) sized(w, h) from(path)
+}

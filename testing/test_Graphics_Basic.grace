@@ -35,6 +35,7 @@ canvas.fill := true
 canvas.drawLineFrom(20, 250) to(400, 260)
 canvas.color := col.green
 canvas.drawTextSaying("Hello World") at(100, 200)
+canvas.drawImageAt(20, 280) sized(200, 200) from("doge.png")
 
 
 def button = g.createButton

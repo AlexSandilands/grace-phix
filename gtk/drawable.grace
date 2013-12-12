@@ -1,3 +1,8 @@
+import "cairo" as cairo
+
+import "io" as io
+import "sys" as sys
+
 import "Vector2" as vec2
 import "Color"   as col
 import "Math"    as math
@@ -107,7 +112,7 @@ type Line = {
 
 
 // Drawable text type
-type Text = {
+type Text = Drawable & {
 
     color -> col.Color
     text  -> String
@@ -117,8 +122,12 @@ type Text = {
 
 
 // Drawable image type
-type Image = {
+type Image = Drawable & {
 
+    filename -> String
+
+    width -> Number
+    height -> Number
 }
 
 
@@ -495,5 +504,54 @@ class aText.write(t : String) at(l : vec2.Vector2) colored(c : col.Color) -> Tex
     method asString -> String is override {
 
         "Text: \"{text}\" at {location}"
+    }
+}
+
+
+// Image Class
+class aImage.at(l : vec2.Vector2) sized(s : vec2.Vector2) from(path' : String) -> Image {
+
+    inherits aDrawable.at(l)
+
+    if (!io.exists(path')) then {
+
+        io.error.write("Error: no file at \"{path'}\"\n")
+        sys.exit(1)
+    }
+
+    def path    = path'
+    def surface = cairo.image_surface_create_from_png(path)
+    def iWidth  = surface.width
+    def iHeight = surface.height
+
+    var size : vec2.Vector2 := s
+
+    // Easier getters for the dimension components
+    method width -> Number { size.x }
+    method height -> Number { size.y }
+
+    // Easier setters for the dimension components
+    method width := (w' : Number) -> Done {
+        size.x := w'
+    }
+
+    method height := (h' : Number) -> Done {
+        size.y := h'
+    }
+
+    // Paint this object to the canvas
+    method draw(gfx) -> Done is override {
+
+        gfx.save
+        gfx.translate(x, y)
+        gfx.scale(width/iWidth, height/iHeight)
+        gfx.set_source_surface(surface, 0, 0)
+        gfx.paint
+        gfx.restore
+    }
+
+    method asString -> String {
+
+        "Image at {location} from {path}"
     }
 }
