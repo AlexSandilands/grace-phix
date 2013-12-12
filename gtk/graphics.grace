@@ -228,6 +228,27 @@ method createCircleAround(x : Number, y : Number)
 }
 
 
+// OVALS
+
+
+// Oval. Has default values: Black, around (50, 50) width 50 height 25
+method createOval -> draw.Oval {
+
+  return draw.aOval.at (vec2.setCoord(50, 50))
+                 sized (vec2.setCoord(50, 25))
+               colored (col.black)
+}
+
+// Oval around (x, y) size wxh colored c
+method createOvalAt(x : Number, y : Number)
+              sized(w : Number, h : Number)
+            colored(c : Color) -> draw.Oval {
+
+    return draw.aOval.at (vec2.setCoord(x, y))
+                   sized (vec2.setCoord(w, h))
+                 colored (col.black)
+}
+
 // SECTORS
 
 

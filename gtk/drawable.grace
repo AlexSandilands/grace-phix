@@ -52,6 +52,19 @@ type Circle = Drawable & {
 }
 
 
+// Drawable oval type
+// This is a circle but it doesn't have a constant radius
+type oval = Drawable & {
+
+    width -> Number
+    height -> Number
+    color  -> col.Color
+
+    fill      -> Boolean
+    lineWidth -> Number
+}
+
+
 // Drawable sector type. Like a circle but you can define where
 // (on the complex plane) it starts being drawn, and where it ends
 type Sector = Drawable & {
@@ -261,6 +274,68 @@ class aCircle.around(l : vec2.Vector2) radius(r : Number) colored(c : col.Color)
         var r := "{radius}"
 
         return "Circle around: {lo} radius: {r}"
+    }
+}
+
+
+// Oval Class
+class aOval.at(l : vec2.Vector2) sized(s : vec2.Vector2) colored(c : col.Color) -> Circle {
+
+    inherits aDrawable.at(l)
+
+    var size : vec2.Vector2 := s
+    var color  : col.Color is public := c
+
+    var fill   : Boolean   is public := true
+    var lineWidth : Number is public := 2
+
+    def from : Number = 0
+    def to   : Number = math.two_pi
+
+
+    // Easier getters for the dimension components
+    method width -> Number { size.x }
+    method height -> Number { size.y }
+
+    // Easier setters for the dimension components
+    method width := (w' : Number) -> Done {
+        size.x := w'
+    }
+
+    method height := (h' : Number) -> Done {
+        size.y := h'
+    }
+
+
+    // Paint this object to the canvas
+    method draw(gfx) -> Done is override {
+
+        gfx.set_source_rgb(color.r, color.g, color.b)
+        gfx.save
+        gfx.translate(x + width/2, y + height/2)
+        gfx.scale(width/2, height/2)
+        gfx.arc(0, 0, 1, from, to)
+        gfx.restore
+
+        if (fill) then {
+
+            gfx.fill
+
+        } else {
+
+            gfx.line_width := lineWidth
+            gfx.stroke
+        }
+    }
+
+
+    method asString -> String is override {
+
+        var lo := "{location}"
+        var w := "{width}"
+        var h := "{height}"
+
+        return "Oval around: {lo} width: {w} height: {h}"
     }
 }
 

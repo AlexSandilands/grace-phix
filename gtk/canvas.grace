@@ -170,6 +170,19 @@ class aCanvas.new -> Canvas {
     }
 
 
+    // Oval around (x, y) size wxh colored c
+    method drawOvalAt(x : Number, y : Number)
+                    sized(w : Number, h : Number) -> draw.Oval {
+
+        var shape := draw.aOval.at (vec2.setCoord(x, y))
+                             sized (vec2.setCoord(w, h))
+                           colored (col.black)
+
+        shape.fill := fill
+
+        drawables.push(shape)
+    }
+
     // SECTORS
 
     // Sector around (x, y) radius r from f to t colored c

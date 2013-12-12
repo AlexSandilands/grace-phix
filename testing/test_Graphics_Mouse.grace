@@ -12,10 +12,7 @@ var size := 5
 def sizeUp = g.createButtonCalled("+")
 def sizeDown = g.createButtonCalled("-")
 
-def hBox = g.createHorizontalBox
-hBox.add(colorButton)
-hBox.add(sizeUp)
-hBox.add(sizeDown)
+def hBox = g.createHorizontalBoxContaining([colorButton, sizeUp, sizeDown])
 
 window.add(canvas)
 window.add(hBox)
