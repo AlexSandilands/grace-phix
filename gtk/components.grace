@@ -26,8 +26,9 @@ type Component = {
 
 type Container = Component & {
 
-    add(c : Component)    -> Done
-    remove(c : Component) -> Boolean
+    add(c : Component)       -> Boolean
+    add(l : List<Component>) -> Boolean
+    remove(c : Component)    -> Boolean
 
     getChildren -> List<Component>
 }
@@ -93,6 +94,27 @@ class aVerticalBox.new -> Container {
             return false
         }
 
+    }
+
+    method addAll(l' : List<Component>) -> Done {
+
+        var ret := true
+
+        for (l') do { c ->
+
+            // Check to see if the component is already in the container
+            if (!l.contains(c)) then {
+
+                l.push(c)
+                vbox.add(c.getComponent)
+
+            } else {
+
+                ret := false
+            }
+        }
+
+        return ret
     }
 
     // Removes the component c from this container
@@ -172,6 +194,27 @@ class aHorizontalBox.new -> Container {
             return false
         }
 
+    }
+
+    method addAll(l' : List<Component>) -> Done {
+
+        var ret := true
+
+        for (l') do { c ->
+
+            // Check to see if the component is already in the container
+            if (!l.contains(c)) then {
+
+                l.push(c)
+                hbox.add(c.getComponent)
+
+            } else {
+
+                ret := false
+            }
+        }
+
+        return ret
     }
 
     // Removes the component c from this container

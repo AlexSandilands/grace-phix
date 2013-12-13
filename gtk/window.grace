@@ -79,9 +79,14 @@ class aWindow.new() -> Window {
 
     // CONTAINER METHODS
 
-    method add(c : comps.Component) -> Done {
+    method add(c : comps.Component) -> Boolean {
 
         box.add(c)
+    }
+
+    method addAll(l : List<Component>) -> Boolean {
+
+        box.addAll(l)
     }
 
     method remove(c : comps.Component) -> Boolean {

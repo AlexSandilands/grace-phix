@@ -18,9 +18,7 @@ circ.color := col.blue
 def text = g.createText
 text.color := col.red
 
-canvas.add(rect)
-canvas.add(circ)
-canvas.add(text)
+canvas.addAll([rect, circ, text])
 
 canvas.fill := false
 canvas.color := col.pink

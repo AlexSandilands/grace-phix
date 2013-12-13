@@ -29,6 +29,7 @@ class aCanvas.new -> Canvas {
     c.set_size_request(640, 480)
     c.app_paintable := true
     c.add_events(gdk.GDK_BUTTON_PRESS_MASK)
+    c.add_events(gdk.GDK_BUTTON_RELEASE_MASK)
     c.add_events(gdk.GDK_BUTTON1_MOTION_MASK)
 
 
@@ -65,6 +66,15 @@ class aCanvas.new -> Canvas {
     method add(d : draw.Drawable) -> Done {
 
         drawables.push(d)
+    }
+
+    // Add a list of drawables to the canvas
+    method addAll(l : List<Drawable>) -> Done {
+
+        for (l) do { d ->
+
+            drawables.push(d)
+        }
     }
 
     // Gets the size of this canvas as a 2d Vector
@@ -114,23 +124,35 @@ class aCanvas.new -> Canvas {
 
     // MOUSE EVENTS
 
-    var clickedBlock : Block := {}
-    var draggedBlock : Block := {}
+    var pressedBlock  : Block := {}
+    var releasedBlock : Block := {}
+    var draggedBlock  : Block := {}
 
-    c.on "button-press-event" do { e ->
+    c.on "button-press-event" do { at ->
 
-        clickedBlock.apply(e)
+        pressedBlock.apply(at)
     }
 
-    c.on "motion-notify-event" do { e ->
+    c.on "button-release-event" do { at ->
 
-        draggedBlock.apply(e)
+        releasedBlock.apply(at)
     }
 
-    // Set the clicked block
-    method mouseClicked := (b : Block) -> Done {
+    c.on "motion-notify-event" do { at ->
 
-        clickedBlock := b
+        draggedBlock.apply(at)
+    }
+
+    // Set the pressed block
+    method mousePressed := (b : Block) -> Done {
+
+        pressedBlock := b
+    }
+
+    // Set the relesaed block
+    method mouseReleased := (b : Block) -> Done {
+
+        releasedBlock := b
     }
 
     // Set the dragged block

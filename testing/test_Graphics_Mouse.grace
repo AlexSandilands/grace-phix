@@ -7,6 +7,7 @@ def window = g.createWindow
 def canvas = g.createCanvas
 
 def colorButton = g.createButtonCalled("Change Color")
+colorButton.setSize(50, 50)
 
 var size := 5
 def sizeUp = g.createButtonCalled("+")
@@ -14,10 +15,9 @@ def sizeDown = g.createButtonCalled("-")
 
 def hBox = g.createHorizontalBoxContaining([colorButton, sizeUp, sizeDown])
 
-window.add(canvas)
-window.add(hBox)
+window.addAll([canvas, hBox])
 
-canvas.mouseClicked := { at ->
+canvas.mouseReleased := { at ->
 
     canvas.drawCircleAround(at.x, at.y) radius(size)
     canvas.paint
