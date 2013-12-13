@@ -32,7 +32,7 @@ method createWindow -> win.Window {
 method createWindowAt(x : Number, y : Number) -> win.Window {
 
     var ret := win.aWindow.new
-    ret.setPosition(vec2.setCoord(x, y))
+    ret.position := vec2.setCoord(x, y)
 
     return ret
 }
@@ -43,8 +43,8 @@ method createWindowAt(x : Number, y : Number)
              withSize(w : Number, h : Number) -> win.Window {
 
     var ret := win.aWindow.new
-    ret.setPosition(vec2.setCoord(x, y))
-    ret.setSize(vec2.setCoord(w, h))
+    ret.position := vec2.setCoord(x, y)
+    ret.size := vec2.setCoord(w, h)
 
     return ret
 }
@@ -52,8 +52,8 @@ method createWindowAt(x : Number, y : Number)
 // Creates and returns a window with the specified size
 method createWindowWithSize(w : Number, h : Number) -> win.Window {
 
-    var ret := win.aWin.new
-    ret.setSize(vec2.setCoord(w, h))
+    var ret := win.aWindow.new
+    ret.size := vec2.setCoord(w, h)
 
     return ret
 }
@@ -64,9 +64,9 @@ method createWindowCalled(t : String)
                  withSize(w : Number, h : Number) -> win.Window{
 
     var ret := win.aWindow.new
-    ret.setTitle(t)
-    ret.setPosition(vec2.setCoord(x, y))
-    ret.setSize(vec2.setCoord(w, h))
+    ret.title := t
+    ret.position := vec2.setCoord(x, y)
+    ret.size := vec2.setCoord(w, h)
 
     return ret
 }
