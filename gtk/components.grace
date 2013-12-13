@@ -27,7 +27,7 @@ type Component = {
 type Container = Component & {
 
     add(c : Component)       -> Boolean
-    add(l : List<Component>) -> Boolean
+    addAll(l : List<Component>) -> Boolean
     remove(c : Component)    -> Boolean
 
     getChildren -> List<Component>
