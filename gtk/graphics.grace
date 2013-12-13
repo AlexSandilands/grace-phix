@@ -2,7 +2,6 @@
 import "gtk" as gtk
 import "gdk" as gdk
 
-
 // Utils imports
 import "Vector2" as vec2
 import "Color" as col
@@ -41,7 +40,7 @@ method createWindowAt(x : Number, y : Number) -> win.Window {
 // Creates and returns a window at the specified position with the
 // specified size
 method createWindowAt(x : Number, y : Number)
-       withSize(w : Number, h : Number) -> win.Window {
+             withSize(w : Number, h : Number) -> win.Window {
 
     var ret := win.aWindow.new
     ret.setPosition(vec2.setCoord(x, y))
@@ -61,8 +60,8 @@ method createWindowWithSize(w : Number, h : Number) -> win.Window {
 
 // Creates a window with name, position and size specified
 method createWindowCalled(t : String)
-       at(x : Number, y : Number)
-       withSize(w : Number, h : Number) -> win.Window{
+                       at(x : Number, y : Number)
+                 withSize(w : Number, h : Number) -> win.Window{
 
     var ret := win.aWindow.new
     ret.setTitle(t)

@@ -67,12 +67,13 @@ class aCanvas.new -> Canvas {
         drawables.push(d)
     }
 
-    // Sets the size of this canvas
+    // Gets the size of this canvas as a 2d Vector
     method size -> vec2.Vector2 {
 
         s
     }
 
+    // Sets the size of this canvas with a 2d Vector
     method size := (s' : vec2.Vector2) -> Done {
 
         s := s'
@@ -176,7 +177,7 @@ class aCanvas.new -> Canvas {
 
         var shape := draw.aOval.at (vec2.setCoord(x, y))
                              sized (vec2.setCoord(w, h))
-                           colored (col.black)
+                           colored (color)
 
         shape.fill := fill
 

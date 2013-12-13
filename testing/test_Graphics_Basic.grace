@@ -32,6 +32,9 @@ canvas.drawSectorAround(300, 50) from(0) to(math.pi) radius(40)
 canvas.color := col.blue
 canvas.drawArcAround(100, 100) from(0) to(math.two_pi) radius(30) width(10)
 canvas.fill := true
+canvas.color := col.orange
+canvas.drawOvalAt(280, 150) sized(100, 50)
+canvas.color := col.blue
 canvas.drawLineFrom(20, 250) to(400, 260)
 canvas.color := col.green
 canvas.drawTextSaying("Hello World") at(100, 200)
