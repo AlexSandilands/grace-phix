@@ -221,9 +221,9 @@ class aColor.new(red : Number, green : Number, blue : Number, alpha : Number) {
 
 
     // Overide the asString method
-    method asString -> String {
+    method asString -> String is override {
 
-        return "Color: r={r}, g={g}, b={b}, a={a}"
+        "rgb({r}, {g}, {b})"
     }
 
 

@@ -209,19 +209,13 @@ method aCos(value : Number) -> Number {
 }
 
 // Uses power series expansion to approximate arcTan
-// This doesn't work for values greater than 1, as the power
-// series converges very very slowly. Could potentially have to
-// sum to millions.
-// TODO: Another approach
 method aTan(value : Number) -> Number {
-
-    var x := normalizeRadians(value)
 
     var ret := 0
 
     for(0 .. 10) do { n ->
 
-        ret := ret (((-1)^n)*(x^(2*n + 1)))/(2*n + 1)
+        ret := ret + (((-1)^n)*(value^(2*n + 1)))/(2*n + 1)
     }
 
     return ret
