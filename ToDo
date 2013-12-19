@@ -17,6 +17,8 @@
 
     Access to component
 
+    A way to import in a method, rather than importing everything at the start
+
 // TODO
 
 	Animations

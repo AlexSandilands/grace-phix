@@ -488,14 +488,14 @@ class aLine.from(f : vec2.Vector2) to(t : vec2.Vector2) colored(c : col.Color) -
         gfx.set_source_rgb(color.r, color.g, color.b)
         gfx.move_to(from.x, from.y)
         gfx.line_to(to.x, to.y)
-        gfx.line_width := width
+        gfx.line_width := lineWidth
         gfx.stroke
 
     }
 
     method asString -> String is override {
 
-        "Line from {from} to {to} with width: {width}"
+        "Line from {from} to {to} with width: {lineWidth}"
     }
 }
 
