@@ -52,6 +52,7 @@ class aWindow.new() -> Window {
     w.add_accel_group(accelgroup)
 
     w.add_events(gdk.GDK_BUTTON_PRESS_MASK)
+    w.add_events(gdk.GDK_BUTTON_RELEASE_MASK)
     w.add_events(gdk.GDK_BUTTON1_MOTION_MASK)
 
 
@@ -141,6 +142,20 @@ class aWindow.new() -> Window {
         w.set_size_request(s.x, s.y)
     }
 
+    // Set the width of this window
+    method width := (w' : Number) -> Done {
+
+        s.x := w'
+        w.set_size_request(s.x, s.y)
+    }
+
+    // Set the height of this window
+    method height := (h' : Number) -> Done {
+
+        s.y := h'
+        w.set_size_request(s.x, s.y)
+    }
+
     // Return the position of this window
     method position -> vec2.Vector2 {
 
@@ -155,23 +170,35 @@ class aWindow.new() -> Window {
 
     // MOUSE EVENTS
 
-    var clickedBlock : Block := {}
-    var draggedBlock : Block := {}
+    var pressedBlock  : Block := {}
+    var releasedBlock : Block := {}
+    var draggedBlock  : Block := {}
 
-    w.on "button-press-event" do { e ->
+    w.on "button-press-event" do { at ->
 
-        clickedBlock.apply(e)
+        pressedBlock.apply(at)
     }
 
-    w.on "motion-notify-event" do { e ->
+    w.on "button-release-event" do { at ->
 
-        draggedBlock.apply(e)
+        releasedBlock.apply(at)
     }
 
-    // Set the clicked block
-    method mouseClicked := (b : Block) -> Done {
+    w.on "motion-notify-event" do { at ->
 
-        clickedBlock := b
+        draggedBlock.apply(at)
+    }
+
+    // Set the pressed block
+    method mousePressed := (b : Block) -> Done {
+
+        pressedBlock := b
+    }
+
+    // Set the relesaed block
+    method mouseReleased := (b : Block) -> Done {
+
+        releasedBlock := b
     }
 
     // Set the dragged block
@@ -185,6 +212,6 @@ class aWindow.new() -> Window {
     // Returns the name of this window as a string
     method asString -> String {
 
-        "Window: {w.title}, Dim: "
+        "Window: {w.title}, Dim: {s}"
     }
 }

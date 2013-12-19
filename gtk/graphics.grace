@@ -25,6 +25,7 @@ import "drawable" as draw
 // Default window, sized 640x480
 method createWindow -> win.Window {
 
+
     return win.aWindow.new
 }
 
@@ -245,7 +246,7 @@ method createOvalAt(x : Number, y : Number)
 
     return draw.aOval.at (vec2.setCoord(x, y))
                    sized (vec2.setCoord(w, h))
-                 colored (col.black)
+                 colored (c)
 }
 
 // SECTORS
@@ -343,5 +344,5 @@ method createImageAt(x : Number, y : Number)
                sized(w : Number, h : Number)
                 from(path : String) -> draw.Image {
 
-    draw.aImage.at(vec2.setCoord(x, y)) sized(w, h) from(path)
+    draw.aImage.at(vec2.setCoord(x, y)) sized(vec2.setCoord(w, h)) from(path)
 }

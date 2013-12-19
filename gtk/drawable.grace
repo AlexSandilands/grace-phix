@@ -101,7 +101,7 @@ type Arc = Drawable & {
 
 
 // Drawable line type
-type Line = {
+type Line = Drawable & {
 
     color -> col.Color
     width -> Number
@@ -288,7 +288,7 @@ class aCircle.around(l : vec2.Vector2) radius(r : Number) colored(c : col.Color)
 
 
 // Oval Class
-class aOval.at(l : vec2.Vector2) sized(s : vec2.Vector2) colored(c : col.Color) -> Circle {
+class aOval.at(l : vec2.Vector2) sized(s : vec2.Vector2) colored(c : col.Color) -> Oval {
 
     inherits aDrawable.at(l)
 
@@ -320,6 +320,7 @@ class aOval.at(l : vec2.Vector2) sized(s : vec2.Vector2) colored(c : col.Color) 
     method draw(gfx) -> Done is override {
 
         gfx.set_source_rgb(color.r, color.g, color.b)
+
         gfx.save
         gfx.translate(x + width/2, y + height/2)
         gfx.scale(width/2, height/2)
@@ -454,6 +455,10 @@ class aArc.around(l : vec2.Vector2) from(f : Number) to(t : Number)
 // Line Class
 class aLine.from(f : vec2.Vector2) to(t : vec2.Vector2) colored(c : col.Color) -> Line {
 
+    // Note that it doesn't make a lot of sense for this to inherit from drawable
+    // but just take it as the "from" variable to be the drawable location
+    inherits aDrawable.at(f)
+
     var color : col.Color is public := c
 
     // Width of the line is 2 by default
@@ -472,6 +477,7 @@ class aLine.from(f : vec2.Vector2) to(t : vec2.Vector2) colored(c : col.Color) -
         gfx.line_to(to.x, to.y)
         gfx.line_width := width
         gfx.stroke
+
     }
 
     method asString -> String is override {
@@ -512,6 +518,7 @@ class aText.write(t : String) at(l : vec2.Vector2) colored(c : col.Color) -> Tex
 class aImage.at(l : vec2.Vector2) sized(s : vec2.Vector2) from(path' : String) -> Image {
 
     inherits aDrawable.at(l)
+
 
     if (!io.exists(path')) then {
 

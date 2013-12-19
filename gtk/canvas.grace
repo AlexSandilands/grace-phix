@@ -60,6 +60,7 @@ class aCanvas.new -> Canvas {
 
     // CANVAS METHODS
 
+    // Size of the canvas
     var s : vec2.Vector2 is confidential := vec2.setCoord(640, 480)
 
     // Adds a drawable object to the canvas
@@ -87,6 +88,20 @@ class aCanvas.new -> Canvas {
     method size := (s' : vec2.Vector2) -> Done {
 
         s := s'
+        c.set_size_request(s.x, s.y)
+    }
+
+    // Set the width of this canvas
+    method width := (w' : Number) -> Done {
+
+        s.x := w'
+        c.set_size_request(s.x, s.y)
+    }
+
+    // Set the height of this canvas
+    method height := (h' : Number) -> Done {
+
+        s.y := h'
         c.set_size_request(s.x, s.y)
     }
 
@@ -195,7 +210,8 @@ class aCanvas.new -> Canvas {
 
     // Oval around (x, y) size wxh colored c
     method drawOvalAt(x : Number, y : Number)
-                    sized(w : Number, h : Number) -> draw.Oval {
+                sized(w : Number, h : Number) -> draw.Oval {
+
 
         var shape := draw.aOval.at (vec2.setCoord(x, y))
                              sized (vec2.setCoord(w, h))
@@ -253,6 +269,7 @@ class aCanvas.new -> Canvas {
     // Line from (x1, y1) to (x2, y2) colored b
     method drawLineFrom(x1 : Number, y1 : Number) to(x2 : Number, y2 : Number) -> Done {
 
+
         drawables.push(
 
             draw.aLine.from (vec2.setCoord(x1, y1))
@@ -281,10 +298,12 @@ class aCanvas.new -> Canvas {
                  sized(w : Number, h : Number)
                   from(path : String) -> Done {
 
+
         drawables.push(
 
             draw.aImage.at(vec2.setCoord(x, y)) sized(vec2.setCoord(w, h)) from(path)
         )
+
     }
 
 }

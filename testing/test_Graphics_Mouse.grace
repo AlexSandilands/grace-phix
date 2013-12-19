@@ -35,11 +35,16 @@ var currentColor := 1
 colorButton.clicked := {
 
     if (currentColor == 6) then {
+
         currentColor := 1
+        canvas.color := colors[currentColor]
+
+    } else {
+
+        currentColor := currentColor + 1
+        canvas.color := colors[currentColor]
     }
 
-    currentColor := currentColor + 1
-    canvas.color := colors[currentColor]
 
 }
 
