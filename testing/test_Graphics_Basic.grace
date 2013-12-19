@@ -29,15 +29,16 @@ canvas.color := col.doge
 canvas.drawSectorAround(300, 50) from(0) to(math.pi) radius(40)
 canvas.color := col.blue
 canvas.drawArcAround(100, 100) from(0) to(math.two_pi) radius(30) width(10)
+// print "Mark"
 canvas.fill := true
-canvas.color := col.orange
+canvas.color := col.yellow
 canvas.drawOvalAt(280, 150) sized(100, 50)
-canvas.color := col.blue
+canvas.color := col.orange
 canvas.drawLineFrom(20, 250) to(400, 260)
 canvas.color := col.green
 canvas.drawTextSaying("Hello World") at(100, 200)
 canvas.drawImageAt(20, 280) sized(200, 200) from("doge.png")
-
+canvas.drawImageAt(300, 280) sized(200, 200) from("doge2.png")
 
 def button = g.createButton
 button.label := "Hello World"
