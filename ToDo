@@ -7,6 +7,19 @@
 
     window.set_position
 
-// Other Problems
+// TOASK
 
-	Time
+    Do all public functions need to be defined in the type
+        - ie draw methods in canvas
+
+    Match not matching types
+        - ie test_Type file
+
+    Access to component
+
+// TODO
+
+	Animations
+    Keypresses
+
+

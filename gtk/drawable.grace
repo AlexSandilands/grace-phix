@@ -37,11 +37,11 @@ type Rectangle = Drawable & {
     fill  -> Boolean
     lineWidth -> Number
 
-    w -> Number
-    h -> Number
+    width -> Number
+    width := (w' : Number) -> Done
 
-    w := (w' : Number) -> Done
-    h := (h' : Number) -> Done
+    height -> Number
+    height := (h' : Number) -> Done
 }
 
 
@@ -61,12 +61,18 @@ type Circle = Drawable & {
 // This is a circle but it doesn't have a constant radius
 type oval = Drawable & {
 
-    width -> Number
-    height -> Number
+    size -> vec2.Vector2
+
     color  -> col.Color
 
     fill      -> Boolean
     lineWidth -> Number
+
+    width -> Number
+    width := (w' : Number) -> Done
+
+    height -> Number
+    height := (h' : Number) -> Done
 }
 
 
@@ -104,7 +110,7 @@ type Arc = Drawable & {
 type Line = Drawable & {
 
     color -> col.Color
-    width -> Number
+    lineWidth -> Number
 
     from -> vec2.Vector2
     to   -> vec2.Vector2
@@ -127,7 +133,10 @@ type Image = Drawable & {
     filename -> String
 
     width -> Number
+    width := (w' : Number) -> Done
+
     height -> Number
+    height := (h' : Number) -> Done
 }
 
 
@@ -205,10 +214,12 @@ class aRectangle.at(l : vec2.Vector2) sized(s : vec2.Vector2) colored(c : col.Co
 
     // Easier setters for the dimension components
     method width := (w' : Number) -> Done {
+
         size.x := w'
     }
 
     method height := (h' : Number) -> Done {
+
         size.y := h'
     }
 
@@ -308,10 +319,12 @@ class aOval.at(l : vec2.Vector2) sized(s : vec2.Vector2) colored(c : col.Color) 
 
     // Easier setters for the dimension components
     method width := (w' : Number) -> Done {
+
         size.x := w'
     }
 
     method height := (h' : Number) -> Done {
+
         size.y := h'
     }
 
@@ -462,7 +475,7 @@ class aLine.from(f : vec2.Vector2) to(t : vec2.Vector2) colored(c : col.Color) -
     var color : col.Color is public := c
 
     // Width of the line is 2 by default
-    var width : Number is public := 2
+    var lineWidth : Number is public := 2
 
     // 2d cartesian coordinates for the start and end of the line
     var from : vec2.Vector2 is public := f
@@ -539,10 +552,12 @@ class aImage.at(l : vec2.Vector2) sized(s : vec2.Vector2) from(path' : String) -
 
     // Easier setters for the dimension components
     method width := (w' : Number) -> Done {
+
         size.x := w'
     }
 
     method height := (h' : Number) -> Done {
+
         size.y := h'
     }
 

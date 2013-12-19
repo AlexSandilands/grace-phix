@@ -7,7 +7,7 @@ def window = g.createWindow
 def canvas = g.createCanvas
 
 def colorButton = g.createButtonCalled("Change Color")
-colorButton.setSize(50, 50)
+colorButton.height := 50
 
 var size := 5
 def sizeUp = g.createButtonCalled("+")

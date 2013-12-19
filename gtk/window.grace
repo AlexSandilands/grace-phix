@@ -17,11 +17,18 @@ type Window = comps.Container & {
     size -> vec2.Vector2
     size:= (s : vec2.Vector2) -> Done
 
+    width -> Number
+    width:= (w' : Number) -> Done
+
+    height -> Number
+    height:= (h' : Number) -> Done
+
     position -> vec2.Vector2
     position:= (p : vec2.Vector2) -> Done
 
-    mouseClicked:= (b : Block) -> Done
-    mouseDragged:= (b : Block) -> Done
+    mousePressed:=  (b : Block) -> Done
+    mouseReleased:= (b : Block) -> Done
+    mouseDragged:=  (b : Block) -> Done
 }
 
 
@@ -95,7 +102,7 @@ class aWindow.new() -> Window {
         box.remove(c)
     }
 
-    method getChildren -> List<comps.Component> {
+    method children -> List<comps.Component> {
 
         [box]
     }
@@ -142,11 +149,23 @@ class aWindow.new() -> Window {
         w.set_size_request(s.x, s.y)
     }
 
+    // Returns the width of this window
+    method width -> Number {
+
+        s.x
+    }
+
     // Set the width of this window
     method width := (w' : Number) -> Done {
 
         s.x := w'
         w.set_size_request(s.x, s.y)
+    }
+
+    // Returns the height of this window
+    method height -> Number {
+
+        s.y
     }
 
     // Set the height of this window

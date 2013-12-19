@@ -11,14 +11,24 @@ import "Math" as math
 
 type Canvas = comps.Component & {
 
-    addDrawable -> Done
+    add(d : draw.Drawable) -> Done
+    addAll(l : List<draw.Drawable>) -> Done
 
     size -> vec2.Vector2
     size:= (s : vec2.Vector2) -> Done
 
+    width -> Number
+    width:= (w' : Number) -> Done
+
+    height -> Number
+    height:= (h' : Number) -> Done
+
     setPaintable(b : Boolean) -> Done
     paint -> Done
 
+    mousePressed:=  (b : Block) -> Done
+    mouseReleased:= (b : Block) -> Done
+    mouseClicked:=  (b : Block) -> Done
 }
 
 
@@ -70,7 +80,7 @@ class aCanvas.new -> Canvas {
     }
 
     // Add a list of drawables to the canvas
-    method addAll(l : List<Drawable>) -> Done {
+    method addAll(l : List<draw.Drawable>) -> Done {
 
         for (l) do { d ->
 

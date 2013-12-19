@@ -38,10 +38,13 @@ type Button = Component & {
     label -> String
     label:= (s : String) -> Done
 
-    width -> Number
-    height -> Number
+    size -> vec2.Vector2
+    sized:= (s' : vec2.Vector2) -> Done
 
+    width -> Number
     width:= -> Done
+
+    height -> Number
     height:= -> Done
 
     clicked(b : Block)  -> Done
@@ -264,6 +267,8 @@ class aButton.new -> Button {
     var l : String := "Default Button"
     b.label := l
 
+    var s : vec2.Vector2 := vec2.setCoord(150, 30)
+
     // COMPONENT METHODS
 
     var parent : Component is public
@@ -275,11 +280,6 @@ class aButton.new -> Button {
 
 
     // BUTTON METHODS
-
-    method setSize(w : Number, h : Number) -> Done {
-
-        b.set_size_request(w, h)
-    }
 
     // Return the label on this button
     method label -> String {
@@ -294,12 +294,53 @@ class aButton.new -> Button {
         b.label := l
     }
 
+    // Returns the size of this button
+    // Note that the button will expand to fit the container it is in
+    // so this size isn't necessarily accurate
+    method size -> vec2.Vector2 {
+
+        s
+    }
+
+    // Sets the size of the button
+    method size := (s' : vec2.Vector2) -> Done {
+
+        s := s'
+        b.set_size_request(s.x, s.y)
+    }
+
+    // Returns the width of the button
+    method width -> Number {
+
+        s.x
+    }
+
+    // Sets the width of the button
+    method width := (w' : Number) -> Done {
+
+        s.x := w'
+        b.set_size_request(s.x, s.y)
+    }
+
+    // returns the height of the button
+    method height -> Number {
+
+        s.y
+    }
+
+    // Sets the height of the button
+    method height := (h' : Number) -> Done {
+
+        s.y := h'
+        b.set_size_request(s.x, s.y)
+    }
+
 
     // Button actions.
 
-    var clickedBlock  := {}
-    var pressedBlock  := {}
-    var releasedBlock := {}
+    var clickedBlock  : Block := {}
+    var pressedBlock  : Block := {}
+    var releasedBlock : Block := {}
 
     b.on "clicked" do {
 
