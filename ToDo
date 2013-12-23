@@ -7,21 +7,12 @@
 
     window.set_position
 
-// TOASK
-
-    Do all public functions need to be defined in the type
-        - ie draw methods in canvas
-
-    Match not matching types
-        - ie test_Type file
-
-    Access to component
-
-    A way to import in a method, rather than importing everything at the start
+    Keypresses
+        - Capital Letters
+        - Some function keys, ie ctrl
 
 // TODO
 
-	Animations
-    Keypresses
-
+    Update types
+    Animations
 
