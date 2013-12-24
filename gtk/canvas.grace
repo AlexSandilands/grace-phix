@@ -11,6 +11,8 @@ import "Math" as math
 
 type Canvas = comps.Component & {
 
+    drawables -> List<draw.Drawable>
+
     add(d : draw.Drawable) -> Done
     addAll(l : List<draw.Drawable>) -> Done
 
@@ -43,9 +45,6 @@ class aCanvas.new -> Canvas {
     c.add_events(gdk.GDK_BUTTON1_MOTION_MASK)
 
 
-    def drawables : List<draw.Drawable> is confidential = []
-
-
     // What to do when the canvas is requested to paint
     c.on "draw" do { gfx ->
 
@@ -70,6 +69,8 @@ class aCanvas.new -> Canvas {
 
     // CANVAS METHODS
 
+    def drawables : List<draw.Drawable> is public = []
+
     // Size of the canvas
     var s : vec2.Vector2 is confidential := vec2.setCoord(640, 480)
 
@@ -86,6 +87,23 @@ class aCanvas.new -> Canvas {
 
             drawables.push(d)
         }
+    }
+
+    // Returns the index of the top drawable that contains (x', y') or
+    // 0 if none are found
+    method checkDrawableAt(x' : Number, y' : Number) -> Number {
+
+        def len = drawables.length
+
+        for (1 .. len) do { i ->
+
+            if (drawables[len + 1 - i].contains(x', y')) then {
+
+                return len + 1 - i
+            }
+        }
+
+        return 0
     }
 
     // Gets the size of this canvas as a 2d Vector

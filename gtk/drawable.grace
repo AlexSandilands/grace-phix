@@ -25,6 +25,9 @@ type Drawable = {
 
     // Takes a cairo graphics object to draw with
     draw(gfx) -> Done
+
+    // Checks if (x, y) is inside the drawable
+    contains(x : Number, y : Number) -> Boolean
 }
 
 
@@ -244,6 +247,12 @@ class aRectangle.at(l : vec2.Vector2) sized(s : vec2.Vector2) colored(c : col.Co
         }
     }
 
+    // Check if (x, y) is inside this rectangle
+    method contains(x' : Number, y' : Number) -> Boolean is override {
+
+        ((x <= x') && (x' <= (x + width))) && ((y <= y') && (y' <= (y + height)))
+    }
+
     method asString -> String is override {
 
         var lo := "{location}"
@@ -285,6 +294,14 @@ class aCircle.around(l : vec2.Vector2) radius(r : Number) colored(c : col.Color)
             gfx.line_width := lineWidth
             gfx.stroke
         }
+    }
+
+    // Returns true if (x', y') is inside this circle
+    method contains(x' : Number, y' : Number) -> Boolean is override {
+
+        // Check if the radius is greater than or equal to the straight line
+        // distance between the center of the circle and the point (x', y')
+        radius >= math.sqrt(math.abs(((x' - x)^2) + ((y' - y)^2)))
     }
 
 
@@ -351,6 +368,13 @@ class aOval.at(l : vec2.Vector2) sized(s : vec2.Vector2) colored(c : col.Color) 
         }
     }
 
+    // Check if (x, y) is inside this oval
+    method contains(x' : Number, y' : Number) -> Boolean is override {
+
+        ((x <= x') && (x' <= (x + width))) && ((y <= y') && (y' <= (y + height)))
+
+        // (((x' - x)^2)/((width/2)^2) + (((y' - y)^2)/((height/2)^2))) <= 1
+    }
 
     method asString -> String is override {
 
@@ -453,6 +477,15 @@ class aArc.around(l : vec2.Vector2) from(f : Number) to(t : Number)
         }
     }
 
+
+    // Returns true if (x', y') is inside this arc
+    method contains(x' : Number, y' : Number) -> Boolean is override {
+
+        // Get the distance from the center of the arc
+        def dist = math.sqrt(math.abs(((x' - x)^2) + ((y' - y)^2)))
+
+        return (dist <= radius) && ((radius - width) <= dist)
+    }
 
     method asString -> String is override {
 
@@ -571,6 +604,13 @@ class aImage.at(l : vec2.Vector2) sized(s : vec2.Vector2) from(path' : String) -
         gfx.paint
         gfx.restore
     }
+
+    // Check if (x, y) is inside this image
+    method contains(x' : Number, y' : Number) -> Boolean is override {
+
+        ((x <= x') && (x' <= (x + width))) && ((y <= y') && (y' <= (y + height)))
+    }
+
 
     method asString -> String {
 
