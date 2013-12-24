@@ -5,22 +5,20 @@ import "Math" as math
 
 def window = g.createWindow
 def canvas = g.createCanvas
-
-def circle1 = g.createCircleAround(200, 200) radius(30) colored(col.magenta)
-def circle2 = g.createCircleAround(250, 200) radius(30) colored(col.pink)
-def circle3 = g.createCircleAround(250, 250) radius(30) colored(col.doge)
-def circle4 = g.createCircleAround(200, 250) radius(30) colored(col.red)
-def circle5 = g.createCircleAround(200, 300) radius(30) colored(col.blue)
-def circle6 = g.createCircleAround(250, 300) radius(30) colored(col.green)
-
-canvas.add(circle1)
-canvas.add(circle2)
-canvas.add(circle3)
-canvas.add(circle4)
-canvas.add(circle5)
-canvas.add(circle6)
-
 window.add(canvas)
+
+canvas.color := col.magenta
+canvas.drawCircleAround(200, 200) radius(30)
+canvas.color := col.pink
+canvas.drawCircleAround(250, 200) radius(30)
+canvas.color := col.doge
+canvas.drawCircleAround(250, 250) radius(30)
+canvas.color := col.red
+canvas.drawCircleAround(200, 250) radius(30)
+canvas.color := col.blue
+canvas.drawCircleAround(200, 300) radius(30)
+canvas.color := col.green
+canvas.drawCircleAround(250, 300) radius(30)
 
 var prev_x := 0
 var prev_y := 0
