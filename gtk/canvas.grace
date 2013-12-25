@@ -69,7 +69,7 @@ class aCanvas.new -> Canvas {
 
     // CANVAS METHODS
 
-    def drawables : List<draw.Drawable> is public = []
+    var drawables : List<draw.Drawable> := []
 
     // Size of the canvas
     var s : vec2.Vector2 is confidential := vec2.setCoord(640, 480)
@@ -89,17 +89,82 @@ class aCanvas.new -> Canvas {
         }
     }
 
+    method remove(d : draw.Drawable) -> Boolean {
+
+        var new : List<draw.Drawable> := []
+
+        // Add every drawable in the list to a new list, apart
+        //from the drawable being removed.
+        for (drawables) do { other ->
+
+            if (d != other) then {
+
+                new.push(other)
+            }
+        }
+
+        // If the original list and new list have the same size
+        // then nothing was removed
+        if (drawables.size == new.size) then {
+
+            return false
+
+        // Otherwise something was removed, so set the new list and return true
+        } else {
+
+            drawables := new
+
+            return true
+        }
+    }
+
+    method removeWithIndex(ind : Number) -> Boolean {
+
+        // Check that the index in within bounds
+        if ((ind < 1) && (drawables.length < ind)) then {
+
+            return false
+
+        } else {
+
+            var new : List<draw.Drawable> := []
+
+            // Add every drawable apart from the one at the passed index
+            // to a new list
+            for (1 .. drawables.size) do { i ->
+
+                if (i != ind) then {
+
+                    new.push(drawables[i])
+                }
+            }
+
+            // Set the new list
+            drawables := new
+
+            return true
+        }
+
+
+    }
+
+    // Returns the drawable that has the passed in index
+    method getWithIndex(ind : Number) -> draw.Drawable {
+
+        drawables[ind]
+    }
+
     // Returns the index of the top drawable that contains (x', y') or
     // 0 if none are found
-    method checkDrawableAt(x' : Number, y' : Number) -> Number {
+    method findDrawableAt(x' : Number, y' : Number) -> Number {
 
-        def len = drawables.length
+        def size = drawables.size
 
-        for (1 .. len) do { i ->
+        for (1 .. size) do { i ->
 
-            if (drawables[len + 1 - i].contains(x', y')) then {
+            if (drawables[size + 1 - i].contains(x', y')) then {
 
-                return len + 1 - i
+                return size + 1 - i
             }
         }
 
