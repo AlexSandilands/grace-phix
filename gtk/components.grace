@@ -145,7 +145,7 @@ class aVerticalBox.new -> Container {
 
         } else {
 
-            // Otherwise remove the component and return true
+            // Otherwise remove the gtk widget and return true
             l := new
             vbox.remove(c.getComponent)
 
