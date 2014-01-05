@@ -317,6 +317,38 @@ method createLineFrom(x1 : Number, y1 : Number)
                    colored (c)
 }
 
+// Line at (x, y) with length l and anti-clockwise angle a in radians
+method createLineAt(x : Number, y : Number)
+             length(l : Number)
+              angle(a : Number)
+            colored(c : col.Color) -> draw.Line {
+
+    // Calculate the horizontal and vertical distances to the end point
+    def xLen = math.cos(a)*l
+    def yLen = math.sin(a)*l
+
+
+    // First quarter of complex plane
+    if (a < math.half_pi) then {
+
+        return draw.aLine.from(vec2.setCoord(x, y)) to(vec2.setCoord(x + xLen, y - yLen)) colored(c)
+
+    // Second quarter of complex plane
+    } elseif (a < math.pi) then {
+
+        return draw.aLine.from(vec2.setCoord(x, y)) to(vec2.setCoord(x - xLen, y - yLen)) colored(c)
+
+    // Third quarter of complex plane
+    } elseif (a < ((3*math.pi)/2)) then {
+
+        return draw.aLine.from(vec2.setCoord(x, y)) to(vec2.setCoord(x - xLen, y + yLen)) colored(c)
+
+    // Last quarter of complex plane
+    } else {
+
+        return draw.aLine.from(vec2.setCoord(x, y)) to(vec2.setCoord(x + xLen, y + yLen)) colored(c)
+    }
+}
 
 // TEXT
 
