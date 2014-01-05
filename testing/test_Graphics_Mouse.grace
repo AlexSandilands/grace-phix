@@ -1,3 +1,5 @@
+// Test that demonstrates mouse events, buttons and drawing
+
 import "graphics" as g
 
 import "Math" as math
