@@ -22,8 +22,6 @@ text.color := col.red
 
 canvas.addAll([rect, circ, text])
 
-var a := (3*math.pi)/2
-
 canvas.drawCircleAround(100, 300) radius(30)
 canvas.drawLineFrom(100, 300) to(200, 500)
 canvas.fill := false
