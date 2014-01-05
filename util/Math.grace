@@ -208,7 +208,9 @@ method aCos(value : Number) -> Number {
     return half_pi - aSin(value)
 }
 
-// Uses power series expansion to approximate arcTan
+// This approach requires summing millions of times before getting
+// close to an accurate answer, which isn't practical on a computer
+// Need to find a new method
 method aTan(value : Number) -> Number {
 
     var ret := 0
