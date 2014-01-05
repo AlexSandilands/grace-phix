@@ -29,6 +29,10 @@ type Window = comps.Container & {
     mousePressed:=  (b : Block) -> Done
     mouseReleased:= (b : Block) -> Done
     mouseDragged:=  (b : Block) -> Done
+
+    onKey(key : String) do(b : Block) -> Done
+
+    asString -> String
 }
 
 
