@@ -6,8 +6,22 @@ def two_pi : Number is readable  = 6.28318530717958647692
 def UnsafeOperation = Error.refine "UnsafeOperation"
 
 //METHODS
+
+// Return the absolute value
+method abs(value : Number) -> Number {
+
+    if (value < 0) then {
+
+        return -value
+
+    } else {
+
+        return value
+    }
+}
+
 //returns the square root of the given value
-method sqrt(value : Number) {
+method sqrt(value : Number) -> Number {
 
     return value ^ 0.5
 }
