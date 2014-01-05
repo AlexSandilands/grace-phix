@@ -16,6 +16,12 @@ type Canvas = comps.Component & {
     add(d : draw.Drawable) -> Done
     addAll(l : List<draw.Drawable>) -> Done
 
+    remove(d : draw.Drawable) -> Boolean
+    removeWithIndex(ind : Number) -> Boolean
+
+    getWithIndex(ind : Number) -> draw.Drawable
+    findDrawableAt(x : Number, y : Number) -> Number
+
     size -> vec2.Vector2
     size:= (s : vec2.Vector2) -> Done
 
@@ -28,9 +34,45 @@ type Canvas = comps.Component & {
     setPaintable(b : Boolean) -> Done
     paint -> Done
 
+    asString -> String
+
+    // Drawing methods
+
+    color -> col.Color
+    fill  -> Boolean
+
     mousePressed:=  (b : Block) -> Done
     mouseReleased:= (b : Block) -> Done
     mouseClicked:=  (b : Block) -> Done
+
+
+    drawRectangleAt(x : Number, y : Number) sized(w : Number, h : Number) -> Done
+
+    drawCircleAround(x : Number, y : Number) radius(r : Number) -> Done
+
+    drawOvalAt(x : Number, y : Number) sized(w : Number, h : Number) -> Done
+
+    drawSectorAround(x : Number, y : Number)
+                from(f : Number)
+                  to(t : Number)
+              radius(r : Number) -> Done
+
+    drawArcAround(x : Number, y : Number)
+             from(f : Number)
+               to(t : Number)
+           radius(r : Number)
+            width(w : Number) -> Done
+
+    drawLineFrom(x1 : Number, y1 : Number) to(x2 : Number, y2 : Number) -> Done
+
+    drawLineAt(x : Number, y : Number) length(l : Number) angle(a : Number) -> Done
+
+    drawTextSaying(t : String) at(x : Number, y : Number) -> Done
+
+    drawImageAt(x : Number, y : Number)
+          sized(w : Number, h : Number)
+           from(path : String) -> Done
+
 }
 
 
@@ -154,15 +196,15 @@ class aCanvas.new -> Canvas {
         drawables[ind]
     }
 
-    // Returns the index of the top drawable that contains (x', y') or
+    // Returns the index of the top drawable that contains (x, y) or
     // 0 if none are found
-    method findDrawableAt(x' : Number, y' : Number) -> Number {
+    method findDrawableAt(x : Number, y : Number) -> Number {
 
         def size = drawables.size
 
         for (1 .. size) do { i ->
 
-            if (drawables[size + 1 - i].contains(x', y')) then {
+            if (drawables[size + 1 - i].contains(x, y)) then {
 
                 return size + 1 - i
             }
@@ -369,6 +411,47 @@ class aCanvas.new -> Canvas {
                          to (vec2.setCoord(x2, y2))
                     colored (color)
         )
+    }
+
+    // Line at (x, y) with length l and anti-clockwise angle a in radians
+    method drawLineAt(x : Number, y : Number) length(l : Number) angle(a : Number) -> Done {
+
+        // Calculate the horizontal and vertical distances to the end point
+        def xLen = math.cos(a)*l
+        def yLen = math.sin(a)*l
+
+        var toPush
+
+        // First quarter of complex plane
+        if (a < math.half_pi) then {
+
+            toPush := draw.aLine.from(vec2.setCoord(x, y))
+                                   to(vec2.setCoord(x + xLen, y - yLen))
+                              colored(color)
+
+        // Second quarter of complex plane
+        } elseif (a < math.pi) then {
+
+            toPush := draw.aLine.from(vec2.setCoord(x, y))
+                                   to(vec2.setCoord(x - xLen, y - yLen))
+                              colored(color)
+
+        // Third quarter of complex plane
+        } elseif (a < ((3*math.pi)/2)) then {
+
+            toPush := draw.aLine.from(vec2.setCoord(x, y))
+                                   to(vec2.setCoord(x - xLen, y + yLen))
+                              colored(color)
+
+        // Last quarter of complex plane
+        } else {
+
+            toPush := draw.aLine.from(vec2.setCoord(x, y))
+                                   to(vec2.setCoord(x + xLen, y + yLen))
+                              colored(color)
+        }
+
+        drawables.push(toPush)
     }
 
 
