@@ -1,3 +1,10 @@
+// Test that demonstrates key presses, mouse events and interacting
+// with objects that have been drawn
+
+// Click on a circle and drag it around
+
+// Pressing delete toggles deleting a circle on click
+
 import "graphics" as g
 
 import "Color" as col
