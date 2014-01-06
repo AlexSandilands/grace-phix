@@ -11,8 +11,6 @@ import "Math" as math
 
 type Canvas = comps.Component & {
 
-    drawables -> List<draw.Drawable>
-
     add(d : draw.Drawable) -> Done
     addAll(l : List<draw.Drawable>) -> Done
 
@@ -21,6 +19,18 @@ type Canvas = comps.Component & {
 
     getWithIndex(ind : Number) -> draw.Drawable
     findDrawableAt(x : Number, y : Number) -> Number
+
+    sendToBack(d : draw.Drawable) -> Done
+    sendIndexToBack(ind : Number) -> Done
+
+    bringToFront(d : draw.Drawable) -> Done
+    bringIndexToFront(ind : Number) -> Done
+
+    sendBack(d : draw.Drawable) -> Done
+    sendIndexBack(ind : Number) -> Done
+
+    bringForward(d : draw.Drawable) -> Done
+    bringIndexForward(ind : Number) -> Done
 
     size -> vec2.Vector2
     size:= (s : vec2.Vector2) -> Done
@@ -212,6 +222,144 @@ class aCanvas.new -> Canvas {
 
         return 0
     }
+
+    // Sends the drawable d to the back of the display buffer
+    method sendToBack(d : draw.Drawable) -> Done {
+
+        var found := false
+        var newList : List<draw.Drawable> := [d]
+
+        for (drawables) do { other ->
+
+            if (other == d) then {
+
+                found := true
+
+            } else {
+
+                newList.push(other)
+            }
+        }
+
+        if (found) then {
+
+            drawables := newList
+        }
+    }
+
+    // Sends the drawable at index ind to the back of the display buffer
+    method sendIndexToBack(ind : Number) -> Done {
+
+        var newList : List<draw.Drawable> := [drawables[ind]]
+
+        for (1 .. drawables.size) do { i ->
+
+            if (i != ind) then {
+
+                newList.push(drawables[i])
+            }
+        }
+
+        drawables := newList
+    }
+
+    // Brings the drawable d to the front of the display buffer
+    method bringToFront(d : draw.Drawable) -> Done {
+
+        var found := false
+        var newList : List<draw.Drawable> := []
+
+        for (drawables) do { other ->
+
+            if (other != d) then {
+
+                newList.push(other)
+
+            } else {
+
+                found := true
+            }
+        }
+
+        if (found) then {
+
+            newList.push(d)
+            drawables := newList
+        }
+    }
+
+    // Brings the drawable at the index ind to the front of the display buffer
+    method bringIndexToFront(ind : Number) -> Done {
+
+        var d : draw.Drawable := drawables[ind]
+        var newList : List<draw.Drawable> := []
+
+        for (1 .. drawables.size) do { i ->
+
+            if (i != ind) then {
+
+                newList.push(drawables[i])
+            }
+        }
+
+        newList.push(d)
+
+        drawables := newList
+    }
+
+    // Sends the drawable back one position in the draw order
+    method sendBack(d : draw.Drawable) -> Done {
+
+        for (2 .. drawables.size) do { i ->
+
+            if (drawables[i] == d) then {
+
+                var temp := drawables[i - 1]
+                drawables[i - 1] := d
+                drawables[i] := temp
+            }
+        }
+    }
+
+    // Sends the drawable at index ind back one position in the draw order
+    method sendIndexBack(ind : Number) -> Done {
+
+        if (ind != 1) then {
+
+            var temp := drawables[ind - 1]
+            drawables[ind - 1] := drawables[ind]
+            drawables[ind] := temp
+        }
+    }
+
+    // Brings the drawable d forward one position in the draw order
+    method bringForward(d : draw.Drawable) -> Done {
+
+        var found := false
+
+        for (1 .. (drawables.size - 1)) do { i ->
+
+            if ((drawables[i] == d) && !found) then {
+
+                var temp := drawables[i + 1]
+                drawables[i + 1] := d
+                drawables[i] := temp
+                found := true
+            }
+        }
+    }
+
+    // Brings the drawable at index ind forward one position in the draw order
+    method bringIndexForward(ind : Number) -> Done {
+
+        if (ind != drawables.size) then {
+
+            var temp := drawables[ind + 1]
+            drawables[ind + 1] := drawables[ind]
+            drawables[ind] := temp
+        }
+    }
+
 
     // Gets the size of this canvas as a 2d Vector
     method size -> vec2.Vector2 {
