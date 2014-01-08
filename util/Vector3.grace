@@ -20,72 +20,72 @@ type Vector3 = {
 // Creates a new zero 3d vector
 method zero -> Vector3 {
 
-    Vector3.new(0, 0, 0)
+    aVector3.new(0, 0, 0)
 }
 
 // Creates a new 3d vector and initialises it with the given x, y and z values
 method setCoord(x : Number, y : Number, z : Number) -> Vector3 {
 
-    Vector3.new(x, y, z)
+    aVector3.new(x, y, z)
 }
 
 // Creates a new 3d vector and initialises it the x and y values of the given
 // 2d vector's x and y values and sets the z value to zero
 method setVector2(v : Vector2) -> Vector3 {
 
-    Vector3.new(v.x, v.y, 0)
+    aVector3.new(v.x, v.y, 0)
 }
 
 // Creates a new 3d vector and initialises it with the values of the given
 // 3d vector
 method setVector3(v : Vector3) -> Vector3 {
 
-    Vector3.new(v.x, v.y, v.z)
+    aVector3.new(v.x, v.y, v.z)
 }
 
 // Creates a new 3d vector and initialises it with the given 4d vector's
 // x, y, and z values and truncates the w value
 method setVector4(v : Vector4) -> Vector3 {
 
-    Vector3.new(v.x, v.y, v.z)
+    aVector3.new(v.x, v.y, v.z)
 }
 
 // Creates a new 3d vector and initialises the x and y values with the given
 // 2d vector's x and y values, and initialises the z value with the given z value
 method setVector2(v : Vector2) coord(z : Number) -> Vector3 {
 
-    Vector3.new(v.x, v.y, z)
+    aVector3.new(v.x, v.y, z)
 }
 
 // Creates a new 3d vector and initialises the x value with the given x value
 // and initialises the y and z values with the given 2d vectors x and y values
 method setCoord(x : Number) vector2(v : Vector2) -> Vector3 {
 
-    Vector3.new(x, v.x, v.y)
+    aVector3.new(x, v.x, v.y)
 }
 
 // Creates a new 3d vector initialised with x: 1, y: 0, z: 0
 method xAxis -> Vector3 {
 
-    Vector3.new(1, 0, 0)
+    aVector3.new(1, 0, 0)
 }
 
 // Creates a new 3d vector initialised with x: 0, y: 1, z: 0
 method yAxis -> Vector3 {
 
-    Vector3.new(0, 1, 0)
+    aVector3.new(0, 1, 0)
 }
 
 // Creates a new 3d vector initialised with x: 0, y: 0, z: 1
 method zAxis -> Vector3 {
 
-    Vector3.new(0, 0, 1)
+    aVector3.new(0, 0, 1)
 }
 
 // Wow
 method doge -> Vector3 {
 
-    Vector3.new(119, 111, 119)
+    aVector3.new(119, 111, 119)
 }
 
 // VECTOR3 CLASS
@@ -126,35 +126,35 @@ class aVector3.new(x' : Number, y' : Number, z' : Number) -> Vector3 {
     // Returns the inversion of this vector
     method prefix- -> Vector3 is public {
 
-        Vector3.new(-x, -y, -z)
+        aVector3.new(-x, -y, -z)
     }
 
     // Creates a new 3d vector as the result of adding this vector with
     // the given vector
     method +(v : Vector3) -> Vector3 is public {
 
-        Vector3.new(x + v.x, y + v.y, z + v.z)
+        aVector3.new(x + v.x, y + v.y, z + v.z)
     }
 
     // Creates a new 3d vector as the result of subtracting this vector
     // from the the given vector
     method -(v : Vector3) -> Vector3 is public {
 
-        Vector3.new(x - v.x, y - v.y, z - v.z)
+        aVector3.new(x - v.x, y - v.y, z - v.z)
     }
 
     // Creates a new 3d vector as the result of multiplying the components
     // of this vector by the given scalar
     method *(s : Number) -> Vector3 is public {
 
-        Vector3.new(x * s, y * s, z * s)
+        aVector3.new(x * s, y * s, z * s)
     }
 
     // Creates a new 3d vector as the result of dividing the components
     // of this vector by the given scalar
     method /(s : Number) -> Vector3 is public {
 
-        Vector3.new(x / s, y / s, z / s)
+        aVector3.new(x / s, y / s, z / s)
     }
 
     // PUBLIC METHODS
@@ -170,13 +170,13 @@ class aVector3.new(x' : Number, y' : Number, z' : Number) -> Vector3 {
 
         def mag = self.magnitude
 
-        return Vector3.new(x / mag, y / mag, z / mag)
+        return aVector3.new(x / mag, y / mag, z / mag)
     }
 
     // Returns a new vector that is this vector clamped between the two values
     method clampBetween(lower : Number, upper : Number) -> Vector3 {
 
-        return Vector3.new(math.clamp(x) between(lower, upper),
+        return aVector3.new(math.clamp(x) between(lower, upper),
             math.clamp(y) between(lower, upper),
             math.clamp(z) between(lower, upper))
     }
@@ -184,7 +184,7 @@ class aVector3.new(x' : Number, y' : Number, z' : Number) -> Vector3 {
     // Returns a new vector that is this vector clamped above the given value
     method clampAbove(threshold : Number) -> Vector3 {
 
-        return Vector3.new(math.clamp(x) above(threshold),
+        return aVector3.new(math.clamp(x) above(threshold),
             math.clamp(y) above(threshold),
             math.clamp(z) above(threshold))
     }
@@ -192,7 +192,7 @@ class aVector3.new(x' : Number, y' : Number, z' : Number) -> Vector3 {
     // Returns a new vector that is this vector clamped below the given value
     method clampBelow(threshold : Number) -> Vector3 {
 
-        return Vector3.new(math.clamp(x) below(threshold),
+        return aVector3.new(math.clamp(x) below(threshold),
             math.clamp(y) below(threshold),
             math.clamp(z) below(threshold))
     }
@@ -201,14 +201,14 @@ class aVector3.new(x' : Number, y' : Number, z' : Number) -> Vector3 {
     // to this vector
     method addScalar(s : Number) -> Vector3 is public {
 
-        Vector3.new(x + s, y + s, z + s)
+        aVector3.new(x + s, y + s, z + s)
     }
 
     // Creates a new 3d vector as the result of subtracting the given scalar
     // from this vector
     method subScalar(s : Number) -> Vector3 is public {
 
-        Vector3.new(x - s, y - s, z - s)
+        aVector3.new(x - s, y - s, z - s)
     }
 
     // Returns the dot product of this vector with the other given vector
@@ -224,7 +224,7 @@ class aVector3.new(x' : Number, y' : Number, z' : Number) -> Vector3 {
         def cy = (x * v.z) - (z * v.x)
         def cz = (x * v.y) - (y * v.x)
 
-        return Vector3.new(cx, cy, cz)
+        return aVector3.new(cx, cy, cz)
     }
 
     // Returns the distance from this vector to the other vector
