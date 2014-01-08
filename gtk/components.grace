@@ -13,26 +13,29 @@ import "Vector2" as vec2
 //                                    //
 // ---------------------------------- //
 
-
+// Top level type for graphical user interface objects.
 type Component = {
 
     parent -> Component
 
+    // TODO
     // This type should also have a getComponent method which returns the
     // actual gtk widget this type wraps up.
     // This can't be enforced however because gtk.widget doesn't have a type
 }
 
-
+// Type for components that can contain other components
 type Container = Component & {
 
-    add(c : Component)       -> Boolean
+    add(c : Component)          -> Boolean
     addAll(l : List<Component>) -> Boolean
-    remove(c : Component)    -> Boolean
+    remove(c : Component)       -> Boolean
 
     getChildren -> List<Component>
 }
 
+// Type for a button, which is a component that can be clicked
+// to perform actions
 type Button = Component & {
 
     label -> String
@@ -62,11 +65,13 @@ type Button = Component & {
 // ---------------------------------- //
 
 
-
+// Container that displays it's components vertically
 class aVerticalBox.new -> Container {
 
+    // GTK widget this class wraps
     def vbox = gtk.box(gtk.GTK_ORIENTATION_VERTICAL, 6)
 
+    // The list of all the components in this container
     var l : List<Component> := []
 
 
@@ -83,6 +88,7 @@ class aVerticalBox.new -> Container {
 
     // CONTAINER METHODS
 
+    // Adds the component c to this box
     method add(c : Component) -> Boolean {
 
         // Check to see if the component is already in the container
@@ -99,7 +105,10 @@ class aVerticalBox.new -> Container {
 
     }
 
-    method addAll(l' : List<Component>) -> Done {
+    // Adds all components in the list l' to this box, unless they are
+    // already in the box. Returns false if at least one of the components
+    // in l' wasn't added.
+    method addAll(l' : List<Component>) -> Boolean {
 
         var ret := true
 
@@ -160,6 +169,7 @@ class aVerticalBox.new -> Container {
 }
 
 
+// Container that displays it's components horizontally
 class aHorizontalBox.new -> Container {
 
     def hbox = gtk.box(gtk.GTK_ORIENTATION_HORIZONTAL, 6)
@@ -183,6 +193,7 @@ class aHorizontalBox.new -> Container {
 
     // CONTAINER METHODS
 
+    // Adds the component c to this box
     method add(c : Component) -> Boolean {
 
         // Check to see if the component is already in the container
@@ -199,7 +210,10 @@ class aHorizontalBox.new -> Container {
 
     }
 
-    method addAll(l' : List<Component>) -> Done {
+    // Adds all components in the list l' to this box, unless they are
+    // already in the box. Returns false if at least one of the components
+    // in l' wasn't added.
+    method addAll(l' : List<Component>) -> Boolean {
 
         var ret := true
 
@@ -357,17 +371,19 @@ class aButton.new -> Button {
         pressedBlock.apply
     }
 
-    // Set the block of code that will execute when this button is pressed
+    // Set the block of code that will execute when this button is clicked
     method clicked := (b : Block) -> Done {
 
         clickedBlock := b
     }
 
+    // Set the block of code that will execute when this button is pressed
     method pressed := (b : Block) -> Done {
 
         pressedBlock := b
     }
 
+    // Set the block of code that will execute when this button is released
     method released := (b : Block) -> Done {
 
         releasedBlock := b
