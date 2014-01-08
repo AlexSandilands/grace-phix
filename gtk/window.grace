@@ -4,7 +4,14 @@ import "Vector2" as vec2
 import "canvas" as can
 import "components" as comps
 
-
+// Window component.
+// This component is a top level graphical frame, which is required
+// for anything that needs to be displayed. It is also of type container
+// as it can contain other components which get displayed in the window.
+// Whenever you add a new component to the window it gets displayed at the
+// bottom each time, as the window uses a vertical box. You can add other boxes
+// to the window if you want components to be displayed in different directions
+// and orders
 type Window = comps.Container & {
 
     display -> Done
