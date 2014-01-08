@@ -20,13 +20,13 @@ method abs(value : Number) -> Number {
     }
 }
 
-//returns the square root of the given value
+// Returns the square root of the given value
 method sqrt(value : Number) -> Number {
 
-    return value ^ 0.5
+    value ^ 0.5
 }
 
-//returns the minimum value of the two given values
+// Returns the minimum value of the two given values
 method min(value : Number, value' : Number) -> Number {
 
     if (value < value') then {
@@ -34,10 +34,10 @@ method min(value : Number, value' : Number) -> Number {
         return value
     }
 
-    value'
+    return value'
 }
 
-//returns the maximum value of the two given values
+// Returns the maximum value of the two given values
 method max(value : Number, value' : Number) -> Number {
 
     if (value > value') then {
@@ -45,10 +45,10 @@ method max(value : Number, value' : Number) -> Number {
         return value
     }
 
-    value'
+    return value'
 }
 
-//clamps the given value between the upper and lower thresholds
+// Clamps the given value between the upper and lower thresholds
 method clamp(value : Number) between(lower : Number, upper : Number) -> Number {
 
     if (value < lower) then {
@@ -60,10 +60,10 @@ method clamp(value : Number) between(lower : Number, upper : Number) -> Number {
         return upper
     }
 
-    value
+    return value
 }
 
-//clamps the given value so that it is not greater then the given threshold
+// Clamps the given value so that it is not greater then the given threshold
 method clamp(value : Number) below(threshold : Number) -> Number {
 
     if (value > threshold) then {
@@ -71,10 +71,10 @@ method clamp(value : Number) below(threshold : Number) -> Number {
         return threshold
     }
 
-    value
+    return value
 }
 
-//clamps the given value so that it is not less than the given threshold
+// Clamps the given value so that it is not less than the given threshold
 method clamp(value : Number) above(threshold : Number) -> Number {
 
     print(value)
@@ -96,19 +96,19 @@ method fact(value : Number) -> Number {
         return 1
     }
 
-    value * fact(value - 1)
+    return value * fact(value - 1)
 }
 
 // Converts degrees to radians
 method toRadians(value : Number) -> Number {
 
-    return value * 0.0174532925
+    value * 0.0174532925
 }
 
 // Converts radians to degrees
 method toDegrees(value : Number) -> Number {
 
-    return value * 57.2957795
+    value * 57.2957795
 }
 
 // Normalizes radians to be between 0 and 2pi
@@ -222,7 +222,7 @@ method aCos(value : Number) -> Number {
     return half_pi - aSin(value)
 }
 
-// This approach requires summing millions of times before getting
+// This approach for aTan requires summing millions of times before getting
 // close to an accurate answer, which isn't practical on a computer
 // Need to find a new method
 method aTan(value : Number) -> Number {
