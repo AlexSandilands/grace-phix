@@ -2,7 +2,7 @@
 import "gtk" as gtk
 import "gdk" as gdk
 
-// Utils imports
+// Util imports
 import "Vector2" as vec2
 import "Color" as col
 import "Math" as math
@@ -25,8 +25,7 @@ import "drawable" as draw
 // Default window, sized 640x480
 method createWindow -> win.Window {
 
-
-    return win.aWindow.new
+    win.aWindow.new
 }
 
 // Creates and returns a default window at the position passed in
