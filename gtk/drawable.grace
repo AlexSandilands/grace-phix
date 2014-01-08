@@ -28,6 +28,8 @@ type Drawable = {
 
     // Checks if (x, y) is inside the drawable
     contains(x : Number, y : Number) -> Boolean
+
+    clone -> Drawable
 }
 
 
@@ -94,7 +96,8 @@ type Sector = Drawable & {
 }
 
 
-// Drawable arc type.
+// Drawable arc type. This is like a sector except you can define a certain
+// ammount of the inside to not be filled in
 type Arc = Drawable & {
 
     radius -> Number
@@ -130,7 +133,8 @@ type Text = Drawable & {
 }
 
 
-// Drawable image type
+// Drawable image type. Takes a string pathway to the image file,
+// which must be a png
 type Image = Drawable & {
 
     filename -> String
@@ -261,6 +265,12 @@ class aRectangle.at(l : vec2.Vector2) sized(s : vec2.Vector2) colored(c : col.Co
 
         return "Rectangle at: {lo} dimensions: {d} colored: {c}"
     }
+
+    // Returns an identical object to this
+    method clone -> Drawable {
+
+        aRectangle.at(l) sized(size) colored(color)
+    }
 }
 
 
@@ -311,6 +321,12 @@ class aCircle.around(l : vec2.Vector2) radius(r : Number) colored(c : col.Color)
         var r := "{radius}"
 
         return "Circle around: {lo} radius: {r}"
+    }
+
+    // Returns an identical object to this
+    method clone -> Drawable {
+
+        aCircle.around(l) radius(radius) colored(color)
     }
 }
 
@@ -384,6 +400,12 @@ class aOval.at(l : vec2.Vector2) sized(s : vec2.Vector2) colored(c : col.Color) 
 
         return "Oval around: {lo} width: {w} height: {h}"
     }
+
+    // Returns an identical object to this
+    method clone -> Drawable {
+
+        aOval.at(l) sized(size) colored(color)
+    }
 }
 
 
@@ -402,6 +424,7 @@ class aSector.around(l : vec2.Vector2) from(f : Number) to(t : Number)
 
     // Where to start drawing the sector, in radians
     var from : Number is public := f
+
     // Where to finish drawing the sector, in radians
     var to   : Number is public := t
 
@@ -431,6 +454,12 @@ class aSector.around(l : vec2.Vector2) from(f : Number) to(t : Number)
         var r := "{radius}"
 
         return "Sector around: {lo} {fr} radius: {r}"
+    }
+
+    // Returns an identical object to this
+    method clone -> Drawable {
+
+        aSector.around(l) from(from) to(to) radius(radius) colored(color)
     }
 }
 
@@ -495,6 +524,12 @@ class aArc.around(l : vec2.Vector2) from(f : Number) to(t : Number)
 
         return "Arc at: {location} radius: {r} width: {w} colored: {c}"
     }
+
+    // Returns an identical object to this
+    method clone -> Drawable {
+
+        aArc.around(l) from(from) to(to) radius(radius) width(width) colored(color)
+    }
 }
 
 
@@ -530,6 +565,12 @@ class aLine.from(f : vec2.Vector2) to(t : vec2.Vector2) colored(c : col.Color) -
 
         "Line from {from} to {to} with width: {lineWidth}"
     }
+
+    // Returns an identical object to this
+    method clone -> Drawable {
+
+        aLine.from(from) to(to) colored(color)
+    }
 }
 
 
@@ -556,6 +597,12 @@ class aText.write(t : String) at(l : vec2.Vector2) colored(c : col.Color) -> Tex
     method asString -> String is override {
 
         "Text: \"{text}\" at {location}"
+    }
+
+    // Returns an identical object to this
+    method clone -> Drawable {
+
+        aText.write(text) at(l) colored(color)
     }
 }
 
@@ -615,5 +662,11 @@ class aImage.at(l : vec2.Vector2) sized(s : vec2.Vector2) from(path' : String) -
     method asString -> String {
 
         "Image at {location} from {path}"
+    }
+
+    // Returns an identical object to this
+    method clone -> Drawable {
+
+        aImage.at(l) sized(size) from(path)
     }
 }
