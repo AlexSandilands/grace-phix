@@ -158,7 +158,7 @@ method sin(value : Number) -> Number {
 
     var ret := 0
 
-    for (0 .. 10) do { n ->
+    for (0 .. 20) do { n ->
 
         ret := ret + (((-1)^n)*(x^(2*n + 1)))/fact(2*n + 1)
     }
@@ -176,7 +176,7 @@ method cos(value : Number) -> Number {
 
     var ret := 0
 
-    for (0 .. 10) do { n ->
+    for (0 .. 20) do { n ->
 
         ret := ret + (((-1)^n)*(x^(2*n)))/fact(2*n)
     }
@@ -207,7 +207,7 @@ method aSin(value : Number) -> Number {
 
     var ret := 0
 
-    for(0 .. 10) do { n ->
+    for(0 .. 20) do { n ->
 
         ret := ret + ((n(2*n) choose(n))*(value^(2*n + 1)))/((4^n)*(2*n + 1))
     }
@@ -229,7 +229,7 @@ method aTan(value : Number) -> Number {
 
     var ret := 0
 
-    for(0 .. 10) do { n ->
+    for(0 .. 20) do { n ->
 
         ret := ret + (((-1)^n)*(value^(2*n + 1)))/(2*n + 1)
     }
