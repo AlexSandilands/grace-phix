@@ -8,11 +8,17 @@ import "Vector2" as vec2
 import "Color" as col
 import "Math" as math
 
-
+// Canvas component.
+// This component is a display buffer. It contains a list of drawable objects
+// which get painted to the buffer and can be manipulated.
+// Dispite appearing to have similar methods as a container, it is not as it
+// doesn't contain components, only drawables.
+// The canvas can have external drawables objects added to it, or it can create
+// it's own basic drawables directly.
 type Canvas = comps.Component & {
 
-    add(d : draw.Drawable) -> Done
-    addAll(l : List<draw.Drawable>) -> Done
+    add(d : draw.Drawable) -> Boolean
+    addAll(l : List<draw.Drawable>) -> Boolean
 
     remove(d : draw.Drawable) -> Boolean
     removeWithIndex(ind : Number) -> Boolean
@@ -124,23 +130,49 @@ class aCanvas.new -> Canvas {
     var drawables : List<draw.Drawable> := []
 
     // Size of the canvas
-    var s : vec2.Vector2 is confidential := vec2.setCoord(640, 480)
+    var s : vec2.Vector2 := vec2.setCoord(640, 480)
 
-    // Adds a drawable object to the canvas
-    method add(d : draw.Drawable) -> Done {
+    // Adds a drawable object d to the canvas.
+    // The same drawable object cannot be added more than once,
+    // so clone it before adding a new one.
+    // A set could work here, but it would make the ordering methods
+    // much more complicated. Lists are also very readable
+    method add(d : draw.Drawable) -> Boolean {
 
-        drawables.push(d)
-    }
+        if (drawables.contains(d)) then {
 
-    // Add a list of drawables to the canvas
-    method addAll(l : List<draw.Drawable>) -> Done {
+            return false
 
-        for (l) do { d ->
+        } else {
 
             drawables.push(d)
+            return true
         }
     }
 
+    // Adds the list l of drawables to the canvas.
+    // If one of the drawables is already on the canvas then the method
+    // will break and return false, with the rest of the drawables in l
+    // not being added.
+    method addAll(l : List<draw.Drawable>) -> Boolean {
+
+        for (l) do { d ->
+
+            if (drawables.contains(d)) then {
+
+                return false
+
+            } else {
+
+                drawables.push(d)
+            }
+        }
+
+        return true
+    }
+
+    // Remove the drawable d from the canvas.
+    // Returns true if one instance was found and removed, or false otherwise.
     method remove(d : draw.Drawable) -> Boolean {
 
         var new : List<draw.Drawable> := []
@@ -170,6 +202,8 @@ class aCanvas.new -> Canvas {
         }
     }
 
+    // Removes the drawable at the index ind. Returns false if the index
+    // was out of bounds.
     method removeWithIndex(ind : Number) -> Boolean {
 
         // Check that the index in within bounds
@@ -200,14 +234,16 @@ class aCanvas.new -> Canvas {
 
     }
 
-    // Returns the drawable that has the passed in index
+    // Returns the drawable at index ind
     method getWithIndex(ind : Number) -> draw.Drawable {
 
         drawables[ind]
     }
 
     // Returns the index of the top drawable that contains (x, y) or
-    // 0 if none are found
+    // 0 if none are found. Note that it searchs from the end of the list
+    // to the beggining of the list, as when painting the canvas paints from
+    // the start of the list.
     method findDrawableAt(x : Number, y : Number) -> Number {
 
         def size = drawables.size
@@ -226,9 +262,13 @@ class aCanvas.new -> Canvas {
     // Sends the drawable d to the back of the display buffer
     method sendToBack(d : draw.Drawable) -> Done {
 
+        // If d has been found in the list
         var found := false
+
+        // Create a new list with d at the beggining (at the back of the buffer)
         var newList : List<draw.Drawable> := [d]
 
+        // Add all drawables other than d to the end of then new list
         for (drawables) do { other ->
 
             if (other == d) then {
@@ -241,6 +281,7 @@ class aCanvas.new -> Canvas {
             }
         }
 
+        // If d was found then set the new list to be the list of drawables.
         if (found) then {
 
             drawables := newList
@@ -250,8 +291,10 @@ class aCanvas.new -> Canvas {
     // Sends the drawable at index ind to the back of the display buffer
     method sendIndexToBack(ind : Number) -> Done {
 
+        // Create a new list with the drawable at index ind at the beggining
         var newList : List<draw.Drawable> := [drawables[ind]]
 
+        // Add all drawables other than the one at index ind to the new list
         for (1 .. drawables.size) do { i ->
 
             if (i != ind) then {
@@ -260,6 +303,9 @@ class aCanvas.new -> Canvas {
             }
         }
 
+        // Set the new list to be the list of drawables.
+        // Note that a bounds error would have been thrown already before
+        // this point if ind was not in the list, so this is safe.
         drawables := newList
     }
 
@@ -267,8 +313,12 @@ class aCanvas.new -> Canvas {
     method bringToFront(d : draw.Drawable) -> Done {
 
         var found := false
+
+        // Create an empty list. d will be added to the end of this when
+        // all other drawables have been added
         var newList : List<draw.Drawable> := []
 
+        // Add all drawables other than d to the new list
         for (drawables) do { other ->
 
             if (other != d) then {
@@ -281,6 +331,8 @@ class aCanvas.new -> Canvas {
             }
         }
 
+        // If d was in the drawables list, add it add the end of the new list
+        // and set that as the new drawables list
         if (found) then {
 
             newList.push(d)
@@ -292,8 +344,12 @@ class aCanvas.new -> Canvas {
     method bringIndexToFront(ind : Number) -> Done {
 
         var d : draw.Drawable := drawables[ind]
+
+        // Create an empty list. The drawable at index ind will be added
+        // at the end of this when all other drawables have been added
         var newList : List<draw.Drawable> := []
 
+        // Add all drawables other than the one at index ind
         for (1 .. drawables.size) do { i ->
 
             if (i != ind) then {
@@ -304,14 +360,20 @@ class aCanvas.new -> Canvas {
 
         newList.push(d)
 
+        // Set the new list to be the list of drawables.
+        // Note that a bounds error would have been thrown already before
+        // this point if ind was not in the list, so this is safe.
         drawables := newList
     }
 
-    // Sends the drawable back one position in the draw order
+    // Sends the drawable d back one position in the draw order
     method sendBack(d : draw.Drawable) -> Done {
 
+        // Search for d from position 2. If it was at position 1
+        // it wouldn't need to be changed
         for (2 .. drawables.size) do { i ->
 
+            // If d is found, switch it with the drawable one index before it
             if (drawables[i] == d) then {
 
                 var temp := drawables[i - 1]
@@ -326,6 +388,7 @@ class aCanvas.new -> Canvas {
 
         if (ind != 1) then {
 
+            // Switch ind and ind - 1
             var temp := drawables[ind - 1]
             drawables[ind - 1] := drawables[ind]
             drawables[ind] := temp
@@ -335,16 +398,23 @@ class aCanvas.new -> Canvas {
     // Brings the drawable d forward one position in the draw order
     method bringForward(d : draw.Drawable) -> Done {
 
-        var found := false
+        // var found := false
 
+        // Search for d from position 1 up to the second to last drawable.
+        // If it was at the end it wouldn't need to be changed
         for (1 .. (drawables.size - 1)) do { i ->
 
-            if ((drawables[i] == d) && !found) then {
+            // If d is found switch it with the drawable one position after it
+            if (drawables[i] == d) then {
 
                 var temp := drawables[i + 1]
                 drawables[i + 1] := d
                 drawables[i] := temp
-                found := true
+                // found := true
+
+                // Return now because otherwise d would get switched all
+                // the way to the top of the list
+                return Done
             }
         }
     }
@@ -354,6 +424,7 @@ class aCanvas.new -> Canvas {
 
         if (ind != drawables.size) then {
 
+            // Switch ind and ind + 1
             var temp := drawables[ind + 1]
             drawables[ind + 1] := drawables[ind]
             drawables[ind] := temp
@@ -367,10 +438,11 @@ class aCanvas.new -> Canvas {
         s
     }
 
-    // Sets the size of this canvas with a 2d Vector
+    // Sets the size of this canvas with a 2d Vector s'
     method size := (s' : vec2.Vector2) -> Done {
 
         s := s'
+
         c.set_size_request(s.x, s.y)
     }
 
@@ -378,6 +450,7 @@ class aCanvas.new -> Canvas {
     method width := (w' : Number) -> Done {
 
         s.x := w'
+
         c.set_size_request(s.x, s.y)
     }
 
@@ -385,23 +458,26 @@ class aCanvas.new -> Canvas {
     method height := (h' : Number) -> Done {
 
         s.y := h'
+
         c.set_size_request(s.x, s.y)
     }
 
+    // Set whether this canvas can actually paint things. True by default
     method setPaintable(b : Boolean) {
 
         c.app_paintable := b
     }
 
+    // Asks the canvas to repaint
     method paint -> Done {
 
         c.queue_draw
     }
 
-
+    // Returns a string representation of this canvas
     method asString -> String {
 
-        return "Canvas, Dim: {s}"
+        "Canvas, Dimension: {s}, Number of drawables: {drawables.size}"
     }
 
 
@@ -413,7 +489,7 @@ class aCanvas.new -> Canvas {
     // ---------------------------- //
 
 
-    // Color that objects will be drawn with if using the canvas draw methods
+    // The color that objects will be drawn with if using the canvas draw methods
     var color : col.Color is public := col.black
 
     // Defines whether or not the shapes drawn by the canvas will be filled
@@ -441,19 +517,19 @@ class aCanvas.new -> Canvas {
         draggedBlock.apply(at)
     }
 
-    // Set the pressed block
+    // Set what happens when you press the mouse button on the canvas
     method mousePressed := (b : Block) -> Done {
 
         pressedBlock := b
     }
 
-    // Set the relesaed block
+    // Set what happens when you release the mouse button on the canvas
     method mouseReleased := (b : Block) -> Done {
 
         releasedBlock := b
     }
 
-    // Set the dragged block
+    // Set what happens when you drag the mouse on the canvas
     method mouseDragged := (b : Block) -> Done {
 
         draggedBlock := b
