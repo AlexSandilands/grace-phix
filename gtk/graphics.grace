@@ -1,7 +1,3 @@
-// GTK Imports
-import "gtk" as gtk
-import "gdk" as gdk
-
 // Util imports
 import "Vector2" as vec2
 import "Color" as col
