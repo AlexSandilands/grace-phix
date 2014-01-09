@@ -1,4 +1,4 @@
-import "cairo" as cairo
+import "dom" as dom
 
 import "io" as io
 import "sys" as sys
@@ -234,21 +234,26 @@ class aRectangle.at(l : vec2.Vector2) sized(s : vec2.Vector2) colored(c : col.Co
     // Paint this object to the canvas
     method draw(gfx) -> Done is override {
 
-        // Set the color
-        gfx.set_source_rgb(color.r, color.g, color.b)
-
-        // Draw the rectangle using stored values
-        gfx.rectangle(x, y, width, height)
-
         if (fill) then {
 
-            gfx.fill
+            // Set the color
+            gfx.fillStyle := color.asString
+
+            // Draw the rectangle using stored values
+            gfx.fillRect(x, y, width, height)
 
         } else {
 
-            gfx.line_width := lineWidth
+            // Set the color
+            gfx.strokeStyle := color.asString
+
+            // Draw the outline of the rectangle
+            gfx.beginPath
+            gfx.rect(x, y, width, height)
             gfx.stroke
+            gfx.closePath
         }
+
     }
 
     // Check if (x, y) is inside this rectangle
@@ -292,17 +297,27 @@ class aCircle.around(l : vec2.Vector2) radius(r : Number) colored(c : col.Color)
     // Paint this object to the canvas
     method draw(gfx) -> Done is override {
 
-        gfx.set_source_rgb(color.r, color.g, color.b)
-        gfx.arc(x, y, radius, from, to)
 
         if (fill) then {
 
+            gfx.fillStyle := color.asString
+
+            ctx.beginPath
+            // ctx.moveTo(x, y)
+            ctx.arc(x, y, radius, 0, math.pi*2, true)
+
             gfx.fill
+            ctx.closePath
 
         } else {
 
-            gfx.line_width := lineWidth
-            gfx.stroke
+            gfx.strokeStyle := color.asString
+
+            ctx.beginPath
+            // ctx.moveTo(x, y)
+            ctx.arc(x, y, radius, 0, math.pi*2, true)
+
+            ctx.closePath
         }
     }
 
@@ -365,23 +380,7 @@ class aOval.at(l : vec2.Vector2) sized(s : vec2.Vector2) colored(c : col.Color) 
     // Paint this object to the canvas
     method draw(gfx) -> Done is override {
 
-        gfx.set_source_rgb(color.r, color.g, color.b)
-
-        gfx.save
-        gfx.translate(x + width/2, y + height/2)
-        gfx.scale(width/2, height/2)
-        gfx.arc(0, 0, 1, from, to)
-        gfx.restore
-
-        if (fill) then {
-
-            gfx.fill
-
-        } else {
-
-            gfx.line_width := lineWidth
-            gfx.stroke
-        }
+        //TODO
     }
 
     // Check if (x, y) is inside this oval
@@ -432,17 +431,24 @@ class aSector.around(l : vec2.Vector2) from(f : Number) to(t : Number)
     // Paint this object to the canvas
     method draw(gfx) -> Done is override {
 
-        gfx.set_source_rgb(color.r, color.g, color.b)
-        gfx.arc(x, y, radius, from, to)
 
         if (fill) then {
 
-            gfx.fill
+            ctx.beginPath
+            ctx.fillStyle := color.asString
+            // ctx.moveTo(x, y)
+            ctx.arc(x, y, radius, from, to)
+            ctx.fill
+            ctx.closePath
 
         } else {
 
-            gfx.line_width := lineWidth
-            gfx.stroke
+            ctx.beginPath
+            ctx.strokeStyle := color.asString
+            // ctx.moveTo(x, y)
+            ctx.arc(x, y, radius, from, to)
+            // ctx.fill
+            ctx.closePath
         }
     }
 
@@ -487,22 +493,24 @@ class aArc.around(l : vec2.Vector2) from(f : Number) to(t : Number)
 
     method draw(gfx) -> Done is override {
 
-        gfx.set_source_rgb(color.r, color.g, color.b)
-
-        // Draw s1
-        gfx.arc(x, y, radius, from, to)
-
-        // Subtract s2
-        gfx.arc_negative(x, y, radius - width, to, from)
 
         if (fill) then {
 
-            gfx.fill
+            ctx.beginPath
+            ctx.fillStyle := color.asString
+            ctx.arc(x, y, radius, from, to)
+            ctx.arc(x, y, radius - width, to, from, true)
+            ctx.fill
+            ctx.closePath
 
         } else {
 
-            gfx.line_width := lineWidth
-            gfx.stroke
+            ctx.beginPath
+            ctx.fillStyle := color.asString
+            ctx.arc(x, y, radius, from, to)
+            ctx.arc(x, y, radius - width, to, from, true)
+            // ctx.fill
+            ctx.closePath
         }
     }
 
@@ -553,12 +561,12 @@ class aLine.from(f : vec2.Vector2) to(t : vec2.Vector2) colored(c : col.Color) -
     // Paint this object to the canvas
     method draw(gfx) -> Done is override {
 
-        gfx.set_source_rgb(color.r, color.g, color.b)
-        gfx.move_to(from.x, from.y)
-        gfx.line_to(to.x, to.y)
-        gfx.line_width := lineWidth
-        gfx.stroke
-
+        ctx.strokeStyle := color.asString
+        ctx.beginPath
+        ctx.moveTo(from.x, from.y)
+        ctx.lineTo(to.x, to.y)
+        ctx.stroke
+        ctx.closePath
     }
 
     method asString -> String is override {
@@ -587,11 +595,12 @@ class aText.write(t : String) at(l : vec2.Vector2) colored(c : col.Color) -> Tex
     // Paint this object to the canvas
     method draw(gfx) -> Done is override {
 
-        gfx.font_size := size
-        gfx.set_source_rgb(color.r, color.g, color.b)
-        gfx.move_to(x, y)
-        gfx.show_text(text)
-        gfx.fill
+        ctx.fillStyle := color.asString
+        ctx.font := "{size}pt sans-serif"
+        ctx.beginPath
+        ctx.fillText(text, x, y)
+        ctx.fill
+        ctx.closePath
     }
 
     method asString -> String is override {
@@ -644,12 +653,7 @@ class aImage.at(l : vec2.Vector2) sized(s : vec2.Vector2) from(path' : String) -
     // Paint this object to the canvas
     method draw(gfx) -> Done is override {
 
-        gfx.save
-        gfx.translate(x, y)
-        gfx.scale(width/iWidth, height/iHeight)
-        gfx.set_source_surface(surface, 0, 0)
-        gfx.paint
-        gfx.restore
+        // TODO
     }
 
     // Check if (x, y) is inside this image
