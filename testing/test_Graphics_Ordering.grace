@@ -6,7 +6,7 @@
 // Pressing delete toggles deleting a circle on click
 
 // Pressing 1 - 8 toggles different order changing when clicking on objects
-// c : Do nothing
+// 1 : Do nothing
 // 2 : Send to back
 // 3 : Bring to front
 // 4 : Send back one position
@@ -37,7 +37,7 @@ var del := false
 
 var click : Block := {}
 
-window.onKey("c") do { click := {} }
+window.onKey("1") do { click := {} }
 
 window.onKey("2") do {
 
