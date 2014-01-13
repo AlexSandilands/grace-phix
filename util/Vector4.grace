@@ -123,6 +123,25 @@ method wAxis -> Vector4 {
     aVector4.new(0, 0, 0, 1)
 }
 
+// Returns the dot product of this vector with the other given vector
+method dot(v1 : Vector4, v2 : Vector4) -> Number is public {
+
+    (v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z) + (v1.w * v2.w)
+}
+
+// Returns the distance from this vector to the other vector
+method distanceTo(v1 : Vector4, v2 : Vector4) -> Number is public {
+
+    return math.sqrt(((v1.x - v2.x) ^ 2) + ((v1.y - v2.y) ^ 2) +
+        ((v1.z - v2.z) ^ 2) + ((v1.w - v2.w) ^ 2))
+}
+
+// Returns the angle between this vector and the other vector
+method angleBetween(v1 : Vector4, v2 : Vector4) -> Number is public {
+
+    math.aCos(dot(v1, v2)/(v1.magnitude*v2.magnitude))
+}
+
 // VECTOR4 CLASS
 // Constructs a new 4d vector with the given x', y', z', and w' values
 class aVector4.new(x' : Number, y' : Number, z' : Number, w' : Number)
@@ -249,25 +268,6 @@ class aVector4.new(x' : Number, y' : Number, z' : Number, w' : Number)
     method subScalar(s : Number) -> Vector4 is public {
 
         aVector4.new(x - s, y - s, z - s, w - s)
-    }
-
-    // Returns the dot product of this vector with the other given vector
-    method dot(v : Vector4) -> Number is public {
-
-        (x * v.x) + (y * v.y) + (z * v.z) + (w * v.w)
-    }
-
-    // Returns the distance from this vector to the other vector
-    method distanceTo(v : Vector4) -> Number is public {
-
-        return math.sqrt(((x - v.x) ^ 2) + ((y - v.y) ^ 2) +
-            ((z - v.z) ^ 2) + ((w - v.w) ^ 2))
-    }
-
-    // Returns the angle between this vector and the other vector
-    method angleBetween(v : Vector4) -> Number is public {
-
-        math.aCos(self.dot(v)/(self.magnitude*v.magnitude))
     }
 
     // Check out glm vector functions

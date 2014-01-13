@@ -88,6 +88,34 @@ method doge -> Vector3 {
     aVector3.new(119, 111, 119)
 }
 
+// Returns the dot product of this vector with the other given vector
+method dot(v1 : Vector3, v2 : Vector3) -> Number is public {
+
+    (v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z)
+}
+
+// Returns the cross product of this vector and the other given vector
+method cross(v1 : Vector3, v2 : Vector3) -> Vector3 is public {
+
+    def cx = (v1.y * v2.z) - (v1.z * v2.y)
+    def cy = (v1.x * v2.z) - (v1.z * v2.x)
+    def cz = (v1.x * v2.y) - (v1.y * v2.x)
+
+    return aVector3.new(cx, cy, cz)
+}
+
+// Returns the distance from this vector to the other vector
+method distanceTo(v1 : Vector3, v2 : Vector3) -> Number is public {
+
+    math.sqrt(((v1.x - v2.x) ^ 2) + ((v1.y - v2.y) ^ 2) + ((v1.z - v2.z) ^ 2))
+}
+
+// Returns the angle between this vector and the other vector
+method angleBetween(v1 : Vector3, v2 : Vector3) -> Number is public {
+
+    math.aCos(dot(v1, v2)/(v1.magnitude*v2.magnitude))
+}
+
 // VECTOR3 CLASS
 // Constructs a new 3d vector with the given x', y', and z' values
 class aVector3.new(x' : Number, y' : Number, z' : Number) -> Vector3 {
@@ -209,34 +237,6 @@ class aVector3.new(x' : Number, y' : Number, z' : Number) -> Vector3 {
     method subScalar(s : Number) -> Vector3 is public {
 
         aVector3.new(x - s, y - s, z - s)
-    }
-
-    // Returns the dot product of this vector with the other given vector
-    method dot(v : Vector3) -> Number is public {
-
-        (x * v.x) + (y * v.y) + (z * v.z)
-    }
-
-    // Returns the cross product of this vector and the other given vector
-    method cross(v : Vector3) -> Vector3 is public {
-
-        def cx = (y * v.z) - (z * v.y)
-        def cy = (x * v.z) - (z * v.x)
-        def cz = (x * v.y) - (y * v.x)
-
-        return aVector3.new(cx, cy, cz)
-    }
-
-    // Returns the distance from this vector to the other vector
-    method distanceTo(v : Vector3) -> Number is public {
-
-        math.sqrt(((x - v.x) ^ 2) + ((y - v.y) ^ 2) + ((z - v.z) ^ 2))
-    }
-
-    // Returns the angle between this vector and the other vector
-    method angleBetween(v : Vector3) -> Number is public {
-
-        math.aCos(self.dot(v)/(self.magnitude*v.magnitude))
     }
 
     // Check out glm vector functions

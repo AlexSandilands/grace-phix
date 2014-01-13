@@ -63,6 +63,26 @@ method yAxis -> Vector2 {
     aVector2.new(0, 1);
 }
 
+
+// Returns the dot product of this vector with the other given vector
+method dot(v1 : Vector2, v2 : Vector2) -> Number is public {
+
+    (v1.x * v2.x) + (v1.y * v2.y)
+}
+
+// Returns the distance from this vector to the other vector
+method distanceBetween(v1 : Vector2, v2 : Vector2) -> Number is public {
+
+    math.sqrt(((v1.x - v2.x) ^ 2) + ((v1.y - v2.y) ^ 2))
+}
+
+// Returns the angle between this vector and the other vector, in radians
+method angleBetween(v1 : Vector2, v2 : Vector2) -> Number is public {
+
+    math.aCos(dot(v1, v2)/(v1.magnitude*v2.magnitude))
+}
+
+
 // VECTOR2 CLASS
 // Constructs a new 2d vector with the given x' and y' values
 class aVector2.new(x' : Number, y' : Number) -> Vector2 {
@@ -181,23 +201,6 @@ class aVector2.new(x' : Number, y' : Number) -> Vector2 {
         aVector2.new(x - s, y - s)
     }
 
-    // Returns the dot product of this vector with the other given vector
-    method dot(v : Vector2) -> Number is public {
-
-        (x * v.x) + (y * v.y)
-    }
-
-    // Returns the distance from this vector to the other vector
-    method distanceTo(v : Vector2) -> Number is public {
-
-        math.sqrt(((x - v.x) ^ 2) + ((y - v.y) ^ 2))
-    }
-
-    // Returns the angle between this vector and the other vector, in radians
-    method angleBetween(v : Vector2) -> Number is public {
-
-        math.aCos(self.dot(v)/(self.magnitude*v.magnitude))
-    }
 
     // Check out glm vector functions
 
