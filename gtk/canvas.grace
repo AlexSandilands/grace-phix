@@ -62,32 +62,32 @@ type Canvas = comps.Component & {
     mouseClicked:=  (b : Block) -> Done
 
 
-    drawRectangleAt(x : Number, y : Number) sized(w : Number, h : Number) -> Done
+    drawRectangleAt(x : Number, y : Number) sized(w : Number, h : Number) -> draw.Drawable
 
-    drawCircleAround(x : Number, y : Number) radius(r : Number) -> Done
+    drawCircleAround(x : Number, y : Number) radius(r : Number) -> draw.Drawable
 
-    drawOvalAt(x : Number, y : Number) sized(w : Number, h : Number) -> Done
+    drawOvalAt(x : Number, y : Number) sized(w : Number, h : Number) -> draw.Drawable
 
     drawSectorAround(x : Number, y : Number)
                 from(f : Number)
                   to(t : Number)
-              radius(r : Number) -> Done
+              radius(r : Number) -> draw.Drawable
 
     drawArcAround(x : Number, y : Number)
              from(f : Number)
                to(t : Number)
            radius(r : Number)
-            width(w : Number) -> Done
+            width(w : Number) -> draw.Drawable
 
-    drawLineFrom(x1 : Number, y1 : Number) to(x2 : Number, y2 : Number) -> Done
+    drawLineFrom(x1 : Number, y1 : Number) to(x2 : Number, y2 : Number) -> draw.Drawable
 
-    drawLineAt(x : Number, y : Number) length(l : Number) angle(a : Number) -> Done
+    drawLineAt(x : Number, y : Number) length(l : Number) angle(a : Number) -> draw.Drawable
 
-    drawTextSaying(t : String) at(x : Number, y : Number) -> Done
+    drawTextSaying(t : String) at(x : Number, y : Number) -> draw.Drawable
 
     drawImageAt(x : Number, y : Number)
           sized(w : Number, h : Number)
-           from(path : String) -> Done
+           from(path : String) -> draw.Drawable
 
 }
 
@@ -541,7 +541,7 @@ class aCanvas.new -> Canvas {
 
     // Rectangle at (x, y) sized wxh colored c
     method drawRectangleAt(x : Number, y : Number)
-                     sized(w : Number, h : Number) -> Done {
+                     sized(w : Number, h : Number) -> draw.Drawable {
 
 
         var shape := draw.aRectangle.at(vec2.setCoord(x, y))
@@ -551,19 +551,23 @@ class aCanvas.new -> Canvas {
         shape.fill := fill
 
         drawables.push(shape)
+
+        return shape
     }
 
 
     // CIRCLES
 
     // Circle around (x, y) radius r colored c
-    method drawCircleAround(x : Number, y : Number) radius(r : Number) -> Done {
+    method drawCircleAround(x : Number, y : Number) radius(r : Number) -> draw.Drawable {
 
         var shape := draw.aCircle.around(vec2.setCoord(x, y)) radius(r) colored(color)
 
         shape.fill := fill
 
         drawables.push(shape)
+
+        return shape
     }
 
 
@@ -579,6 +583,8 @@ class aCanvas.new -> Canvas {
         shape.fill := fill
 
         drawables.push(shape)
+
+        return shape
     }
 
     // SECTORS
@@ -587,7 +593,7 @@ class aCanvas.new -> Canvas {
     method drawSectorAround(x : Number, y : Number)
                        from(f : Number)
                          to(t : Number)
-                     radius(r : Number) -> Done {
+                     radius(r : Number) -> draw.Drawable {
 
         var shape := draw.aSector.around(vec2.setCoord(x, y))
                                     from(f)
@@ -598,6 +604,8 @@ class aCanvas.new -> Canvas {
         shape.fill := fill
 
         drawables.push(shape)
+
+        return shape
     }
 
 
@@ -608,7 +616,7 @@ class aCanvas.new -> Canvas {
                     from(f : Number)
                       to(t : Number)
                   radius(r : Number)
-                   width(w : Number) -> Done {
+                   width(w : Number) -> draw.Drawable {
 
         var shape := draw.aArc.around(vec2.setCoord(x, y))
                                  from(f)
@@ -620,74 +628,79 @@ class aCanvas.new -> Canvas {
         shape.fill := fill
 
         drawables.push(shape)
+
+        return shape
     }
 
 
     // LINE
 
     // Line from (x1, y1) to (x2, y2) colored b
-    method drawLineFrom(x1 : Number, y1 : Number) to(x2 : Number, y2 : Number) -> Done {
+    method drawLineFrom(x1 : Number, y1 : Number) to(x2 : Number, y2 : Number) -> draw.Drawable {
 
+        var shape := draw.aLine.from (vec2.setCoord(x1, y1))
+                                  to (vec2.setCoord(x2, y2))
+                             colored (color)
 
-        drawables.push(
+        drawables.push(shape)
 
-            draw.aLine.from (vec2.setCoord(x1, y1))
-                         to (vec2.setCoord(x2, y2))
-                    colored (color)
-        )
+        return shape
     }
 
     // Line at (x, y) with length l and anti-clockwise angle a in radians
-    method drawLineAt(x : Number, y : Number) length(l : Number) angle(a : Number) -> Done {
+    method drawLineAt(x : Number, y : Number) length(l : Number) angle(a : Number) -> draw.Drawable {
 
         // Calculate the horizontal and vertical distances to the end point
         def xLen = math.cos(a)*l
         def yLen = math.sin(a)*l
 
-        var toPush
+        var shape
 
         // First quarter of complex plane
         if (a < math.half_pi) then {
 
-            toPush := draw.aLine.from(vec2.setCoord(x, y))
+            shape := draw.aLine.from(vec2.setCoord(x, y))
                                    to(vec2.setCoord(x + xLen, y - yLen))
                               colored(color)
 
         // Second quarter of complex plane
         } elseif (a < math.pi) then {
 
-            toPush := draw.aLine.from(vec2.setCoord(x, y))
+            shape := draw.aLine.from(vec2.setCoord(x, y))
                                    to(vec2.setCoord(x - xLen, y - yLen))
                               colored(color)
 
         // Third quarter of complex plane
         } elseif (a < ((3*math.pi)/2)) then {
 
-            toPush := draw.aLine.from(vec2.setCoord(x, y))
+            shape := draw.aLine.from(vec2.setCoord(x, y))
                                    to(vec2.setCoord(x - xLen, y + yLen))
                               colored(color)
 
         // Last quarter of complex plane
         } else {
 
-            toPush := draw.aLine.from(vec2.setCoord(x, y))
+            shape := draw.aLine.from(vec2.setCoord(x, y))
                                    to(vec2.setCoord(x + xLen, y + yLen))
                               colored(color)
         }
 
-        drawables.push(toPush)
+        drawables.push(shape)
+
+        return shape
     }
 
 
     // TEXT
 
     // Text saying t at (x, y) colored c
-    method drawTextSaying(t : String) at(x : Number, y : Number) -> Done {
+    method drawTextSaying(t : String) at(x : Number, y : Number) -> draw.Drawable {
 
-        drawables.push(
+        var shape := draw.aText.write(t) at(vec2.setCoord(x, y)) colored(color)
 
-            draw.aText.write(t) at(vec2.setCoord(x, y)) colored(color)
-        )
+        drawables.push(shape)
+
+        return shape
     }
 
 
@@ -696,14 +709,13 @@ class aCanvas.new -> Canvas {
     // Image at (x, y) sized wxh from file: path
     method drawImageAt(x : Number, y : Number)
                  sized(w : Number, h : Number)
-                  from(path : String) -> Done {
+                  from(path : String) -> draw.Drawable {
 
+        var shape := draw.aImage.at(vec2.setCoord(x, y)) sized(vec2.setCoord(w, h)) from(path)
 
-        drawables.push(
+        drawables.push(shape)
 
-            draw.aImage.at(vec2.setCoord(x, y)) sized(vec2.setCoord(w, h)) from(path)
-        )
-
+        return shape
     }
 
 }
