@@ -302,22 +302,22 @@ class aCircle.around(l : vec2.Vector2) radius(r : Number) colored(c : col.Color)
 
             gfx.fillStyle := color.asString
 
-            ctx.beginPath
-            // ctx.moveTo(x, y)
-            ctx.arc(x, y, radius, 0, math.pi*2, true)
+            gfx.beginPath
+            // gfx.moveTo(x, y)
+            gfx.arc(x, y, radius, 0, math.pi*2, true)
 
             gfx.fill
-            ctx.closePath
+            gfx.closePath
 
         } else {
 
             gfx.strokeStyle := color.asString
 
-            ctx.beginPath
-            // ctx.moveTo(x, y)
-            ctx.arc(x, y, radius, 0, math.pi*2, true)
+            gfx.beginPath
+            // gfx.moveTo(x, y)
+            gfx.arc(x, y, radius, 0, math.pi*2, true)
 
-            ctx.closePath
+            gfx.closePath
         }
     }
 
@@ -434,21 +434,21 @@ class aSector.around(l : vec2.Vector2) from(f : Number) to(t : Number)
 
         if (fill) then {
 
-            ctx.beginPath
-            ctx.fillStyle := color.asString
-            // ctx.moveTo(x, y)
-            ctx.arc(x, y, radius, from, to)
-            ctx.fill
-            ctx.closePath
+            gfx.beginPath
+            gfx.fillStyle := color.asString
+            // gfx.moveTo(x, y)
+            gfx.arc(x, y, radius, from, to)
+            gfx.fill
+            gfx.closePath
 
         } else {
 
-            ctx.beginPath
-            ctx.strokeStyle := color.asString
-            // ctx.moveTo(x, y)
-            ctx.arc(x, y, radius, from, to)
-            // ctx.fill
-            ctx.closePath
+            gfx.beginPath
+            gfx.strokeStyle := color.asString
+            // gfx.moveTo(x, y)
+            gfx.arc(x, y, radius, from, to)
+            // gfx.fill
+            gfx.closePath
         }
     }
 
@@ -496,21 +496,21 @@ class aArc.around(l : vec2.Vector2) from(f : Number) to(t : Number)
 
         if (fill) then {
 
-            ctx.beginPath
-            ctx.fillStyle := color.asString
-            ctx.arc(x, y, radius, from, to)
-            ctx.arc(x, y, radius - width, to, from, true)
-            ctx.fill
-            ctx.closePath
+            gfx.beginPath
+            gfx.fillStyle := color.asString
+            gfx.arc(x, y, radius, from, to)
+            gfx.arc(x, y, radius - width, to, from, true)
+            gfx.fill
+            gfx.closePath
 
         } else {
 
-            ctx.beginPath
-            ctx.fillStyle := color.asString
-            ctx.arc(x, y, radius, from, to)
-            ctx.arc(x, y, radius - width, to, from, true)
-            // ctx.fill
-            ctx.closePath
+            gfx.beginPath
+            gfx.fillStyle := color.asString
+            gfx.arc(x, y, radius, from, to)
+            gfx.arc(x, y, radius - width, to, from, true)
+            // gfx.fill
+            gfx.closePath
         }
     }
 
@@ -561,12 +561,12 @@ class aLine.from(f : vec2.Vector2) to(t : vec2.Vector2) colored(c : col.Color) -
     // Paint this object to the canvas
     method draw(gfx) -> Done is override {
 
-        ctx.strokeStyle := color.asString
-        ctx.beginPath
-        ctx.moveTo(from.x, from.y)
-        ctx.lineTo(to.x, to.y)
-        ctx.stroke
-        ctx.closePath
+        gfx.strokeStyle := color.asString
+        gfx.beginPath
+        gfx.moveTo(from.x, from.y)
+        gfx.lineTo(to.x, to.y)
+        gfx.stroke
+        gfx.closePath
     }
 
     method asString -> String is override {
@@ -595,12 +595,12 @@ class aText.write(t : String) at(l : vec2.Vector2) colored(c : col.Color) -> Tex
     // Paint this object to the canvas
     method draw(gfx) -> Done is override {
 
-        ctx.fillStyle := color.asString
-        ctx.font := "{size}pt sans-serif"
-        ctx.beginPath
-        ctx.fillText(text, x, y)
-        ctx.fill
-        ctx.closePath
+        gfx.fillStyle := color.asString
+        gfx.font := "{size}pt sans-serif"
+        gfx.beginPath
+        gfx.fillText(text, x, y)
+        gfx.fill
+        gfx.closePath
     }
 
     method asString -> String is override {
