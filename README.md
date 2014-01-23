@@ -11,7 +11,7 @@ Currently to run on GTK, this is required:
 - After building, copy these files into grace-gtk/
 
         grace-phix/gtk/*
-        grace-phix/util/Math.grace
+        grace-phix/util/GMath.grace
         grace-phix/util/Color.grace
         grace-phix/util/Vector2.grace
 

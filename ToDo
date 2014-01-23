@@ -1,20 +1,14 @@
-// How to use:
-
-    window.get_size
-    window.get_position
-
 // How to fix:
 
     window.set_position
 
     Keypresses
         - Capital Letters
-        - Some function keys, ie ctrl
+        - Some function keys, ie ctrl, Tab
 
 // TODO
 
     Animations
-    Allow changing the order that drawables are displayed
     Line width in web graphics
     Ovals in web graphics
     Images in web graphics

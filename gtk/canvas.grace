@@ -6,7 +6,7 @@ import "components" as comps
 
 import "Vector2" as vec2
 import "Color" as col
-import "Math" as math
+import "GMath" as math
 
 // Canvas component.
 // This component is a display buffer. It contains a list of drawable objects

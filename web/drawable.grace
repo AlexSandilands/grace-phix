@@ -5,7 +5,7 @@ import "sys" as sys
 
 import "Vector2" as vec2
 import "Color"   as col
-import "Math"    as math
+import "GMath"    as math
 
 
 // Abstract super class for drawable objects

@@ -1,4 +1,4 @@
-import "Math" as math
+import "GMath" as math
 
 type Color = {
 

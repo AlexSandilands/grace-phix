@@ -1,3 +1,5 @@
+import "math" as math
+
 // Constants
 def pi : Number is readable      = 3.14159265358979323846
 def half_pi : Number is readable = 1.57079632679489661923
@@ -154,17 +156,7 @@ method n(n : Number) choose(k : Number) -> Number {
 // and converts it to a value between 0 and 2pi
 method sin(value : Number) -> Number {
 
-    var x := normalizeRadians(value)
-
-    var ret := 0
-
-    for (0 .. 20) do { n ->
-
-        ret := ret + (((-1)^n)*(x^(2*n + 1)))/fact(2*n + 1)
-    }
-
-
-    return ret
+    return math.sin(value)
 }
 
 // Uses Taylors series expansion to get an estimate of cosine
@@ -172,17 +164,7 @@ method sin(value : Number) -> Number {
 // and converts it to a value between 0 and 2pi
 method cos(value : Number) -> Number {
 
-    var x := normalizeRadians(value)
-
-    var ret := 0
-
-    for (0 .. 20) do { n ->
-
-        ret := ret + (((-1)^n)*(x^(2*n)))/fact(2*n)
-    }
-
-
-    return ret
+    return math.cos(value)
 }
 
 // Uses sin and cos functions to approximate values on tan
@@ -198,41 +180,25 @@ method tan(value : Number) -> Number {
         UnsafeOperation.raise "Tan(3pi/2) is undefined"
     }
 
-
-    return sin(value)/cos(value)
+    return math.tan(value)
 }
 
 // Uses power series expansion to approximate inverse sine values
-method aSin(value : Number) -> Number {
+method asin(value : Number) -> Number {
 
-    var ret := 0
-
-    for(0 .. 20) do { n ->
-
-        ret := ret + ((n(2*n) choose(n))*(value^(2*n + 1)))/((4^n)*(2*n + 1))
-    }
-
-
-    return ret
+    math.asin(value)
 }
 
 // Uses arcSine to calculate arcCosine
-method aCos(value : Number) -> Number {
+method acos(value : Number) -> Number {
 
-    return half_pi - aSin(value)
+    math.acos(value)
 }
 
-// This approach for aTan requires summing millions of times before getting
+// This approach for atan requires summing millions of times before getting
 // close to an accurate answer, which isn't practical on a computer
 // Need to find a new method
-method aTan(value : Number) -> Number {
+method atan(value : Number) -> Number {
 
-    var ret := 0
-
-    for(0 .. 20) do { n ->
-
-        ret := ret + (((-1)^n)*(value^(2*n + 1)))/(2*n + 1)
-    }
-
-    return ret
+    math.atan(value)
 }

@@ -1,4 +1,4 @@
-import "Math" as math
+import "GMath" as math
 
 // Vector type which is four dimensional
 // Ie it has x, y, z and w coordinates.
@@ -139,7 +139,7 @@ method distanceTo(v1 : Vector4, v2 : Vector4) -> Number is public {
 // Returns the angle between this vector and the other vector
 method angleBetween(v1 : Vector4, v2 : Vector4) -> Number is public {
 
-    math.aCos(dot(v1, v2)/(v1.magnitude*v2.magnitude))
+    math.acos(dot(v1, v2)/(v1.magnitude*v2.magnitude))
 }
 
 // VECTOR4 CLASS

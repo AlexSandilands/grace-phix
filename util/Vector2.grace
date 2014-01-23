@@ -1,4 +1,4 @@
-import "Math" as math
+import "GMath" as math
 
 // Vector type which is two dimensional.
 // Ie is has a x and y coordinate.
@@ -79,7 +79,7 @@ method distanceBetween(v1 : Vector2, v2 : Vector2) -> Number is public {
 // Returns the angle between this vector and the other vector, in radians
 method angleBetween(v1 : Vector2, v2 : Vector2) -> Number is public {
 
-    math.aCos(dot(v1, v2)/(v1.magnitude*v2.magnitude))
+    math.acos(dot(v1, v2)/(v1.magnitude*v2.magnitude))
 }
 
 

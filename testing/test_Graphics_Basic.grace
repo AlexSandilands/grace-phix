@@ -2,7 +2,7 @@
 
 import "graphics" as g
 import "Color" as col
-import "Math" as math
+import "GMath" as math
 
 def window = g.createWindow
 

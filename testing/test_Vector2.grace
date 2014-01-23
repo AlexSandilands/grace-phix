@@ -1,7 +1,7 @@
 import "Vector2" as vec2
 import "Vector3" as vec3
 import "Vector4" as vec4
-import "Math" as math
+import "GMath" as math
 
 var v1 := vec2.setCoord(1, 2)
 var v2 := vec2.setVector2(v1)
@@ -32,14 +32,14 @@ print(v1.addScalar(5))
 print(v1.subScalar(5))
 print(v1.magnitude)
 print(v1.normalize)
-print(v1.dot(v6))
+print(vec2.dot(v1, v6))
 print(v1.toList)
-print(v1.distanceTo(v7))
+print(vec2.distanceBetween(v1, v7))
 print(v7.clampBetween(0, 1))
 print(v7.clampAbove(5.5))
 print(v7.clampBelow(5.5))
 
 // Should be 45 degrees
-print(math.toDegrees(v8.angleBetween(v9)))
+print(math.toDegrees(vec2.angleBetween(v8, v9)))
 // Should be 135 degrees
-print(math.toDegrees(v10.angleBetween(v9)))
+print(math.toDegrees(vec2.angleBetween(v10, v9)))
