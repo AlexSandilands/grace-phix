@@ -1,0 +1,40 @@
+% Syntax highlighting for the Grace language
+% Based on the syntax from the specification,
+% modified by Michael Homer, Andrew Black.
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{textcomp}  % for \textquotesingle, used by upquote=true
+\definecolor{BlueGrey}{rgb}{0.4,0.4,0.5}
+\lstdefinelanguage{Grace}{
+%   keywords={self,true,false,match,case,catch,raise,returns,
+%        prefix,
+%        super,outer,finally,using,extends,Selftype},
+   morendkeywords={class,object,return,inherits,def,var,type,where,method,is,
+        super,outer,using,self,self type,prefix,import,as,dialect},
+   sensitive,
+   morecomment=[s]{/*}{*/},%
+   morecomment=[l]{//},%
+   morestring=[b]",%
+   basicstyle=\sffamily\small,
+   xleftmargin=1em,
+   showstringspaces=false,
+   keywordstyle=\color{black}\bfseries,
+   ndkeywordstyle=\color{Mahogany}\bfseries,
+   identifierstyle=\color{black},
+   commentstyle=\color{BlueGrey}\rmfamily\itshape,
+   stringstyle=\color{MidnightBlue}\ttfamily,
+   aboveskip=0.6ex plus 1pt minus 1pt,
+   belowskip=0.6ex plus 1pt minus 1pt,
+   columns=flexible
+}[keywords,comments,strings]
+
+\newcommand{\grace}{
+\lstset{language=Grace,
+        keywordstyle=\color{black}\bfseries,
+        mathescape=true,
+        showstringspaces=false,
+        keepspaces=true,
+        breaklines=true,
+        literate={+}{{$+$}}1 {-}{{$-$}}1,
+        upquote=true,
+        columns=fullflexible} % no fixed width fonts
+}
