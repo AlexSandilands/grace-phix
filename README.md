@@ -1,7 +1,10 @@
 Grace-Phix
 ==========
 
-A graphics library for the Grace programming language, using GTK and Javascript backend.
+A graphics library for the Grace programming language, currently using GTK 
+and Javascript backend.
+
+Documentation for the API can be found in doc/
 
 Currently to run on GTK, this is required:
 
