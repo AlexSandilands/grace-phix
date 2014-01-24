@@ -23,7 +23,8 @@ type Drawable = {
     moveTo := (l : vec2.Vector2) -> Done
     moveBy(dx : Number, dy : Number) -> Done
 
-    // Takes a graphics object to draw with
+    // Paints this object to a canvas, using the graphical object gfx
+    // of that canvas
     draw(gfx) -> Done
 
     // Checks if (x, y) is inside the drawable
@@ -63,7 +64,6 @@ type Circle = Drawable & {
 
 
 // Drawable oval type
-// This is a circle but it doesn't have a constant radius
 type oval = Drawable & {
 
     size -> vec2.Vector2
@@ -194,8 +194,8 @@ class aDrawable.at(l : vec2.Vector2) -> Drawable {
         location := location + vec2.setCoord(dx, dy)
     }
 
-    // Paint this object to the canvas it is on. gfx is the graphics object
-    // of the canvas
+    // Paints this object to a canvas, using the graphical object gfx
+    // of that canvas
     method draw(gfx) -> Done {
         // Place Holder, this class should never be instantiated
     }

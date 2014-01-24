@@ -281,6 +281,8 @@ class aButton.new -> Button {
     var l : String := "Default Button"
     b.label := l
 
+    // Vector holding the size of this button
+    // First component is width, second is height
     var s : vec2.Vector2 := vec2.setCoord(150, 30)
 
     // COMPONENT METHODS
@@ -308,7 +310,8 @@ class aButton.new -> Button {
         b.label := l
     }
 
-    // Returns the size of this button
+    // Returns the size of this button with a vector
+    // First component is width, second is height
     // Note that the button will expand to fit the container it is in
     // so this size isn't necessarily accurate
     method size -> vec2.Vector2 {
@@ -316,7 +319,8 @@ class aButton.new -> Button {
         s
     }
 
-    // Sets the size of the button
+    // Sets the size of the button with a button
+    // First component is width, second is height
     method size := (s' : vec2.Vector2) -> Done {
 
         s := s'

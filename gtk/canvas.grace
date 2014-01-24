@@ -130,6 +130,7 @@ class aCanvas.new -> Canvas {
     var drawables : List<draw.Drawable> := []
 
     // Size of the canvas
+    // First component is width, second is height
     var s : vec2.Vector2 := vec2.setCoord(640, 480)
 
     // Adds a drawable object d to the canvas.
@@ -202,8 +203,8 @@ class aCanvas.new -> Canvas {
         }
     }
 
-    // Removes the drawable at the index ind. Returns false if the index
-    // was out of bounds.
+    // Removes the drawable at the index ind.
+    // Returns false if the index was out of bounds.
     method removeWithIndex(ind : Number) -> Boolean {
 
         // Check that the index in within bounds
@@ -433,17 +434,25 @@ class aCanvas.new -> Canvas {
 
 
     // Gets the size of this canvas as a 2d Vector
+    // First component is width, second is height
     method size -> vec2.Vector2 {
 
         s
     }
 
     // Sets the size of this canvas with a 2d Vector s'
+    // First component is width, second is height
     method size := (s' : vec2.Vector2) -> Done {
 
         s := s'
 
         c.set_size_request(s.x, s.y)
+    }
+
+    // Returns the width of this canvas
+    method width -> Number {
+
+        s.x
     }
 
     // Set the width of this canvas
@@ -452,6 +461,12 @@ class aCanvas.new -> Canvas {
         s.x := w'
 
         c.set_size_request(s.x, s.y)
+    }
+
+    // Returns the height of this canvas
+    method height -> Number {
+
+        s.y
     }
 
     // Set the height of this canvas

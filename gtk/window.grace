@@ -9,7 +9,7 @@ import "components" as comps
 // for anything that needs to be displayed. It is also of type container
 // as it can contain other components which get displayed in the window.
 // Whenever you add a new component to the window it gets displayed at the
-// bottom each time, as the window uses a vertical box. You can add other boxes
+// bottom, as the window uses a vertical box. You can add other boxes
 // to the window if you want components to be displayed in different directions
 // and orders
 type Window = comps.Container & {
@@ -147,13 +147,15 @@ class aWindow.new() -> Window {
         w.title := t
     }
 
-    // Get the size of this window
+    // Return the size of this window
+    // First component is width, second is height
     method size -> vec2.Vector2 {
 
         s
     }
 
-    // Set the size of this window
+    // Set the size of this window with a vector
+    // First component is width, second is height
     method size := (s' : vec2.Vector2) -> Done {
 
         s := s'
@@ -187,11 +189,14 @@ class aWindow.new() -> Window {
     }
 
     // Return the position of this window
+    // First component is width, second is height
     method position -> vec2.Vector2 {
 
         // TODO
     }
 
+    // Set the position of this window with a Vector
+    // First component is width, second is height
     method position:= (p : vec2.Vector2) -> Done {
 
         // TODO
