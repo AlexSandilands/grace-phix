@@ -166,7 +166,8 @@ sources are ported into Grace they can be used with Grace-Phix.\\
 
 
 \subsection{Component Hierarchy}
-This is a very basic draft of the hierarchy of how the graphical components work.
+This is a very basic draft of the hierarchy of how the graphical components work. This was
+made quite a while ago so it is a little outdated, but the general idea still holds.
 A nicer diagram will be made soon.
 
 \vspace{0.5in}
@@ -186,7 +187,7 @@ used and combined to create new drawable objects that can be added and drawn on
 a canvas. It is split up into sections for readability, based on which type of
 objects the methods are creating.\\
 This is the main module that will be imported into a program when using the graphics
-library
+library.
 
 \begin{moduleSection}{Interface}
 
@@ -282,6 +283,46 @@ Listing \ref{code/components_interface} shows the interface for Grace-Phix compo
 \end{moduleSection}
 
 \clearpage
+
+\end{module}
+
+
+
+\begin{module}{Utilities}
+
+The following are the utility modules that the Grace-Phix library uses.
+
+\begin{moduleSection}{GMath}
+
+Note that this module doesn't create an object, so it doesn't have any type definitions.
+These are all the methods that the math module provides.\\
+
+Listing \ref{code/gmath_interface} shows the interface for GMath.
+\gracescript{code/gmath_interface}{GMath interface}
+
+\end{moduleSection}
+
+\begin{moduleSection}{Color}
+
+This color module provides a color object and many constructor methods.\\
+
+Listing \ref{code/color_interface} shows the interface for Color.
+\gracescript{code/color_interface}{Color interface}
+
+\end{moduleSection}
+
+\begin{moduleSection}{Vector2}
+
+Vectors are used throughout Grace-Phix, not just for cartesian coordinates but for storing
+any variables that can be conceptually grouped together. For example, width and height could
+be stored together in a two dimensional vector.\\
+
+This module provides a Vector2 object and many constructor methods.\\
+
+Listing \ref{code/vector2_interface} shows the interface for Vector2.
+\gracescript{code/vector2_interface}{Vector2 interface}
+
+\end{moduleSection}
 
 \end{module}
 

@@ -1,4 +1,4 @@
-MAIN = assignment_2
+MAIN = api
 
 %.pdf: %.tex $(wildcard *.tex) refs.bib
 	pdflatex $*.tex
