@@ -151,23 +151,19 @@ method n(n : Number) choose(k : Number) -> Number {
     return fact(n)/(fact(k)*fact(n-k))
 }
 
-// Uses Taylors series expansion to get an estimate of sine
-// This method assumes that the value passed in is already in radians.
-// and converts it to a value between 0 and 2pi
+// Returns the sine of value
 method sin(value : Number) -> Number {
 
     return math.sin(value)
 }
 
-// Uses Taylors series expansion to get an estimate of cosine
-// This method assumes that the value passed in is already in radians.
-// and converts it to a value between 0 and 2pi
+// Returns the cosine of value
 method cos(value : Number) -> Number {
 
     return math.cos(value)
 }
 
-// Uses sin and cos functions to approximate values on tan
+// Returns the tangent of value
 // Undefined on pi/2 and 3pi/2 so will throw an error on these values
 method tan(value : Number) -> Number {
 
@@ -183,21 +179,19 @@ method tan(value : Number) -> Number {
     return math.tan(value)
 }
 
-// Uses power series expansion to approximate inverse sine values
+// Returns the arcsine of value
 method asin(value : Number) -> Number {
 
     math.asin(value)
 }
 
-// Uses arcSine to calculate arcCosine
+// Returns the arccosine of value
 method acos(value : Number) -> Number {
 
     math.acos(value)
 }
 
-// This approach for atan requires summing millions of times before getting
-// close to an accurate answer, which isn't practical on a computer
-// Need to find a new method
+// Returns the arctangent of value
 method atan(value : Number) -> Number {
 
     math.atan(value)

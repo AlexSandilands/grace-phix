@@ -11,7 +11,17 @@ type Color = {
     g := (g' : Number) -> Done
     b := (b' : Number) -> Done
     a := (a' : Number) -> Done
+
+    +(other : Color) -> Color
+
+    brighter  -> Color
+    darker    -> Color
+    invert    -> Color
+    greyscale -> Color
+
+    asString -> String
 }
+
 
 
 method black -> Color {
@@ -44,7 +54,7 @@ method magenta -> Color {
 }
 
 
-method gray -> Color {
+method grey -> Color {
 
     aColor.new(0.5, 0.5, 0.5, 1)
 }
@@ -99,6 +109,7 @@ method fromRGB(r : Number, g : Number, b : Number) withAlpha(a : Number) -> Colo
 
 
 // Class that contains values of a color and methods for manipulating the color
+// Color components are between 0 and 1
 class aColor.new(red : Number, green : Number, blue : Number, alpha : Number) {
 
     // Components of this color
@@ -137,7 +148,18 @@ class aColor.new(red : Number, green : Number, blue : Number, alpha : Number) {
 
     // Functions
 
-    // Returns a slightly brighter copy of this color, by a factor of 0.7
+    // Additive binary operator for this color.
+    method +(other : Color) -> Color {
+
+        var newR := math.clamp(r' + other.r) below(1)
+        var newG := math.clamp(g' + other.g) below(1)
+        var newB := math.clamp(b' + other.b) below(1)
+        var newA := math.clamp(a' + other.a) below(1)
+
+        return aColor.new(newR, newG, newB, newA)
+    }
+
+    // Returns a brighter copy of this color, by a factor of 0.7
     method brighter -> Color {
 
         if((r' == 0) && (g' == 0) && (b' == 0)) then {
@@ -162,7 +184,7 @@ class aColor.new(red : Number, green : Number, blue : Number, alpha : Number) {
         return aColor.new(newR, newG, newB, a')
     }
 
-    // Returns a slightly darker copy of this color, by a factor of 0.7
+    // Returns a darker copy of this color, by a factor of 0.7
     method darker -> Color {
 
         // Deal with Red component
@@ -193,8 +215,8 @@ class aColor.new(red : Number, green : Number, blue : Number, alpha : Number) {
 
 
 
-    // Grayscales this color
-    method grayscale -> Color {
+    // Returns a greyscale copy of this color
+    method greyscale -> Color {
 
         var avg := (r' + g' + b')/3
 
@@ -208,16 +230,6 @@ class aColor.new(red : Number, green : Number, blue : Number, alpha : Number) {
 
 
 
-    // Additive binary operator for colors. Works like adding lights
-    method +(other : Color) -> Color {
-
-        var newR := math.clamp(r' + other.r) below(1)
-        var newG := math.clamp(g' + other.g) below(1)
-        var newB := math.clamp(b' + other.b) below(1)
-        var newA := math.clamp(a' + other.a) below(1)
-
-        return aColor.new(newR, newG, newB, newA)
-    }
 
 
     // Overide the asString method
