@@ -6,15 +6,30 @@ type Vector4 = {
 
     x -> Number
     y -> Number
-    z -> Number
-    w -> Number
 
-    == -> Boolean
-    != -> Boolean
-    +  -> Vector4
-    -  -> Vector4
-    *  -> Vector4
-    /  -> Vector4
+    ==(v : Vector4) -> Boolean
+    !=(v : Vector4) -> Boolean
+    + (v : Vector4) -> Vector4
+    - (v : Vector4) -> Vector4
+    * (s : Number)  -> Vector4
+    / (s : Number)  -> Vector4
+    < (v : Vector4) -> Boolean
+    > (v : Vector4) -> Boolean
+
+    prefix- -> Vector4
+    magnitude -> Number
+    normalize -> Vector4
+
+    clampBetween(lower : Number, upper : Number) -> Vector4
+    clampAbove(threshold : Number) -> Vector4
+    clampBelow(threshold : Number) -> Vector4
+
+    addScalar(s : Number) -> Vector4
+    subScalar(s : Number) -> Vector4
+
+    toList -> List
+
+    asString -> String
 }
 
 // CONSTRUCTOR METHODS
@@ -142,6 +157,8 @@ method angleBetween(v1 : Vector4, v2 : Vector4) -> Number is public {
     math.acos(dot(v1, v2)/(v1.magnitude*v2.magnitude))
 }
 
+
+
 // VECTOR4 CLASS
 // Constructs a new 4d vector with the given x', y', z', and w' values
 class aVector4.new(x' : Number, y' : Number, z' : Number, w' : Number)
@@ -152,7 +169,6 @@ class aVector4.new(x' : Number, y' : Number, z' : Number, w' : Number)
     var z : Number is public := z'
     var w : Number is public := w'
 
-    // OPERATORS
     // Returns true if this vector has the same values as the given vector
     method ==(v : Vector4) -> Boolean is public {
 
@@ -163,26 +179,6 @@ class aVector4.new(x' : Number, y' : Number, z' : Number, w' : Number)
     method !=(v : Vector4) -> Boolean is public {
 
         !((x == v.x) && ((y == v.y) && ((z == v.z) && (w == v.w))))
-    }
-
-    // Returns if the magnitude of this vector is less than the
-    // magnitude of the given vector
-    method <(v : Vector4) -> Boolean is public {
-
-        self.magnitude < v.magnitude
-    }
-
-    // Returns if the magnitude of this vector is greater than the
-    // magnitude of the given vector
-    method >(v : Vector4) -> Boolean is public {
-
-        self.magnitude < v.magnitude
-    }
-
-    // Returns the inversion of this vector
-    method prefix- -> Vector4 is public {
-
-        aVector4.new(-x, -y, -z, -w)
     }
 
     // Creates a new 4d vector as the result of adding this vector with
@@ -213,7 +209,25 @@ class aVector4.new(x' : Number, y' : Number, z' : Number, w' : Number)
         aVector4.new(x / s, y / s, z / s, w / s)
     }
 
-    // PUBLIC METHODS
+    // Returns if the magnitude of this vector is less than the
+    // magnitude of the given vector
+    method <(v : Vector4) -> Boolean is public {
+
+        self.magnitude < v.magnitude
+    }
+
+    // Returns if the magnitude of this vector is greater than the
+    // magnitude of the given vector
+    method >(v : Vector4) -> Boolean is public {
+
+        self.magnitude < v.magnitude
+    }
+
+    // Returns the inversion of this vector
+    method prefix- -> Vector4 is public {
+
+        aVector4.new(-x, -y, -z, -w)
+    }
 
     // Returns the magnitude of this vector
     method magnitude -> Number is public {

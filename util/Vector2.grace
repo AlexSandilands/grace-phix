@@ -1,18 +1,34 @@
 import "GMath" as math
 
-// Vector type which is two dimensional.
-// Ie is has a x and y coordinate.
+// Two dimensional Vector type.
+// Ie is has an x and y coordinate.
 type Vector2 = {
-
     x -> Number
     y -> Number
 
-    == -> Boolean
-    != -> Boolean
-    +  -> Vector2
-    -  -> Vector2
-    *  -> Vector2
-    /  -> Vector2
+    ==(v : Vector2) -> Boolean
+    !=(v : Vector2) -> Boolean
+    + (v : Vector2) -> Vector2
+    - (v : Vector2) -> Vector2
+    * (s : Number)  -> Vector2
+    / (s : Number)  -> Vector2
+    < (v : Vector2) -> Boolean
+    > (v : Vector2) -> Boolean
+
+    prefix- -> Vector2
+    magnitude -> Number
+    normalize -> Vector2
+
+    clampBetween(lower : Number, upper : Number) -> Vector2
+    clampAbove(threshold : Number) -> Vector2
+    clampBelow(threshold : Number) -> Vector2
+
+    addScalar(s : Number) -> Vector2
+    subScalar(s : Number) -> Vector2
+
+    toList -> List
+
+    asString -> String
 }
 
 
@@ -83,6 +99,7 @@ method angleBetween(v1 : Vector2, v2 : Vector2) -> Number is public {
 }
 
 
+
 // VECTOR2 CLASS
 // Constructs a new 2d vector with the given x' and y' values
 class aVector2.new(x' : Number, y' : Number) -> Vector2 {
@@ -101,26 +118,6 @@ class aVector2.new(x' : Number, y' : Number) -> Vector2 {
     method !=(v : Vector2) -> Boolean is public {
 
         !((x == v.x) && (y == v.y))
-    }
-
-    // Returns if the magnitude of this vector is less than the
-    // magnitude of the given vector
-    method <(v : Vector2) -> Boolean is public {
-
-        self.magnitude < v.magnitude
-    }
-
-    // Returns if the magnitude of this vector is greater than the
-    // magnitude of the given vector
-    method >(v : Vector2) -> Boolean is public {
-
-        self.magnitude > v.magnitude
-    }
-
-    // Returns the inversion of this vector
-    method prefix- -> Vector2 is public {
-
-        aVector2.new(-x, -y)
     }
 
     // Creates a new 2d vector as the result of adding this vector with
@@ -151,7 +148,26 @@ class aVector2.new(x' : Number, y' : Number) -> Vector2 {
         aVector2.new(x / s, y / s)
     }
 
-    // PUBLIC METHODS
+    // Returns if the magnitude of this vector is less than the
+    // magnitude of the given vector
+    method <(v : Vector2) -> Boolean is public {
+
+        self.magnitude < v.magnitude
+    }
+
+    // Returns if the magnitude of this vector is greater than the
+    // magnitude of the given vector
+    method >(v : Vector2) -> Boolean is public {
+
+        self.magnitude > v.magnitude
+    }
+
+    // Returns the inversion of this vector
+    method prefix- -> Vector2 is public {
+
+        aVector2.new(-x, -y)
+    }
+
     // Returns the magnitude of this vector
     method magnitude -> Number is public {
 
@@ -173,14 +189,14 @@ class aVector2.new(x' : Number, y' : Number) -> Vector2 {
                math.clamp(y) between(lower, upper))
     }
 
-    // Returns a new vector that is this vector clamped above the given value
+    // Returns a new vector that is this vector clamped above the given threshold
     method clampAbove(threshold : Number) -> Vector2 {
 
         return aVector2.new(math.clamp(x) above(threshold),
                math.clamp(y) above(threshold))
     }
 
-    // Returns a new vector that is this vector clamped below the given value
+    // Returns a new vector that is this vector clamped below the given threshold
     method clampBelow(threshold : Number) -> Vector2 {
 
         return aVector2.new(math.clamp(x) below(threshold),
@@ -188,14 +204,14 @@ class aVector2.new(x' : Number, y' : Number) -> Vector2 {
     }
 
     // Creates a new 2d vector as the result of adding the given scalar
-    // to this vector
+    // s to this vector
     method addScalar(s : Number) -> Vector2 is public {
 
         aVector2.new(x + s, y + s)
     }
 
     // Creates a new 2d vector as the result of subtracting the given scalar
-    // from this vector
+    // s from this vector
     method subScalar(s : Number) -> Vector2 is public {
 
         aVector2.new(x - s, y - s)

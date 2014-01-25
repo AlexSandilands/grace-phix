@@ -6,14 +6,30 @@ type Vector3 = {
 
     x -> Number
     y -> Number
-    z -> Number
 
-    == -> Boolean
-    != -> Boolean
-    +  -> Vector3
-    -  -> Vector3
-    *  -> Vector3
-    /  -> Vector3
+    ==(v : Vector3) -> Boolean
+    !=(v : Vector3) -> Boolean
+    + (v : Vector3) -> Vector3
+    - (v : Vector3) -> Vector3
+    * (s : Number)  -> Vector3
+    / (s : Number)  -> Vector3
+    < (v : Vector3) -> Boolean
+    > (v : Vector3) -> Boolean
+
+    prefix- -> Vector3
+    magnitude -> Number
+    normalize -> Vector3
+
+    clampBetween(lower : Number, upper : Number) -> Vector3
+    clampAbove(threshold : Number) -> Vector3
+    clampBelow(threshold : Number) -> Vector3
+
+    addScalar(s : Number) -> Vector3
+    subScalar(s : Number) -> Vector3
+
+    toList -> List
+
+    asString -> String
 }
 
 // CONSTRUCTOR METHODS
@@ -116,6 +132,8 @@ method angleBetween(v1 : Vector3, v2 : Vector3) -> Number is public {
     math.acos(dot(v1, v2)/(v1.magnitude*v2.magnitude))
 }
 
+
+
 // VECTOR3 CLASS
 // Constructs a new 3d vector with the given x', y', and z' values
 class aVector3.new(x' : Number, y' : Number, z' : Number) -> Vector3 {
@@ -124,7 +142,7 @@ class aVector3.new(x' : Number, y' : Number, z' : Number) -> Vector3 {
     var y : Number is public := y'
     var z : Number is public := z'
 
-    // OPERATORS
+
     // Returns true if this vector has the same values as the given vector
     method ==(v : Vector3) -> Boolean is public {
 
@@ -135,26 +153,6 @@ class aVector3.new(x' : Number, y' : Number, z' : Number) -> Vector3 {
     method !=(v : Vector3) -> Boolean is public {
 
         !((x == v.x) && ((y == v.y) && (y == v.y)))
-    }
-
-    // Returns if the magnitude of this vector is less than the
-    // magnitude of the given vector
-    method <(v : Vector3) -> Boolean is public {
-
-        self.magnitude < v.magnitude
-    }
-
-    // Returns if the magnitude of this vector is greater than the
-    // magnitude of the given vector
-    method >(v : Vector3) -> Boolean is public {
-
-        self.magnitude > v.magnitude
-    }
-
-    // Returns the inversion of this vector
-    method prefix- -> Vector3 is public {
-
-        aVector3.new(-x, -y, -z)
     }
 
     // Creates a new 3d vector as the result of adding this vector with
@@ -185,7 +183,25 @@ class aVector3.new(x' : Number, y' : Number, z' : Number) -> Vector3 {
         aVector3.new(x / s, y / s, z / s)
     }
 
-    // PUBLIC METHODS
+    // Returns if the magnitude of this vector is less than the
+    // magnitude of the given vector
+    method <(v : Vector3) -> Boolean is public {
+
+        self.magnitude < v.magnitude
+    }
+
+    // Returns if the magnitude of this vector is greater than the
+    // magnitude of the given vector
+    method >(v : Vector3) -> Boolean is public {
+
+        self.magnitude > v.magnitude
+    }
+
+    // Returns the inversion of this vector
+    method prefix- -> Vector3 is public {
+
+        aVector3.new(-x, -y, -z)
+    }
 
     // Returns the magnitude of this vector
     method magnitude -> Number is public {
