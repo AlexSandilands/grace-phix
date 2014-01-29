@@ -286,7 +286,7 @@ class aRectangle.at(l : vec2.Vector2) sized(s : vec2.Vector2) colored(c : col.Co
     method draw(gfx) -> Done is override {
 
         // Set the color
-        gfx.set_source_rgb(color.r, color.g, color.b)
+        gfx.set_source_rgb(color.r/255, color.g/255, color.b/255)
 
         // Draw the rectangle using stored values
         gfx.rectangle(x, y, width, height)
@@ -343,7 +343,7 @@ class aCircle.around(l : vec2.Vector2) radius(r : Number) colored(c : col.Color)
     // Paint this object to the canvas
     method draw(gfx) -> Done is override {
 
-        gfx.set_source_rgb(color.r, color.g, color.b)
+        gfx.set_source_rgb(color.r/255, color.g/255, color.b/255)
         gfx.arc(x, y, radius, from, to)
 
         if (fill) then {
@@ -416,7 +416,7 @@ class aOval.at(l : vec2.Vector2) sized(s : vec2.Vector2) colored(c : col.Color) 
     // Paint this object to the canvas
     method draw(gfx) -> Done is override {
 
-        gfx.set_source_rgb(color.r, color.g, color.b)
+        gfx.set_source_rgb(color.r/255, color.g/255, color.b/255)
 
         gfx.save
         gfx.translate(x + width/2, y + height/2)
@@ -483,7 +483,7 @@ class aSector.around(l : vec2.Vector2) from(f : Number) to(t : Number)
     // Paint this object to the canvas
     method draw(gfx) -> Done is override {
 
-        gfx.set_source_rgb(color.r, color.g, color.b)
+        gfx.set_source_rgb(color.r/255, color.g/255, color.b/255)
         gfx.arc(x, y, radius, from, to)
 
         if (fill) then {
@@ -538,7 +538,7 @@ class aArc.around(l : vec2.Vector2) from(f : Number) to(t : Number)
 
     method draw(gfx) -> Done is override {
 
-        gfx.set_source_rgb(color.r, color.g, color.b)
+        gfx.set_source_rgb(color.r/255, color.g/255, color.b/255)
 
         // Draw s1
         gfx.arc(x, y, radius, from, to)
@@ -604,7 +604,7 @@ class aLine.from(f : vec2.Vector2) to(t : vec2.Vector2) colored(c : col.Color) -
     // Paint this object to the canvas
     method draw(gfx) -> Done is override {
 
-        gfx.set_source_rgb(color.r, color.g, color.b)
+        gfx.set_source_rgb(color.r/255, color.g/255, color.b/255)
         gfx.move_to(from.x, from.y)
         gfx.line_to(to.x, to.y)
         gfx.line_width := lineWidth
@@ -639,7 +639,7 @@ class aText.write(t : String) at(l : vec2.Vector2) colored(c : col.Color) -> Tex
     method draw(gfx) -> Done is override {
 
         gfx.font_size := fontSize
-        gfx.set_source_rgb(color.r, color.g, color.b)
+        gfx.set_source_rgb(color.r/255, color.g/255, color.b/255)
         gfx.move_to(x, y)
         gfx.show_text(text)
         gfx.fill
