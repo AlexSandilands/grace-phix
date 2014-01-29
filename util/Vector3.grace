@@ -45,39 +45,39 @@ method x(x' : Number) y(y' : Number) z(z' : Number) -> Vector3 {
     aVector3.new(x', y', z')
 }
 
-// Creates a new 3d vector and initialises it the x and y values of the given
-// 2d vector's x and y values and sets the z value to zero
-method setVector2(v : Vector2) -> Vector3 {
-
-    aVector3.new(v.x, v.y, 0)
-}
-
-// Creates a new 3d vector and initialises it with the values of the given
-// 3d vector
-method setVector3(v : Vector3) -> Vector3 {
-
-    aVector3.new(v.x, v.y, v.z)
-}
-
-// Creates a new 3d vector and initialises it with the given 4d vector's
-// x, y, and z values and truncates the w value
-method setVector4(v : Vector4) -> Vector3 {
-
-    aVector3.new(v.x, v.y, v.z)
-}
-
 // Creates a new 3d vector and initialises the x and y values with the given
 // 2d vector's x and y values, and initialises the z value with the given z value
-method setVector2(v : Vector2) coord(z : Number) -> Vector3 {
+method xy(v : Vector2) z(z : Number) -> Vector3 {
 
     aVector3.new(v.x, v.y, z)
 }
 
 // Creates a new 3d vector and initialises the x value with the given x value
 // and initialises the y and z values with the given 2d vectors x and y values
-method setCoord(x : Number) vector2(v : Vector2) -> Vector3 {
+method x(x : Number) yz(v : Vector2) -> Vector3 {
 
     aVector3.new(x, v.x, v.y)
+}
+
+// Creates a new 3d vector and initialises it with the values of the given
+// 3d vector
+method xyz(v : Vector3) -> Vector3 {
+
+    aVector3.new(v.x, v.y, v.z)
+}
+
+// Creates a new 3d vector and initialises it the x and y values of the given
+// 2d vector's x and y values and sets the z value to zero
+method fromVector2(v : Vector2) -> Vector3 {
+
+    aVector3.new(v.x, v.y, 0)
+}
+
+// Creates a new 3d vector and initialises it with the given 4d vector's
+// x, y, and z values and truncates the w value
+method fromVector4(v : Vector4) -> Vector3 {
+
+    aVector3.new(v.x, v.y, v.z)
 }
 
 // Creates a new 3d vector initialised with x: 1, y: 0, z: 0
@@ -130,6 +130,33 @@ method distanceTo(v1 : Vector3, v2 : Vector3) -> Number is public {
 method angleBetween(v1 : Vector3, v2 : Vector3) -> Number is public {
 
     math.acos(dot(v1, v2)/(v1.magnitude*v2.magnitude))
+}
+
+// Clamps the values of the vector between the given thresholds
+method clamp (v : Vector2) Between (lower : Number, upper : Number) -> Vector3 {
+
+    return aVector3.new(
+        math.clamp(v.x) between(lower, upper),
+        math.clamp(v.y) between(lower, upper),
+        math.clamp(v.z) between(lower, upper))
+}
+
+// Clamps the values of the vector above the given threshold
+method clamp (v : Vector2) Above (threshold : Number) -> Vector3 {
+
+    return aVector3.new(
+        math.clamp(v.x) above(threshold),
+        math.clamp(v.y) above(threshold),
+        math.clamp(v.z) above(threshold))
+}
+
+// Clamps the values of the vector below the given threshold
+method clamp (v : Vector2) Below (threshold : Number) -> Vector3 {
+
+    return aVector3.new(
+        math.clamp(v.x) below(threshold),
+        math.clamp(v.y) below(threshold),
+        math.clamp(v.z) below(threshold))
 }
 
 
