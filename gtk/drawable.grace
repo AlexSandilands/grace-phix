@@ -12,7 +12,10 @@ import "GMath"    as math
 type Drawable = {
 
     location -> vec2.Vector2
+    location:= (l : vec2.Vector2) -> Done
+
     visible -> Boolean
+    visible:= (b : Boolean) -> Done
 
     x -> Number
     y -> Number
@@ -38,10 +41,16 @@ type Drawable = {
 type Rectangle = Drawable & {
 
     size  -> vec2.Vector2
+    size:= (s : vec2.Vector2) -> Done
+
     color -> col.Color
+    color:= (c : col.Color) -> Done
 
     fill  -> Boolean
+    fill:= (b : Boolean)
+
     lineWidth -> Number
+    lineWidth:= (w : Number) -> Done
 
     width -> Number
     width := (w' : Number) -> Done
@@ -56,10 +65,16 @@ type Rectangle = Drawable & {
 type Circle = Drawable & {
 
     radius -> Number
+    radius:= (r : Number) -> Done
+
     color  -> col.Color
+    color:= (c : col.Color) -> Done
 
     fill      -> Boolean
+    fill:= (b : Boolean) -> Done
+
     lineWidth -> Number
+    lineWidth:= (w : Number) -> Done
 }
 
 
@@ -67,11 +82,16 @@ type Circle = Drawable & {
 type oval = Drawable & {
 
     size -> vec2.Vector2
+    size:= (s : vec2.Vector2) -> Done
 
-    color  -> col.Color
+    color -> col.Color
+    color:= (c : col.Color) -> Done
 
-    fill      -> Boolean
+    fill -> Boolean
+    fill:= (b : Boolean) -> Done
+
     lineWidth -> Number
+    lineWidth:= (w : Number) -> Done
 
     width -> Number
     width := (w' : Number) -> Done
@@ -86,13 +106,22 @@ type oval = Drawable & {
 type Sector = Drawable & {
 
     radius -> Number
-    color  -> col.Color
+    radius:= (r : Number) -> Done
 
-    fill      -> Boolean
+    color -> col.Color
+    color:= (c : col.Color) -> Done
+
+    fill -> Boolean
+    fill:= (b : Boolean) -> Done
+
     lineWidth -> Number
+    lineWidth:= (w : Number) -> Done
 
     from -> Number
-    to   -> Number
+    from:= (f : Number) -> Done
+
+    to -> Number
+    to:= (t : Number) -> Done
 }
 
 
@@ -101,14 +130,25 @@ type Sector = Drawable & {
 type Arc = Drawable & {
 
     radius -> Number
-    width  -> Number
-    color  -> col.Color
+    radius:= (r : Number) -> Done
 
-    fill      -> Boolean
+    width -> Number
+    width:= (w : Number) -> Done
+
+    color -> col.Color
+    color:= (c : col.Color) -> Done
+
+    fill -> Boolean
+    fill:= (b : Boolean) -> Done
+
     lineWidth -> Number
+    lineWidth:= (w : Number) -> Done
 
-    from   -> Number
-    to     -> Number
+    from -> Number
+    from:= (b : Boolean) -> Done
+
+    to -> Number
+    to:= (t : Number) -> Done
 }
 
 
@@ -116,10 +156,16 @@ type Arc = Drawable & {
 type Line = Drawable & {
 
     color -> col.Color
+    color:= (c : col.Color) -> Done
+
     lineWidth -> Number
+    lineWidth:= (w : Number) -> Done
 
     from -> vec2.Vector2
-    to   -> vec2.Vector2
+    from:= (f : Number) -> Done
+
+    to -> vec2.Vector2
+    to:= (t : Number) -> Done
 }
 
 
@@ -127,9 +173,13 @@ type Line = Drawable & {
 type Text = Drawable & {
 
     color -> col.Color
-    text  -> String
+    color:= (c : col.Color) -> Done
 
-    size  -> Number
+    text -> String
+    text:= (s : String) -> Done
+
+    fontSize -> Number
+    fontSize:= (s : Number) -> Done
 }
 
 
@@ -138,6 +188,7 @@ type Text = Drawable & {
 type Image = Drawable & {
 
     filename -> String
+    filename:= (s : String) -> Done
 
     width -> Number
     width := (w' : Number) -> Done
@@ -191,7 +242,7 @@ class aDrawable.at(l : vec2.Vector2) -> Drawable {
     // Moves the object by dx in the x direction, dy in the y direction
     method moveBy(dx : Number, dy : Number) -> Done {
 
-        location := location + vec2.setCoord(dx, dy)
+        location := location + vec2.x(dx) y(dy)
     }
 
     // Paints this object to a canvas, using the graphical object gfx
@@ -580,14 +631,14 @@ class aText.write(t : String) at(l : vec2.Vector2) colored(c : col.Color) -> Tex
     inherits aDrawable.at(l)
 
     var text : String     is public := t
-    var size : Number     is public := 10
     var color : col.Color is public := c
+    var fontSize : Number is public := 10
 
 
     // Paint this object to the canvas
     method draw(gfx) -> Done is override {
 
-        gfx.font_size := size
+        gfx.font_size := fontSize
         gfx.set_source_rgb(color.r, color.g, color.b)
         gfx.move_to(x, y)
         gfx.show_text(text)

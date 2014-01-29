@@ -17,6 +17,7 @@ import "Vector2" as vec2
 type Component = {
 
     parent -> Component
+    parent:= (c : Component) -> Done
 
     // TODO
     // This type should also have a getComponent method which returns the
@@ -31,7 +32,7 @@ type Container = Component & {
     addAll(l : List<Component>) -> Boolean
     remove(c : Component)       -> Boolean
 
-    getChildren -> List<Component>
+    children -> List<Component>
 }
 
 // Type for a button, which is a component that can be clicked
@@ -45,14 +46,14 @@ type Button = Component & {
     sized:= (s' : vec2.Vector2) -> Done
 
     width -> Number
-    width:= -> Done
+    width:= (w : Number) -> Done
 
     height -> Number
-    height:= -> Done
+    height:= (h : Number)-> Done
 
-    clicked(b : Block)  -> Done
-    pressed(b : Block)  -> Done
-    released(b : Block) -> Done
+    clicked:= (b : Block)  -> Done
+    pressed:= (b : Block)  -> Done
+    released:= (b : Block) -> Done
 }
 
 
@@ -162,7 +163,7 @@ class aVerticalBox.new -> Container {
         }
     }
 
-    method getChildren -> List<Component> {
+    method children -> List<Component> {
 
         l
     }
@@ -268,7 +269,7 @@ class aHorizontalBox.new -> Container {
 
     }
 
-    method getChildren -> List<Component> {
+    method children -> List<Component> {
 
         l
     }
@@ -283,7 +284,7 @@ class aButton.new -> Button {
 
     // Vector holding the size of this button
     // First component is width, second is height
-    var s : vec2.Vector2 := vec2.setCoord(150, 30)
+    var s : vec2.Vector2 := vec2.x(150) y(30)
 
     // COMPONENT METHODS
 

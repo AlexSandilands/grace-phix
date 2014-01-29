@@ -28,7 +28,7 @@ method createWindow -> win.Window {
 method createWindowAt(x : Number, y : Number) -> win.Window {
 
     var ret := win.aWindow.new
-    ret.position := vec2.setCoord(x, y)
+    ret.position := vec2.x(x) y(y)
 
     return ret
 }
@@ -39,8 +39,8 @@ method createWindowAt(x : Number, y : Number)
              withSize(w : Number, h : Number) -> win.Window {
 
     var ret := win.aWindow.new
-    ret.position := vec2.setCoord(x, y)
-    ret.size := vec2.setCoord(w, h)
+    ret.position := vec2.x(x) y(y)
+    ret.size := vec2.x(w) y(h)
 
     return ret
 }
@@ -49,7 +49,7 @@ method createWindowAt(x : Number, y : Number)
 method createWindowWithSize(w : Number, h : Number) -> win.Window {
 
     var ret := win.aWindow.new
-    ret.size := vec2.setCoord(w, h)
+    ret.size := vec2.x(w) y(h)
 
     return ret
 }
@@ -61,8 +61,8 @@ method createWindowCalled(t : String)
 
     var ret := win.aWindow.new
     ret.title := t
-    ret.position := vec2.setCoord(x, y)
-    ret.size := vec2.setCoord(w, h)
+    ret.position := vec2.x(x) y(y)
+    ret.size := vec2.x(w) y(h)
 
     return ret
 }
@@ -88,7 +88,7 @@ method createCanvas -> can.Canvas {
 method createCanvasWithSize(w : Number, h : Number) -> can.Canvas {
 
     var ret := can.aCanvas.new
-    ret.size := vec2.setCoord(w, h)
+    ret.size := vec2.x(w) y(h)
 
     return ret
 }
@@ -189,8 +189,8 @@ method createButtonCalled(s : String) onClicked(b : Block) {
 // Rectangle. Has default values: Black, at (25, 25), sized 50x50
 method createRectangle -> draw.Rectangle {
 
-    return draw.aRectangle.at (vec2.setCoord(25, 25))
-                        sized (vec2.setCoord(50, 50))
+    return draw.aRectangle.at (vec2.x(25) y(25))
+                        sized (vec2.x(50) y(50))
                       colored (col.black)
 }
 
@@ -199,7 +199,7 @@ method createRectangleAt(x : Number, y : Number)
                    sized(w : Number, h : Number)
                  colored(c : col.Color) -> draw.Rectangle {
 
-    draw.aRectangle.at(vec2.setCoord(x, y)) sized(vec2.setCoord(w, h)) colored(c)
+    draw.aRectangle.at(vec2.x(x) y(y)) sized(vec2.x(w) y(h)) colored(c)
 }
 
 
@@ -209,7 +209,7 @@ method createRectangleAt(x : Number, y : Number)
 // Circle. Has default values: Black, around (50, 50), radius 25
 method createCircle -> draw.Circle {
 
-    return draw.aCircle.around (vec2.setCoord(50, 50))
+    return draw.aCircle.around (vec2.x(50) y(50))
                         radius (25)
                        colored (col.black)
 }
@@ -219,7 +219,7 @@ method createCircleAround(x : Number, y : Number)
                    radius(r : Number)
                   colored(c : col.Color) -> draw.Circle {
 
-    draw.aCircle.around(vec2.setCoord(x, y)) radius(r) colored(c)
+    draw.aCircle.around(vec2.x(x) y(y)) radius(r) colored(c)
 }
 
 
@@ -229,8 +229,8 @@ method createCircleAround(x : Number, y : Number)
 // Oval. Has default values: Black, around (50, 50) width 50 height 25
 method createOval -> draw.Oval {
 
-  return draw.aOval.at (vec2.setCoord(50, 50))
-                 sized (vec2.setCoord(50, 25))
+  return draw.aOval.at (vec2.x(50) y(50))
+                 sized (vec2.x(50) y(25))
                colored (col.black)
 }
 
@@ -239,8 +239,8 @@ method createOvalAt(x : Number, y : Number)
               sized(w : Number, h : Number)
             colored(c : Color) -> draw.Oval {
 
-    return draw.aOval.at (vec2.setCoord(x, y))
-                   sized (vec2.setCoord(w, h))
+    return draw.aOval.at (vec2.x(x) y(y))
+                   sized (vec2.x(w) y(h))
                  colored (c)
 }
 
@@ -250,7 +250,7 @@ method createOvalAt(x : Number, y : Number)
 // Sector. Has default values: Black, around (50, 50), radius 25, from 0 to pi
 method createSector -> draw.Sector {
 
-    return draw.aSector.around (vec2.setCoord(50, 50))
+    return draw.aSector.around (vec2.x(50) y(50))
                           from (0) to (math.pi)
                         radius (25)
                        colored (col.black)
@@ -263,7 +263,7 @@ method createSectorAround(x : Number, y : Number)
                    radius(r : Number)
                   colored(c : col.Color) -> draw.Sector {
 
-    draw.aSector.around(vec2.setCoord(x, y)) from(f) to(t) radius(r) colored(c)
+    draw.aSector.around(vec2.x(x) y(y)) from(f) to(t) radius(r) colored(c)
 }
 
 
@@ -273,7 +273,7 @@ method createSectorAround(x : Number, y : Number)
 // Arc. Has default values: Black, around (50, 50), radius 25, width 10 from 0 to 2pi
 method createArc -> draw.Arc {
 
-    return draw.aArc.around (vec2.setCoord(50, 50))
+    return draw.aArc.around (vec2.x(50) y(50))
                        from (0) to (math.two_pi)
                      radius (25)
                       width (10)
@@ -288,7 +288,7 @@ method createArcAround(x : Number, y : Number)
                  width(w : Number)
                colored(c : col.Color) -> draw.Arc {
 
-    draw.aArc.around(vec2.setCoord(x, y)) from(f) to(t) radius(r) width(w) colored(c)
+    draw.aArc.around(vec2.x(x) y(y)) from(f) to(t) radius(r) width(w) colored(c)
 }
 
 
@@ -297,8 +297,8 @@ method createArcAround(x : Number, y : Number)
 // Line. Has default values: Black, from (25, 25) to (75, 75)
 method createLine -> draw.Line {
 
-    return draw.aLine.from (vec2.setCoord(25, 25))
-                        to (vec2.setCoord(75, 75))
+    return draw.aLine.from (vec2.x(25) y(25))
+                        to (vec2.x(75) y(75))
                    colored (col.black)
 }
 
@@ -307,8 +307,8 @@ method createLineFrom(x1 : Number, y1 : Number)
                    to(x2 : Number, y2 : Number)
               colored(c : col.Color) -> draw.Line {
 
-    return draw.aLine.from (vec2.setCoord(x1, y1))
-                        to (vec2.setCoord(x2, y2))
+    return draw.aLine.from (vec2.x(x1) y(y1))
+                        to (vec2.x(x2) y(y2))
                    colored (c)
 }
 
@@ -326,22 +326,22 @@ method createLineAt(x : Number, y : Number)
     // First quarter of complex plane
     if (a < math.half_pi) then {
 
-        return draw.aLine.from(vec2.setCoord(x, y)) to(vec2.setCoord(x + xLen, y - yLen)) colored(c)
+        return draw.aLine.from(vec2.x(x) y(y)) to(vec2.x(x + xLen) y(y - yLen)) colored(c)
 
     // Second quarter of complex plane
     } elseif (a < math.pi) then {
 
-        return draw.aLine.from(vec2.setCoord(x, y)) to(vec2.setCoord(x - xLen, y - yLen)) colored(c)
+        return draw.aLine.from(vec2.x(x) y(y)) to(vec2.x(x - xLen) y(y - yLen)) colored(c)
 
     // Third quarter of complex plane
     } elseif (a < ((3*math.pi)/2)) then {
 
-        return draw.aLine.from(vec2.setCoord(x, y)) to(vec2.setCoord(x - xLen, y + yLen)) colored(c)
+        return draw.aLine.from(vec2.x(x) y(y)) to(vec2.x(x - xLen) y(y + yLen)) colored(c)
 
     // Last quarter of complex plane
     } else {
 
-        return draw.aLine.from(vec2.setCoord(x, y)) to(vec2.setCoord(x + xLen, y + yLen)) colored(c)
+        return draw.aLine.from(vec2.x(x) y(y)) to(vec2.x(x + xLen) y(y + yLen)) colored(c)
     }
 }
 
@@ -351,7 +351,7 @@ method createLineAt(x : Number, y : Number)
 method createText -> draw.Text {
 
     return draw.aText.write ("Text")
-                         at (vec2.setCoord(39, 52))
+                         at (vec2.x(39) y(52))
                     colored (col.black)
 }
 
@@ -360,7 +360,7 @@ method createTextSaying(t : String)
                      at(x : Number, y : Number)
                 colored(c : col.Color) -> draw.Text {
 
-    draw.aText.write(t) at(vec2.setCoord(x, y)) colored(c)
+    draw.aText.write(t) at(vec2.x(x) y(y)) colored(c)
 }
 
 
@@ -371,5 +371,5 @@ method createImageAt(x : Number, y : Number)
                sized(w : Number, h : Number)
                 from(path : String) -> draw.Image {
 
-    draw.aImage.at(vec2.setCoord(x, y)) sized(vec2.setCoord(w, h)) from(path)
+    draw.aImage.at(vec2.x(x) y(y)) sized(vec2.x(w) y(h)) from(path)
 }

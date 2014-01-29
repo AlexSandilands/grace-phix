@@ -16,8 +16,6 @@ type Window = comps.Container & {
 
     display -> Done
 
-    addCanvas(c : can.Canvas) -> Done
-
     title -> String
     title:= (t : String) -> Done
 
@@ -124,7 +122,7 @@ class aWindow.new() -> Window {
     // WINDOW METHODS
 
     // Size of this window
-    var s : vec2.Vector2 is confidential := vec2.setCoord(640, 480)
+    var s : vec2.Vector2 is confidential := vec2.x(640) y(480)
 
     // Displays the window and all components in the window
     // then starts up the gtk main loop.
