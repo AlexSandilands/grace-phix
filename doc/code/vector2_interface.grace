@@ -5,9 +5,11 @@ type Vector2 = {
 
     // The first coordinate of this vector
     x -> Number
+    x:= (value : Number) -> Done
 
     // The second coordinate of this vector
     y -> Number
+    y:= (value : Number) -> Done
 
     // OPERATORS
 
@@ -80,7 +82,7 @@ type Vector2 = {
 method zero -> Vector2
 
 // Creates a new 2d vector and initialises it with the given x and y values
-method setCoord(x : Number, y : Number) -> Vector2
+method x(x : Number) y(y : Number) -> Vector2
 
 // Creates a new 2d vector and initialises it with the values of the given
 // 2d vector

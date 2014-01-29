@@ -3,22 +3,20 @@
 // Abstract super class for drawable objects
 type Drawable = {
 
-    // Cartesian coordinates for the location on the 2d plane
+    // The cartesian coordinates for the location on the 2d plane
     location -> Vector2
+    location:= (l : Vector2) -> Done
 
     // If true, this drawable will be drawn
     visible -> Boolean
+    visible:= (b : Boolean) > Done
 
-    // Returns the x cartesian coordinate
+    // The x cartesian coordinate
     x -> Number
-
-    // Returns the y cartesian coordinate
-    y -> Number
-
-    // Sets the x cartesian coordinate
     x := (x' : Number) -> Done
 
-    // Sets the y cartesian coordinate
+    // The y cartesian coordinate
+    y -> Number
     y := (y' : Number) -> Done
 
     // Sets the x,y cartesian coordinate with a vector
@@ -46,26 +44,26 @@ type Rectangle = Drawable & {
     // Vector holding the width and height of this rectangle
     // First component is width, second is height
     size  -> Vector2
+    size:= (s : Vector2) -> Done
 
     // The color of this rectangle
     color -> Color
+    color:= (c : Color) -> Done
 
     // Defines whether this rectangle should filled
-    fill  -> Boolean
+    fill -> Boolean
+    fill:= (b : Boolean) -> Done
 
     // If not filled, this is the width of the outline
     lineWidth -> Number
+    lineWidth:= (w : Number) -> Done
 
-    // Returns the width of this rectangle
+    // The width of the rectangle
     width -> Number
-
-    // Sets the width of this rectangle
     width := (w' : Number) -> Done
 
-    // Returns the height of this rectangle
+    // The height of the rectangle
     height -> Number
-
-    // Sets the height of this rectangle
     height := (h' : Number) -> Done
 }
 
@@ -76,15 +74,19 @@ type Circle = Drawable & {
 
     // The radius of this circle
     radius -> Number
+    radius:= (r : Number) -> Done
 
     // The color of this circle
     color  -> Color
+    color:= (c : Color) -> Done
 
     // Defines whether this circle should filled
-    fill      -> Boolean
+    fill -> Boolean
+    fill(b : Boolean) -> Done
 
     // If not filled, this is the width of the outline
     lineWidth -> Number
+    lineWidth:= (w : Number) -> Done
 }
 
 
@@ -99,26 +101,26 @@ type oval = Drawable & {
     // Vector holding the width and height of this oval
     // First component is width, second is height
     size -> Vector2
+    size:= (s : Vector2) -> Done
 
     // The color of this oval
     color  -> Color
+    color:= (c : Color) -> Done
 
     // Defines whether this oval should be filled
-    fill      -> Boolean
+    fill -> Boolean
+    fill:= (b : Boolean) -> Done
 
     // If not filled, this is the width of the outline
     lineWidth -> Number
+    lineWidth:= (w : Number) -> Done
 
-    // Returns the width of the oval
+    // The width of the oval
     width -> Number
-
-    // Sets the width of the oval
     width := (w' : Number) -> Done
 
-    // Returns the height of the oval
+    // The height of the oval
     height -> Number
-
-    // Sets the height of the oval
     height := (h' : Number) -> Done
 }
 
@@ -129,21 +131,27 @@ type Sector = Drawable & {
 
     // The radius of the sector
     radius -> Number
+    radius:= (r : Number) -> Done
 
     // The color of this sector
     color  -> Color
+    color:= (c : Color) -> Done
 
     // Defines whether this sector should be filled
-    fill      -> Boolean
+    fill -> Boolean
+    fill:= (b : Boolean) -> Done
 
     // If not filled, this is the width of the line
     lineWidth -> Number
+    lineWidth:= (w : Number) -> Done
 
     // Angle the sector starts drawing from (in radians)
     from -> Number
+    from:= (f : Number) -> Done
 
     // Angle the sector stops drawing at (in radians)
     to   -> Number
+    to:= (t : Number) -> Done
 }
 
 
@@ -153,24 +161,31 @@ type Arc = Drawable & {
 
     // The radius of the arc
     radius -> Number
+    radius:= (r : Number) -> Done
 
     // The width of the arc
-    width  -> Number
+    width -> Number
+    width:= (w : Number) -> Done
 
     // The color of the arc
-    color  -> Color
+    color -> Color
+    color:= (c : Color) -> Done
 
     // Defines whether this arc should be filled
-    fill      -> Boolean
+    fill -> Boolean
+    fill:= (b : Boolean) -> Done
 
     // If not filled, this is the width of the outline
     lineWidth -> Number
+    lineWidth:= (w : Number) -> Done
 
     // Angle the arc starts drawing from (in radians)
-    from   -> Number
+    from -> Number
+    from:= (f : Number) -> Done
 
     // Angle the arc stops drawing at (in radians)
-    to     -> Number
+    to -> Number
+    to:= (t : Number) -> Done
 }
 
 
@@ -179,15 +194,19 @@ type Line = Drawable & {
 
     // The color of the line
     color -> Color
+    color:= (c : Color) -> Done
 
     // The width of the line
     lineWidth -> Number
+    lineWidth:= (w : Number) -> Done
 
     // Catesian coordinates of the start of the line
     from -> Vector2
+    from:= (f : Number) -> Done
 
     // Cartesian coordinates of the end of the line
-    to   -> Vector2
+    to -> Vector2
+    to:= (t : Number) -> Done
 }
 
 
@@ -204,12 +223,15 @@ type Text = Drawable & {
 
     // The color of the text
     color -> Color
+    color:= (c : Color) -> Done
 
     // The string that this text writes
-    text  -> String
+    text -> String
+    text:= (s : String) -> Done
 
     // The font size of the text
-    size  -> Number
+    fontSize -> Number
+    fontSize:= (s : Number) -> Done
 }
 
 
@@ -219,16 +241,13 @@ type Image = Drawable & {
 
     // Path to the image, relative to the file that is using this object
     filename -> String
+    filename:= (s : String) -> Done
 
-    // Returns the width of the image
+    // The width of the image
     width -> Number
-
-    // Sets the width of the image
     width := (w' : Number) -> Done
 
-    // Returns the height of the image
+    // The height of the image
     height -> Number
-
-    // Sets the height of the image
     height := (h' : Number) -> Done
 }

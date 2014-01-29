@@ -29,7 +29,7 @@ type Container = Component & {
     remove(c : Component)       -> Boolean
 
     // Returns a list of all the components in this container
-    getChildren -> List<Component>
+    children -> List<Component>
 }
 
 
@@ -70,11 +70,11 @@ type Button = Component & {
     height:= -> Done
 
     // Sets what happens when this button is clicked
-    clicked(b : Block)  -> Done
+    clicked:= (b : Block)  -> Done
 
     // Sets what happens when this button is pressed
-    pressed(b : Block)  -> Done
+    pressed:= (b : Block)  -> Done
 
     // Sets what happens when this button is released
-    released(b : Block) -> Done
+    released:= (b : Block) -> Done
 }

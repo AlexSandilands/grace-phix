@@ -75,8 +75,11 @@ type Canvas = Component & {
     // Set the height of this canvas
     height:= (h' : Number) -> Done
 
+    // Returns whether this canvas is able to paint objects
+    paintable -> Boolean
+
     // Set whether this canvas can actually paint things. True by default
-    setPaintable(b : Boolean) -> Done
+    paintable:= (b : Boolean) -> Done
 
     // Asks the canvas to repaint
     paint -> Done
