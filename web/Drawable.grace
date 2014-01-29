@@ -615,62 +615,62 @@ class aText.write(t : String) at(l : vec2.Vector2) colored(c : col.Color) -> Tex
     }
 }
 
-
 // Image Class
 class aImage.at(l : vec2.Vector2) sized(s : vec2.Vector2) from(path' : String) -> Image {
 
     inherits aDrawable.at(l)
 
+    //TODO: fix
 
-    if (!io.exists(path')) then {
-
-        io.error.write("Error: no file at \"{path'}\"\n")
-        sys.exit(1)
-    }
-
-    def path    = path'
-    def surface = cairo.image_surface_create_from_png(path)
-    def iWidth  = surface.width
-    def iHeight = surface.height
-
-    var size : vec2.Vector2 := s
-
-    // Easier getters for the dimension components
-    method width -> Number { size.x }
-    method height -> Number { size.y }
-
-    // Easier setters for the dimension components
-    method width := (w' : Number) -> Done {
-
-        size.x := w'
-    }
-
-    method height := (h' : Number) -> Done {
-
-        size.y := h'
-    }
-
-    // Paint this object to the canvas
-    method draw(gfx) -> Done is override {
-
-        // TODO
-    }
-
-    // Check if (x, y) is inside this image
-    method contains(x' : Number, y' : Number) -> Boolean is override {
-
-        ((x <= x') && (x' <= (x + width))) && ((y <= y') && (y' <= (y + height)))
-    }
-
-
-    method asString -> String {
-
-        "Image at {location} from {path}"
-    }
-
-    // Returns an identical object to this
-    method clone -> Drawable {
-
-        aImage.at(l) sized(size) from(path)
-    }
+//    if (!io.exists(path')) then {
+//
+//        io.error.write("Error: no file at \"{path'}\"\n")
+//        sys.exit(1)
+//    }
+//
+//    def path    = path'
+//    def surface = cairo.image_surface_create_from_png(path)
+//    def iWidth  = surface.width
+//    def iHeight = surface.height
+//
+//    var size : vec2.Vector2 := s
+//
+//    // Easier getters for the dimension components
+//    method width -> Number { size.x }
+//    method height -> Number { size.y }
+//
+//    // Easier setters for the dimension components
+//    method width := (w' : Number) -> Done {
+//
+//        size.x := w'
+//    }
+//
+//    method height := (h' : Number) -> Done {
+//
+//        size.y := h'
+//    }
+//
+//    // Paint this object to the canvas
+//    method draw(gfx) -> Done is override {
+//
+//        // TODO
+//    }
+//
+//    // Check if (x, y) is inside this image
+//    method contains(x' : Number, y' : Number) -> Boolean is override {
+//
+//        ((x <= x') && (x' <= (x + width))) && ((y <= y') && (y' <= (y + height)))
+//    }
+//
+//
+//    method asString -> String {
+//
+//        "Image at {location} from {path}"
+//    }
+//
+//    // Returns an identical object to this
+//    method clone -> Drawable {
+//
+//        aImage.at(l) sized(size) from(path)
+//    }
 }
