@@ -191,7 +191,7 @@ class aDrawable.at(l : vec2.Vector2) -> Drawable {
     // Moves the object by dx in the x direction, dy in the y direction
     method moveBy(dx : Number, dy : Number) -> Done {
 
-        location := location + vec2.setCoord(dx, dy)
+        location := location + vec2.x(dx) y(dy)
     }
 
     // Paint this object to the canvas it is on. gfx is the graphics object
