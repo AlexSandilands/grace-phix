@@ -40,9 +40,9 @@ method zero -> Vector3 {
 }
 
 // Creates a new 3d vector and initialises it with the given x, y and z values
-method setCoord(x : Number, y : Number, z : Number) -> Vector3 {
+method x(x' : Number) y(y' : Number) z(z' : Number) -> Vector3 {
 
-    aVector3.new(x, y, z)
+    aVector3.new(x', y', z')
 }
 
 // Creates a new 3d vector and initialises it the x and y values of the given

@@ -26,79 +26,79 @@ type Color = {
 
 method black -> Color {
 
-    aColor.new(0, 0, 0, 1)
+    aColor.new(0, 0, 0, 255)
 }
 
 
 method blue -> Color {
 
-    aColor.new(0, 0, 1, 1)
+    aColor.new(0, 0, 255, 255)
 }
 
 
 method cyan -> Color {
 
-    aColor.new(0, 1, 1, 1)
+    aColor.new(0, 255, 255, 255)
 }
 
 
 method doge -> Color {
 
-    aColor.new(0.72, 0.62, 0.38, 1)
+    aColor.new(184, 158, 97, 255)
 }
 
 
 method magenta -> Color {
 
-    aColor.new(1, 0, 1, 1)
+    aColor.new(255, 0, 255, 255)
 }
 
 
 method grey -> Color {
 
-    aColor.new(0.5, 0.5, 0.5, 1)
+    aColor.new(127.5, 127.5, 127.5, 255)
 }
 
 
 method green -> Color {
 
-    aColor.new(0, 1, 0, 1)
+    aColor.new(0, 255, 0, 255)
 }
 
 
 method orange -> Color {
 
-    aColor.new(1, 0.55, 0, 1)
+    aColor.new(255, 140, 0, 255)
 }
 
 
 method pink -> Color {
 
-    aColor.new(1, 0.41, 0.7, 1)
+    aColor.new(255, 105, 179, 255)
 }
 
 
 method red -> Color {
 
-    aColor.new(1, 0, 0, 1)
+    aColor.new(255, 0, 0, 255)
 }
 
 
 method white -> Color {
 
-    aColor.new(1, 1, 1, 1)
+    aColor.new(255, 255, 255, 255)
 }
 
 
 method yellow -> Color {
 
-    aColor.new(1, 1, 0, 1)
+    aColor.new(255, 255, 0, 255)
 }
 
 
 method fromRGB(r : Number, g : Number, b : Number) -> Color {
 
-    aColor.new(r, g, b, 1)
+    aColor.new(r, g, b, 255)
 }
 
 
@@ -109,14 +109,14 @@ method fromRGB(r : Number, g : Number, b : Number) withAlpha(a : Number) -> Colo
 
 
 // Class that contains values of a color and methods for manipulating the color
-// Color components are between 0 and 1
+// Color components are between 0 and 255
 class aColor.new(red : Number, green : Number, blue : Number, alpha : Number) {
 
     // Components of this color
-    var r' : Number := math.clamp(red) between(0, 1)
-    var g' : Number := math.clamp(green) between(0, 1)
-    var b' : Number := math.clamp(blue) between(0, 1)
-    var a' : Number := math.clamp(alpha) between(0, 1)
+    var r' : Number := math.clamp(red) between(0, 255)
+    var g' : Number := math.clamp(green) between(0, 255)
+    var b' : Number := math.clamp(blue) between(0, 255)
+    var a' : Number := math.clamp(alpha) between(0, 255)
 
     // Nicer method names for getters
     method r -> Number { r' }
@@ -124,25 +124,25 @@ class aColor.new(red : Number, green : Number, blue : Number, alpha : Number) {
     method b -> Number { b' }
     method a -> Number { a' }
 
-    // Override the setters so values must be between 0 and 1
+    // Override the setters so values must be between 0 and 255
     method r := (new : Number) -> Done {
 
-        r' := math.clamp(new) between(0, 1)
+        r' := math.clamp(new) between(0, 255)
     }
 
     method g := (new : Number) -> Done {
 
-        g' := math.clamp(new) between(0, 1)
+        g' := math.clamp(new) between(0, 255)
     }
 
     method b := (new : Number) -> Done {
 
-        b' := math.clamp(new) between(0, 1)
+        b' := math.clamp(new) between(0, 255)
     }
 
     method a := (new : Number) -> Done {
 
-        a' := math.clamp(new) between(0, 1)
+        a' := math.clamp(new) between(0, 255)
     }
 
 
@@ -151,10 +151,10 @@ class aColor.new(red : Number, green : Number, blue : Number, alpha : Number) {
     // Additive binary operator for this color.
     method +(other : Color) -> Color {
 
-        var newR := math.clamp(r' + other.r) below(1)
-        var newG := math.clamp(g' + other.g) below(1)
-        var newB := math.clamp(b' + other.b) below(1)
-        var newA := math.clamp(a' + other.a) below(1)
+        var newR := math.clamp(r' + other.r) below(255)
+        var newG := math.clamp(g' + other.g) below(255)
+        var newB := math.clamp(b' + other.b) below(255)
+        var newA := math.clamp(a' + other.a) below(255)
 
         return aColor.new(newR, newG, newB, newA)
     }
@@ -164,21 +164,21 @@ class aColor.new(red : Number, green : Number, blue : Number, alpha : Number) {
 
         if((r' == 0) && (g' == 0) && (b' == 0)) then {
 
-            var newR := 0.5
-            var newG := 0.5
-            var newB := 0.5
+            var newR := 127.5
+            var newG := 127.5
+            var newB := 127.5
 
             return aColor.new(newR, newG, newB, a')
         }
 
         // Deal with Red component
-        var newR := math.clamp(r' / 0.7) below(1)
+        var newR := math.clamp(r' / 0.7) below(255)
 
         // Deal with Green component
-        var newG := math.clamp(g' / 0.7) below(1)
+        var newG := math.clamp(g' / 0.7) below(255)
 
         // Deal with Blue component
-        var newB := math.clamp(b' / 0.7) below(1)
+        var newB := math.clamp(b' / 0.7) below(255)
 
 
         return aColor.new(newR, newG, newB, a')
@@ -205,9 +205,9 @@ class aColor.new(red : Number, green : Number, blue : Number, alpha : Number) {
     // Returns an inverted copy of this color
     method invert -> Color {
 
-        var newR := 1 - r'
-        var newG := 1 - g'
-        var newB := 1 - b'
+        var newR := 255 - r'
+        var newG := 255 - g'
+        var newB := 255 - b'
 
 
         return aColor.new(newR, newG, newB, a')

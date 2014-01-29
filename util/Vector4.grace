@@ -41,9 +41,9 @@ method zero -> Vector4 {
 
 // Creates a new 3d vector and initialises it with the given
 // x, y, z, and w values
-method setCoord(x : Number, y : Number, z : Number, w : Number) ->Vector4 {
+method x(x' : Number) y(y' : Number) z(z' : Number) w(w' : Number) ->Vector4 {
 
-    aVector4.new(x, y, z, w)
+    aVector4.new(x', y', z', w')
 }
 
 // Creates a new 4d vector and initialises it the x and y values of the given

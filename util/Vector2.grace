@@ -41,9 +41,9 @@ method zero -> Vector2 {
 }
 
 // Creates a new 2d vector and initialises it with the given x and y values
-method setCoord(x : Number, y : Number) -> Vector2 {
+method x(x' : Number) y(y' : Number) -> Vector2 {
 
-    aVector2.new(x, y)
+    aVector2.new(x', y')
 }
 
 // Creates a new 2d vector and initialises it with the values of the given
