@@ -17,7 +17,12 @@ def sizeDown = g.createButtonCalled("-")
 
 def hBox = g.createHorizontalBoxContaining([colorButton, sizeUp, sizeDown])
 
-window.addAll([canvas, hBox])
+def vbox = g.createVerticalBox
+
+vbox.add(canvas)
+vbox.add(hBox)
+
+window.add(vbox)
 
 canvas.mouseReleased := { at ->
 
