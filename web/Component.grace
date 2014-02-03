@@ -1,6 +1,7 @@
-//COMPONENT SUPER TYPE
+
+//COMPONENT TYPE
 type Component = {
 
-    //the parent component
+    //the parent component of this component
     parent -> Component
 }
