@@ -297,14 +297,13 @@ class aCircle.around(l : vec2.Vector2) radius(r : Number) colored(c : col.Color)
     // Paint this object to the canvas
     method draw(gfx) -> Done is override {
 
-
         if (fill) then {
 
             gfx.fillStyle := color.asString
 
             gfx.beginPath
             // gfx.moveTo(x, y)
-            gfx.arc(x, y, radius, 0, math.pi*2, true)
+            gfx.arc(x, y, radius, 0, math.pi*2, true, 50)
 
             gfx.fill
             gfx.closePath
@@ -380,7 +379,41 @@ class aOval.at(l : vec2.Vector2) sized(s : vec2.Vector2) colored(c : col.Color) 
     // Paint this object to the canvas
     method draw(gfx) -> Done is override {
 
-        //TODO
+        //calculate the needed values
+        def kappa = 0.5522848
+        def ox = (size.x / 2) * kappa
+        def oy = (size.y / 2) * kappa
+        def xe = x + size.x
+        def ye = y + size.y
+        def xm = x + (size.x / 2)
+        def ym = y + (size.y / 2)
+
+        if (fill) then {
+
+            gfx.fillStyle := color.asString
+
+            gfx.beginPath
+            gfx.moveTo(x, ym)
+            gfx.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y)
+            gfx.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym)
+            gfx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye)
+            gfx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym)
+            gfx.fill
+            gfx.closePath
+
+        } else {
+
+            gfx.strokeStyle := color.asString
+
+            gfx.beginPath
+            gfx.moveTo(x, ym)
+            gfx.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y)
+            gfx.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym)
+            gfx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye)
+            gfx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym)
+            gfx.stroke
+            gfx.closePath
+        }
     }
 
     // Check if (x, y) is inside this oval
