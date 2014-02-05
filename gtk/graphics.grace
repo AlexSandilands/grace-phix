@@ -2,6 +2,7 @@
 import "Vector2" as vec2
 import "Color" as col
 import "GMath" as math
+import "Timer" as timer
 
 // Graphics imports
 import "window" as win
@@ -169,6 +170,44 @@ method createButtonCalled(s : String) onClicked(b : Block) {
     ret.clicked := b
 
     return ret
+}
+
+
+// ============================================================================
+// ============================================================================
+
+
+// --------------------------------- //
+//                                   //
+//          TIMER METHODS            //
+//                                   //
+// --------------------------------- //
+
+
+// Repeat the block every milliseconds
+// Returns the id of the timer in charge of executing this block
+method every (milliseconds : Number) do (block : Block) -> Number {
+
+    return timer.every(milliseconds) do(block)
+}
+
+// Execute the block once after milliseconds
+// Returns the id of the timer in charge of executing this block
+method after (milliseconds : Number) do (block : Block) -> Number {
+
+    return timer.after(milliseconds) do(block)
+}
+
+// Stop timer with id
+method stop(id : Number) -> Done {
+
+    timer.stop(id)
+}
+
+// Stop all timers.
+method stopAll -> Done{
+
+    timer.stopAll
 }
 
 
