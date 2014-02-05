@@ -48,21 +48,21 @@ method x(x' : Number) y(y' : Number) -> Vector2 {
 
 // Creates a new 2d vector and initialises it with the values of the given
 // 2d vector
-method setVector2(v : Vector2) -> Vector2 {
+method xy(v : Vector2) -> Vector2 {
 
     aVector2.new(v.x, v.y)
 }
 
 // Creates a new 2d vector and initialises it with the x and y values of the
 // given 3d vector and truncates the z value
-method setVector3(v : Vector3) -> Vector2 {
+method fromVector3(v : Vector3) -> Vector2 {
 
     aVector2.new(v.x, v.y)
 }
 
 // Creates a new 2d vector and initialises it with the x and y values of the
 // given 4d vector and truncates the z and w values
-method setVector4(v : Vector4) -> Vector2 {
+method fromVector4(v : Vector4) -> Vector2 {
 
     aVector2.new(v.x, v.y)
 }
@@ -96,6 +96,27 @@ method distanceBetween(v1 : Vector2, v2 : Vector2) -> Number is public {
 method angleBetween(v1 : Vector2, v2 : Vector2) -> Number is public {
 
     math.acos(dot(v1, v2)/(v1.magnitude*v2.magnitude))
+}
+
+// Clamps the values of the vector between the given thresholds
+method clamp (v : Vector2) Between (lower : Number, upper : Number) -> Vector2 {
+
+    return aVector2.new(math.clamp(v.x) between(lower, upper),
+       math.clamp(v.y) between(lower, upper))
+}
+
+// Clamps the values of the vector above the given threshold
+method clamp (v : Vector2) Above (threshold : Number) -> Vector2 {
+
+    return aVector2.new(math.clamp(v.x) above(threshold),
+       math.clamp(v.y) above(threshold))
+}
+
+// Clamps the values of the vector below the given threshold
+method clamp (v : Vector2) Below (threshold : Number) -> Vector2 {
+
+    return aVector2.new(math.clamp(v.x) below(threshold),
+        math.clamp(v.y) below(threshold))
 }
 
 
@@ -180,27 +201,6 @@ class aVector2.new(x' : Number, y' : Number) -> Vector2 {
         def mag = self.magnitude
 
         return aVector2.new(x / mag, y / mag)
-    }
-
-    // Returns a new vector that is this vector clamped between the two values
-    method clampBetween(lower : Number, upper : Number) -> Vector2 {
-
-        return aVector2.new(math.clamp(x) between(lower, upper),
-               math.clamp(y) between(lower, upper))
-    }
-
-    // Returns a new vector that is this vector clamped above the given threshold
-    method clampAbove(threshold : Number) -> Vector2 {
-
-        return aVector2.new(math.clamp(x) above(threshold),
-               math.clamp(y) above(threshold))
-    }
-
-    // Returns a new vector that is this vector clamped below the given threshold
-    method clampBelow(threshold : Number) -> Vector2 {
-
-        return aVector2.new(math.clamp(x) below(threshold),
-               math.clamp(y) below(threshold))
     }
 
     // Creates a new 2d vector as the result of adding the given scalar

@@ -46,30 +46,10 @@ method x(x' : Number) y(y' : Number) z(z' : Number) w(w' : Number) ->Vector4 {
     aVector4.new(x', y', z', w')
 }
 
-// Creates a new 4d vector and initialises it the x and y values of the given
-// 2d vector's x and y values and sets the z and w values to zero
-method setVector2(v : Vector2) -> Vector4 {
-
-    aVector4.new(v.x, v.y, 0, 0)
-}
-
-// Creates a new 4d vector and initialises it the x, y, and z values of the given
-// 3d vector's x, y, and z values and sets the w value to zero
-method setVector3(v : Vector3) -> Vector4 {
-
-    aVector4.new(v.x, v.y, v.z, 0)
-}
-
-// Creates a new 4d vector and initialises it with the given 4d vector's values
-method setVector4(v : Vector4) -> Vector4 {
-
-    aVector4.new(v.x, v.y, v.z, v.w)
-}
-
 // Creates a new 4d vector and initialises the x and y values to the given
 // 2d vector's x and y values and initialises the z and w values to the given
 // z and w values
-method setVector2(v: Vector2) coord(z : Number, w : Number) -> Vector4 {
+method xy(v: Vector2) z(z : Number w(w : Number) -> Vector4 {
 
     aVector4.new(v.x, v.y, z, w)
 }
@@ -77,7 +57,7 @@ method setVector2(v: Vector2) coord(z : Number, w : Number) -> Vector4 {
 // Creates a new 4d vector and initialises the x and w values with the given
 // x and w values and initialises the y and z values with the given 2d
 // vector's x and y values
-method setCoord(x : Number) vector2(v : Vector2) Coord(w : Number) -> Vector4 {
+method x(x : Number) yz(v : Vector2) w(w : Number) -> Vector4 {
 
     aVector4.new(x, v.x, v.y, w)
 }
@@ -85,7 +65,7 @@ method setCoord(x : Number) vector2(v : Vector2) Coord(w : Number) -> Vector4 {
 // Creates a new 4d vector and initialises the x and y values with the given
 // x and y values and initialises the z and w values with the given 2d
 // vector's x and y values
-method setCoord(x : Number, y : Number) vector2(v : Vector2) -> Vector4 {
+method x(x : Number) y(y : Number) zw(v : Vector2) -> Vector4 {
 
     aVector4.new(x, y, v.x, v.y)
 }
@@ -93,7 +73,7 @@ method setCoord(x : Number, y : Number) vector2(v : Vector2) -> Vector4 {
 // Creates a new 4d vector and initialises the x and y values using the given
 // 2d vector v x and y values and initialises the z and w values using the
 // given 2d vector v' x and y values
-method setVector2(v : Vector2) vector2(v' : Vector2) -> Vector4 {
+method xy(v : Vector2) zw(v' : Vector2) -> Vector4 {
 
     aVector4.new(v.x, v.y, v'.x, v'.y)
 }
@@ -101,7 +81,7 @@ method setVector2(v : Vector2) vector2(v' : Vector2) -> Vector4 {
 // Creates a new 4d vector and initialises the x, y, and z values using the
 // given 3d vector's x, y, and z values and initialises the w value with the
 // given w value
-method setVector3(v : Vector3) coord(w : Number) -> Vector4 {
+method xyz(v : Vector3) w(w : Number) -> Vector4 {
 
     aVector4.new(v.x, v.y, v.z, w)
 }
@@ -109,9 +89,29 @@ method setVector3(v : Vector3) coord(w : Number) -> Vector4 {
 // Creates a new 4d vector and initialises the x value with the given x value
 // and initialises the y, z, and w values with the given 3d vector's x, y, and z
 // values
-method setCoord(x : Number) vector3(v : Vector3) -> Vector4 {
+method x(x : Number) yzw(v : Vector3) -> Vector4 {
 
     aVector4.new(x, v.x, v.y, v.z)
+}
+
+// Creates a new 4d vector and initialises it with the given 4d vector's values
+method xyzw(v : Vector4) -> Vector4 {
+
+    aVector4.new(v.x, v.y, v.z, v.w)
+}
+
+// Creates a new 4d vector and initialises it the x and y values of the given
+// 2d vector's x and y values and sets the z and w values to zero
+method fromVector2(v : Vector2) -> Vector4 {
+
+    aVector4.new(v.x, v.y, 0, 0)
+}
+
+// Creates a new 4d vector and initialises it the x, y, and z values of the given
+// 3d vector's x, y, and z values and sets the w value to zero
+method fromVector3(v : Vector3) -> Vector4 {
+
+    aVector4.new(v.x, v.y, v.z, 0)
 }
 
 // Creates a new 4d vector initialised with x: 1, y: 0, z: 0 w: 0
@@ -157,7 +157,7 @@ method angleBetween(v1 : Vector4, v2 : Vector4) -> Number is public {
     math.acos(dot(v1, v2)/(v1.magnitude*v2.magnitude))
 }
 
-
+//TODO: clamp functions
 
 // VECTOR4 CLASS
 // Constructs a new 4d vector with the given x', y', z', and w' values
@@ -241,33 +241,6 @@ class aVector4.new(x' : Number, y' : Number, z' : Number, w' : Number)
         def mag = self.magnitude
 
         aVector4.new(x / mag, y / mag, z / mag, w / mag)
-    }
-
-    // Returns a new vector that is this vector clamped between the two values
-    method clampBetween(lower : Number, upper : Number) -> Vector4 {
-
-        return aVector4.new(math.clamp(x) between(lower, upper),
-            math.clamp(y) between(lower, upper),
-            math.clamp(z) between(lower, upper),
-            math.clamp(w) between(lower, upper))
-    }
-
-    // Returns a new vector that is this vector clamped above the given value
-    method clampAbove(threshold : Number) -> Vector4 {
-
-        return aVector4.new(math.clamp(x) above(threshold),
-            math.clamp(y) above(threshold),
-            math.clamp(z) above(threshold),
-            math.clamp(w) above(threshold))
-    }
-
-    // Returns a new vector that is this vector clamped below the given value
-    method clampBelow(threshold : Number) -> Vector4 {
-
-        return aVector4.new(math.clamp(x) below(threshold),
-            math.clamp(y) below(threshold),
-            math.clamp(z) below(threshold),
-            math.clamp(w) below(threshold))
     }
 
     // Creates a new 4d vector as the result of adding the given scalar
