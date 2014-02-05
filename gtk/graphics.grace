@@ -2,7 +2,7 @@
 import "Vector2" as vec2
 import "Color" as col
 import "GMath" as math
-import "Timer" as timer
+import "timer" as timer
 
 // Graphics imports
 import "window" as win
