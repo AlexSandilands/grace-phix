@@ -194,21 +194,23 @@ method createButtonCalled(s : String) onClicked(b : Block) {
 // Returns the id of the timer in charge of executing this block
 method every (milliseconds : Number) do (block : Block) -> Number {
 
+    dom.window.setInterval( { block.apply; window.update; }, milliseconds)
+
     // wait 5ms between each iteration of the loop
-    dom.while {true} waiting 5 do {
+    // dom.while {true} waiting 5 do {
 
-        block.apply
+    //     block.apply
 
-        // update the window
-        window.update
-    }
+    //     // update the window
+    //     window.update
+    // }
 }
 
 // Execute the block once after milliseconds
 // Returns the id of the timer in charge of executing this block
 method after (milliseconds : Number) do (block : Block) -> Number {
 
-    //return timer.after(milliseconds) do(block)
+    dom.window.setTimeout( { block.apply; window.update; }, milliseconds)
 }
 
 // Stop timer with id

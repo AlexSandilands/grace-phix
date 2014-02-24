@@ -93,6 +93,11 @@ class aWindow.new() -> Window {
         ComponentError.raise "Windows do not have a parent component"
     }
 
+    method getComponent {
+
+        w
+    }
+
     // Updates the window
     // NOTE: this should never be manually called
     method update -> Done {

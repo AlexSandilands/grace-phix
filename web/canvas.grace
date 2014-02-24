@@ -25,7 +25,7 @@ type Canvas = comps.Component & type {
 
     sendToBack(d : draw.Drawable) -> Done
     sendIndexToBack(ind : Number) -> Done
-o
+
     bringToFront(d : draw.Drawable) -> Done
     bringIndexToFront(ind : Number) -> Done
 
@@ -95,14 +95,6 @@ o
 
 class aCanvas.new -> Canvas {
 
-    // GTK components for this canvas
-//    def c = gtk.drawing_area
-//    c.set_size_request(640, 480)
-//    c.app_paintable := true
-//    c.add_events(gdk.GDK_BUTTON_PRESS_MASK)
-//    c.add_events(gdk.GDK_BUTTON_RELEASE_MASK)
-//    c.add_events(gdk.GDK_BUTTON1_MOTION_MASK)
-
     //dom variables
     var c
     var cxt
@@ -122,17 +114,6 @@ class aCanvas.new -> Canvas {
         cxt.fillStyle := "white"
         cxt.fillRect(0, 0, s.x, s.y)
     }
-
-    // What to do when the canvas is requested to paint
-//    c.on "draw" do { gfx ->
-//
-//        for (drawables) do { d ->
-//
-//            d.draw(gfx)
-//        }
-//
-//    }
-
 
     // COMPONENT METHODS
 

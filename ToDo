@@ -8,8 +8,8 @@
 
 // TODO
 
-    Animations
-    Line width in web graphics
-    Ovals in web graphics
-    Images in web graphics
-    Contains in oval
+    Images in web graphics / On Macs with gtk
+    Timer function: After()do in web graphics
+    Motion, enter and leave events in web
+    GUI Labels (a component that can be added to a window and has text)
+
