@@ -1,3 +1,5 @@
+import "dom" as dom
+
 // Util imports
 import "Vector2" as vec2
 import "Color" as col
@@ -16,11 +18,13 @@ import "drawable" as draw
 //                                    //
 // ---------------------------------- //
 
+var window
 
 // Default window, sized 640x480
 method createWindow -> win.Window {
 
-    win.aWindow.new
+    window := win.aWindow.new
+    window
 }
 
 // Creates and returns a default window at the position passed in
@@ -28,6 +32,7 @@ method createWindowAt(x : Number, y : Number) -> win.Window {
 
     var ret := win.aWindow.new
     ret.position := vec2.x(x) y(y)
+    window := ret
 
     return ret
 }
@@ -40,6 +45,7 @@ method createWindowAt(x : Number, y : Number)
     var ret := win.aWindow.new
     ret.position := vec2.x(x) y(y)
     ret.size := vec2.x(w) y(h)
+    window := ret
 
     return ret
 }
@@ -49,6 +55,7 @@ method createWindowWithSize(w : Number, h : Number) -> win.Window {
 
     var ret := win.aWindow.new
     ret.size := vec2.x(w) y(h)
+    window := ret
 
     return ret
 }
@@ -62,6 +69,7 @@ method createWindowCalled(t : String)
     ret.title := t
     ret.position := vec2.x(x) y(y)
     ret.size := vec2.x(w) y(h)
+    window := ret
 
     return ret
 }
@@ -168,6 +176,51 @@ method createButtonCalled(s : String) onClicked(b : Block) {
     ret.clicked := b
 
     return ret
+}
+
+
+// ============================================================================
+// ============================================================================
+
+
+// --------------------------------- //
+//                                   //
+//          TIMER METHODS            //
+//                                   //
+// --------------------------------- //
+
+
+// Repeat the block every milliseconds
+// Returns the id of the timer in charge of executing this block
+method every (milliseconds : Number) do (block : Block) -> Number {
+
+    // wait 5ms between each iteration of the loop
+    dom.while {true} waiting 5 do {
+
+        block.apply
+
+        // update the window
+        window.update
+    }
+}
+
+// Execute the block once after milliseconds
+// Returns the id of the timer in charge of executing this block
+method after (milliseconds : Number) do (block : Block) -> Number {
+
+    //return timer.after(milliseconds) do(block)
+}
+
+// Stop timer with id
+method stop(id : Number) -> Done {
+
+    //timer.stop(id)
+}
+
+// Stop all timers.
+method stopAll -> Done{
+
+    //timer.stopAll
 }
 
 

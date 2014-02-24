@@ -20,8 +20,8 @@ type Drawable = {
     x := (x' : Number) -> Done
     y := (y' : Number) -> Done
 
-    moveTo := (l : vec2.Vector2) -> Done
-    moveBy(dx : Number, dy : Number) -> Done
+    //moveTo := (l : vec2.Vector2) -> Done
+    //moveBy(dx : Number, dy : Number) -> Done
 
     // Takes a graphics object to draw with
     draw(gfx) -> Done
@@ -240,7 +240,7 @@ class aRectangle.at(l : vec2.Vector2) sized(s : vec2.Vector2) colored(c : col.Co
             gfx.fillStyle := color.asString
 
             // Draw the rectangle using stored values
-            gfx.fillRect(x, y, width, height)
+            gfx.fillRect(location.x, location.y, width, height)
 
         } else {
 

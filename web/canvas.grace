@@ -1,5 +1,5 @@
-import "Drawable" as draw
-import "Components" as comps
+import "drawable" as draw
+import "components" as comps
 
 import "Vector2" as vec2
 import "Color" as col
@@ -25,7 +25,7 @@ type Canvas = comps.Component & {
 
     sendToBack(d : draw.Drawable) -> Done
     sendIndexToBack(ind : Number) -> Done
-
+o
     bringToFront(d : draw.Drawable) -> Done
     bringIndexToFront(ind : Number) -> Done
 
@@ -138,11 +138,12 @@ class aCanvas.new -> Canvas {
 
     var parent : comps.Component is public
 
-    // Get the dom component for this canvas
-    //TODO: remove this?
-    method getComponent {
+    // Upadtes the canvas
+    // NOTE: this should never be manually called
+    method update -> Done {
 
-        c
+        //repaint
+        paint
     }
 
 
@@ -513,12 +514,16 @@ class aCanvas.new -> Canvas {
     method paintable:= (b : Boolean) {
 
         p := b
-        c.app_paintable := b
     }
 
     // Asks the canvas to repaint
     //TODO: fix??
     method paint -> Done {
+
+        if (!p) then {
+
+            return
+        }
 
         //redraw the background
         cxt.fillStyle := "white"
@@ -555,41 +560,66 @@ class aCanvas.new -> Canvas {
 
     // MOUSE EVENTS
 
-    var pressedBlock  : Block := {}
-    var releasedBlock : Block := {}
-    var draggedBlock  : Block := {}
-
-//    c.on "button-press-event" do { at ->
-//
-//        pressedBlock.apply(at)
-//    }
-//
-//    c.on "button-release-event" do { at ->
-//
-//        releasedBlock.apply(at)
-//    }
-//
-//    c.on "motion-notify-event" do { at ->
-//
-//        draggedBlock.apply(at)
-//    }
-
     // Set what happens when you press the mouse button on the canvas
     method mousePressed := (b : Block) -> Done {
 
-        pressedBlock := b
+        //add the update to the end of the block
+        def pressedBlock = { ev->
+
+            def e = object {
+
+                var x is public := ev.clientX
+                var y is public := ev.clientY
+            }
+            b.apply(e)
+
+            update
+        }
+
+        //add to the dom canvas
+        c.addEventListener("click", pressedBlock)
     }
 
     // Set what happens when you release the mouse button on the canvas
     method mouseReleased := (b : Block) -> Done {
 
-        releasedBlock := b
+        //add the update to the end of the block
+        def releasedBlock = { ev ->
+
+            def e = object {
+
+                var x is public := ev.clientX
+                var y is public := ev.clientY
+            }
+
+            b.apply(e)
+
+            b.apply
+            update
+        }
+
+        //add to the dom canvas
+        c.addEventListener("mouseup", releasedBlock)
     }
 
     // Set what happens when you drag the mouse on the canvas
     method mouseDragged := (b : Block) -> Done {
 
-        draggedBlock := b
+        //add the update to the end of the block
+        def dragBlock = { ev ->
+
+            def e = object {
+
+                var x is public := ev.clientX
+                var y is public := ev.clientY
+            }
+
+            b.apply(e)
+            update
+        }
+
+        //add to the dom canvas
+        c.addEventListener("mousemove", dragBlock)
     }
 
 
