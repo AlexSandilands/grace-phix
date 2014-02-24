@@ -20,10 +20,6 @@ type Vector4 = {
     magnitude -> Number
     normalize -> Vector4
 
-    clampBetween(lower : Number, upper : Number) -> Vector4
-    clampAbove(threshold : Number) -> Vector4
-    clampBelow(threshold : Number) -> Vector4
-
     addScalar(s : Number) -> Vector4
     subScalar(s : Number) -> Vector4
 
