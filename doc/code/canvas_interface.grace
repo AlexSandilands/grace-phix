@@ -1,4 +1,4 @@
-type Canvas = Component & {
+type Canvas = Component & type {
 
     // Adds a drawable object d to the canvas.
     // The same drawable object cannot be added more than once, so clone it before adding a new one.

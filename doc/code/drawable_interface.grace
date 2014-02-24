@@ -39,7 +39,7 @@ type Drawable = {
 
 
 // Drawable rectangle type
-type Rectangle = Drawable & {
+type Rectangle = Drawable & type {
 
     // Vector holding the width and height of this rectangle
     // First component is width, second is height
@@ -70,7 +70,7 @@ type Rectangle = Drawable & {
 
 // Drawable circle type
 // This is a sector, but the "from" and "to" values are constants: 0 -> 2pi
-type Circle = Drawable & {
+type Circle = Drawable & type {
 
     // The radius of this circle
     radius -> Number
@@ -96,7 +96,7 @@ type Circle = Drawable & {
 
 
 // Drawable oval type
-type oval = Drawable & {
+type oval = Drawable & type {
 
     // Vector holding the width and height of this oval
     // First component is width, second is height
@@ -127,7 +127,7 @@ type oval = Drawable & {
 
 // Drawable sector type. Like a circle but you can define where
 // (on the complex plane) it starts being drawn, and where it ends
-type Sector = Drawable & {
+type Sector = Drawable & type {
 
     // The radius of the sector
     radius -> Number
@@ -157,7 +157,7 @@ type Sector = Drawable & {
 
 // Drawable arc type. This is like a sector except you can define a certain
 // ammount of the inside to not be filled in
-type Arc = Drawable & {
+type Arc = Drawable & type {
 
     // The radius of the arc
     radius -> Number
@@ -190,7 +190,7 @@ type Arc = Drawable & {
 
 
 // Drawable line type
-type Line = Drawable & {
+type Line = Drawable & type {
 
     // The color of the line
     color -> Color
@@ -219,7 +219,7 @@ type Line = Drawable & {
 
 
 // Drawable text type
-type Text = Drawable & {
+type Text = Drawable & type {
 
     // The color of the text
     color -> Color
@@ -237,7 +237,7 @@ type Text = Drawable & {
 
 // Drawable image type. Takes a string pathway to the image file,
 // which must be a png
-type Image = Drawable & {
+type Image = Drawable & type {
 
     // Path to the image, relative to the file that is using this object
     filename -> String

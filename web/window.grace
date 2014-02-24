@@ -12,7 +12,7 @@ import "Vector2" as vec2
 // bottom, as the window uses a vertical box. You can add other boxes
 // to the window if you want components to be displayed in different directions
 // and orders
-type Window = comps.Container & {
+type Window = comps.Container & type {
 
     display -> Done
 

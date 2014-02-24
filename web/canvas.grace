@@ -12,7 +12,7 @@ import "GMath" as math
 // doesn't contain components, only drawables.
 // The canvas can have external drawables objects added to it, or it can create
 // it's own basic drawables directly.
-type Canvas = comps.Component & {
+type Canvas = comps.Component & type {
 
     add(d : draw.Drawable) -> Boolean
     addAll(l : List<draw.Drawable>) -> Boolean

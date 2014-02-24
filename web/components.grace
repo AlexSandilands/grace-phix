@@ -20,7 +20,7 @@ type Component = {
 }
 
 // Type for components that can contain other components
-type Container = Component & {
+type Container = Component & type {
 
     add(c : Component)          -> Boolean
     addAll(l : List<Component>) -> Boolean
@@ -31,7 +31,7 @@ type Container = Component & {
 
 // Type for a button, which is a component that can be clicked
 // to perform actions
-type Button = Component & {
+type Button = Component & type {
 
     label -> String
     label:= (s : String) -> Done

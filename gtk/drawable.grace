@@ -38,7 +38,7 @@ type Drawable = {
 
 
 // Drawable rectangle type
-type Rectangle = Drawable & {
+type Rectangle = Drawable & type {
 
     size  -> vec2.Vector2
     size:= (s : vec2.Vector2) -> Done
@@ -62,7 +62,7 @@ type Rectangle = Drawable & {
 
 // Drawable circle type
 // This is a sector, but the "from" and "to" values are constants: 0 -> 2pi
-type Circle = Drawable & {
+type Circle = Drawable & type {
 
     radius -> Number
     radius:= (r : Number) -> Done
@@ -79,7 +79,7 @@ type Circle = Drawable & {
 
 
 // Drawable oval type
-type oval = Drawable & {
+type oval = Drawable & type {
 
     size -> vec2.Vector2
     size:= (s : vec2.Vector2) -> Done
@@ -103,7 +103,7 @@ type oval = Drawable & {
 
 // Drawable sector type. Like a circle but you can define where
 // (on the complex plane) it starts being drawn, and where it ends
-type Sector = Drawable & {
+type Sector = Drawable & type {
 
     radius -> Number
     radius:= (r : Number) -> Done
@@ -127,7 +127,7 @@ type Sector = Drawable & {
 
 // Drawable arc type. This is like a sector except you can define a certain
 // ammount of the inside to not be filled in
-type Arc = Drawable & {
+type Arc = Drawable & type {
 
     radius -> Number
     radius:= (r : Number) -> Done
@@ -153,7 +153,7 @@ type Arc = Drawable & {
 
 
 // Drawable line type
-type Line = Drawable & {
+type Line = Drawable & type {
 
     color -> col.Color
     color:= (c : col.Color) -> Done
@@ -170,7 +170,7 @@ type Line = Drawable & {
 
 
 // Drawable text type
-type Text = Drawable & {
+type Text = Drawable & type {
 
     color -> col.Color
     color:= (c : col.Color) -> Done
@@ -185,7 +185,7 @@ type Text = Drawable & {
 
 // Drawable image type. Takes a string pathway to the image file,
 // which must be a png
-type Image = Drawable & {
+type Image = Drawable & type {
 
     filename -> String
     filename:= (s : String) -> Done

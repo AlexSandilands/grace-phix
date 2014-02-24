@@ -1,5 +1,5 @@
 
-type Window = Container & {
+type Window = Container & type {
 
     // Displays the window and all components in the window
     // then starts the main loop.

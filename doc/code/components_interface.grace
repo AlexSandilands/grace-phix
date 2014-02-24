@@ -15,7 +15,7 @@ type Component = {
 
 
 // Type for components that can contain other components
-type Container = Component & {
+type Container = Component & type {
 
     // Adds component c to this container.
     // Returns true if added, false if c was already in the container
@@ -41,7 +41,7 @@ type Container = Component & {
 
 // Type for a button, which is a component that can be clicked
 // to perform actions
-type Button = Component & {
+type Button = Component & type {
 
     // Returns the label on this button
     label -> String
