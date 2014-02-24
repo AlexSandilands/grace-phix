@@ -1,3 +1,8 @@
+// Grace-Phix graphics library, written by Alex Sandilands
+// Last revised 24/02/2014
+// See https://github.com/AlexSandilands/grace-phix
+
+
 import "gtk" as gtk
 import "gdk" as gdk
 
