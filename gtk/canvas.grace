@@ -104,7 +104,10 @@ class aCanvas.new -> Canvas {
     c.app_paintable := true
     c.add_events(gdk.GDK_BUTTON_PRESS_MASK)
     c.add_events(gdk.GDK_BUTTON_RELEASE_MASK)
-    c.add_events(gdk.GDK_BUTTON1_MOTION_MASK)
+    c.add_events(gdk.GDK_POINTER_MOTION_MASK)
+    c.add_events(gdk.GDK_ENTER_NOTIFY_MASK)
+    c.add_events(gdk.GDK_LEAVE_NOTIFY_MASK)
+
 
 
     // What to do when the canvas is requested to paint
@@ -526,24 +529,48 @@ class aCanvas.new -> Canvas {
 
 
     // MOUSE EVENTS
+    var mouseDown := false
+
 
     var pressedBlock  : Block := {}
     var releasedBlock : Block := {}
     var draggedBlock  : Block := {}
+    var motionBlock   : Block := {}
+    var enterBlock    : Block := {}
+    var leaveBlock    : Block := {}
 
     c.on "button-press-event" do { at ->
 
+        mouseDown := true
         pressedBlock.apply(at)
     }
 
     c.on "button-release-event" do { at ->
 
+        mouseDown := false
         releasedBlock.apply(at)
     }
 
     c.on "motion-notify-event" do { at ->
 
-        draggedBlock.apply(at)
+        if (mouseDown) then {
+
+            draggedBlock.apply(at)
+
+        } else {
+
+            motionBlock.apply(at)
+        }
+    }
+
+    c.on "enter-notify-event" do { at ->
+
+        enterBlock.apply(at)
+    }
+
+    c.on "leave-notify-event" do { at ->
+
+        leaveBlock.apply(at)
     }
 
     // Set what happens when you press the mouse button on the canvas
@@ -564,6 +591,23 @@ class aCanvas.new -> Canvas {
         draggedBlock := b
     }
 
+    // Set what happens when you move the mouse on the canvas
+    method mouseMotion := (b : Block) -> Done {
+
+        motionBlock := b
+    }
+
+    // Set what happens when the mouse enters the canvas
+    method mouseEnter := (b : Block) -> Done {
+
+        enterBlock := b
+    }
+
+    // Set what happens when the mouse leaves the canvas
+    method mouseLeave := (b : Block) -> Done {
+
+        leaveBlock := b
+    }
 
 
     // RECTANGLES
