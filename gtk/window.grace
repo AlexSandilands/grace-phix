@@ -217,19 +217,19 @@ class aWindow.new() -> Window {
     var enterBlock    : Block := {}
     var leaveBlock    : Block := {}
 
-    c.on "button-press-event" do { at ->
+    w.on "button-press-event" do { at ->
 
         mouseDown := true
         pressedBlock.apply(at)
     }
 
-    c.on "button-release-event" do { at ->
+    w.on "button-release-event" do { at ->
 
         mouseDown := false
         releasedBlock.apply(at)
     }
 
-    c.on "motion-notify-event" do { at ->
+    w.on "motion-notify-event" do { at ->
 
         if (mouseDown) then {
 
@@ -241,12 +241,12 @@ class aWindow.new() -> Window {
         }
     }
 
-    c.on "enter-notify-event" do { at ->
+    w.on "enter-notify-event" do { at ->
 
         enterBlock.apply(at)
     }
 
-    c.on "leave-notify-event" do { at ->
+    w.on "leave-notify-event" do { at ->
 
         leaveBlock.apply(at)
     }
