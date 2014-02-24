@@ -529,8 +529,8 @@ class aCanvas.new -> Canvas {
 
 
     // MOUSE EVENTS
-    var mouseDown := false
 
+    var mouseDown := false
 
     var pressedBlock  : Block := {}
     var releasedBlock : Block := {}

@@ -203,43 +203,84 @@ class aWindow.new() -> Window {
 
     // MOUSE EVENTS
 
+    var mouseDown := false
+
     var pressedBlock  : Block := {}
     var releasedBlock : Block := {}
     var draggedBlock  : Block := {}
+    var motionBlock   : Block := {}
+    var enterBlock    : Block := {}
+    var leaveBlock    : Block := {}
 
-    w.on "button-press-event" do { at ->
+    c.on "button-press-event" do { at ->
 
+        mouseDown := true
         pressedBlock.apply(at)
     }
 
-    w.on "button-release-event" do { at ->
+    c.on "button-release-event" do { at ->
 
+        mouseDown := false
         releasedBlock.apply(at)
     }
 
-    w.on "motion-notify-event" do { at ->
+    c.on "motion-notify-event" do { at ->
 
-        draggedBlock.apply(at)
+        if (mouseDown) then {
+
+            draggedBlock.apply(at)
+
+        } else {
+
+            motionBlock.apply(at)
+        }
     }
 
-    // Set the pressed block
+    c.on "enter-notify-event" do { at ->
+
+        enterBlock.apply(at)
+    }
+
+    c.on "leave-notify-event" do { at ->
+
+        leaveBlock.apply(at)
+    }
+
+    // Set what happens when you press the mouse button on the canvas
     method mousePressed := (b : Block) -> Done {
 
         pressedBlock := b
     }
 
-    // Set the relesaed block
+    // Set what happens when you release the mouse button on the canvas
     method mouseReleased := (b : Block) -> Done {
 
         releasedBlock := b
     }
 
-    // Set the dragged block
+    // Set what happens when you drag the mouse on the canvas
     method mouseDragged := (b : Block) -> Done {
 
         draggedBlock := b
     }
 
+    // Set what happens when you move the mouse on the canvas
+    method mouseMotion := (b : Block) -> Done {
+
+        motionBlock := b
+    }
+
+    // Set what happens when the mouse enters the canvas
+    method mouseEnter := (b : Block) -> Done {
+
+        enterBlock := b
+    }
+
+    // Set what happens when the mouse leaves the canvas
+    method mouseLeave := (b : Block) -> Done {
+
+        leaveBlock := b
+    }
 
     // KEY EVENTS
 
