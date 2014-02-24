@@ -104,13 +104,13 @@ method random -> Color {
 
 method r(r' : Number) g(g' : Number) b(b' : Number) -> Color {
 
-    aColor.new(r, g, b, 255)
+    aColor.new(r', g', b', 255)
 }
 
 
 method r(r' : Number) g(g' : Number) b(b' : Number) a(a' : Number) -> Color {
 
-    aColor.new(r, g, b, a)
+    aColor.new(r', g', b', a')
 }
 
 
