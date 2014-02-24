@@ -25,4 +25,4 @@ c1 := c1.darker
 print("c1 := c1.darker")
 print("c1.invert: " ++ c1.invert)
 
-print("c1.grayscale: " ++ c1.grayscale)
+print("c1.grayscale: " ++ c1.greyscale)
