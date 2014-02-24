@@ -90,6 +90,11 @@ method clamp(value : Number) above(threshold : Number) -> Number {
     return value
 }
 
+method random -> Number {
+
+    math.random
+}
+
 // Calculates the factorial of the given input
 method fact(value : Number) -> Number {
 

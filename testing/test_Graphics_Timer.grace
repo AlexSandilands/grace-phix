@@ -32,7 +32,7 @@ start.clicked := {
 
             if (right) then {
 
-                r.x := r.x + 2
+                r.moveBy(2, 0)
                 canvas.paint
 
                 if ((r.x + r.width) > 640) then {
@@ -42,7 +42,7 @@ start.clicked := {
 
             } else {
 
-                r.x := r.x - 2
+                r.moveBy(-2, 0)
                 canvas.paint
 
                 if (r.x < 0) then {

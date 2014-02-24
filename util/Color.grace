@@ -96,13 +96,19 @@ method yellow -> Color {
 }
 
 
-method fromRGB(r : Number, g : Number, b : Number) -> Color {
+method random -> Color {
+
+    aColor.new(math.random*255, math.random*255, math.random*255, 255)
+}
+
+
+method r(r' : Number) g(g' : Number) b(b' : Number) -> Color {
 
     aColor.new(r, g, b, 255)
 }
 
 
-method fromRGB(r : Number, g : Number, b : Number) withAlpha(a : Number) -> Color {
+method r(r' : Number) g(g' : Number) b(b' : Number) a(a' : Number) -> Color {
 
     aColor.new(r, g, b, a)
 }
